@@ -6,18 +6,17 @@
 #    By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/18 16:05:40 by zstenger          #+#    #+#              #
-#    Updated: 2022/12/01 20:05:59 by zstenger         ###   ########.fr        #
+#    Updated: 2022/12/02 19:26:56 by zstenger         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra 
 NAME = so_long
 LIBFT = libft/libft.a
 MLX42 = MLX42/libmlx42.a
 GLFW3 = MLX42/glfw_lib/libglfw3.a
-
-SRCS = src/------RANDOMSHIT------
+SRCS = src/so_long.c
 
 DEF_COLOR = \033[0;39m
 RED = \033[1;91m
@@ -25,10 +24,7 @@ GREEN = \033[4;92m
 CYAN = \033[1;96m
 YELLOW = \033[1;33m
 PURPLE = \033[1;35m
-
 BWhite = \033[1;37m 
-
-On_Blue = \033[44m
 
 all: $(NAME)
 
@@ -66,6 +62,7 @@ $(GLFW3):
 	fi
 	
 clean:
+	@echo "$(RED)Removing .o files.$(DEF_COLOR)"
 	make clean -C ./libft
 	make clean -C ./MLX42
 	@echo "$(CYAN)MLX42 and libft .o files has been removed.$(DEF_COLOR)"
@@ -79,20 +76,61 @@ fclean:
 
 
 t: $(NAME)
-	@echo "$(RED)RUN TEST ONE, LET'S PLAY A GAME!$(DEF_COLOR)"
-	./$(NAME) map/map.ber
+	@echo "$(RED)RUN TEST 1, LET THE GAME BEGIN!$(DEF_COLOR)"
+	./$(NAME) maps/map.ber
 	@echo "$(CYAN)YaAaY yOu HaVe Won!$(DEF_COLOR)"
-	
+
 t2: $(NAME)
-	@echo "$(RED)RUN TEST ONE, LET'S PLAY A GAME!$(DEF_COLOR)"
-	./$(NAME) map/big_map.ber
+	@echo "$(RED)RUN TEST 2, LET THE GAME BEGIN!$(DEF_COLOR)"
+	./$(NAME) maps/map2.ber
+	@echo "$(CYAN)YaAaY yOu HaVe WoN!$(DEF_COLOR)"
+
+t3: $(NAME)
+	@echo "$(RED)RUN TEST 3, LET THE GAME BEGIN!$(DEF_COLOR)"
+	./$(NAME) maps/map3.ber
+	@echo "$(CYAN)YaAaY yOu HaVe WoN!$(DEF_COLOR)"
+
+t4: $(NAME)
+	@echo "$(RED)RUN TEST 4, LET THE GAME BEGIN!$(DEF_COLOR)"
+	./$(NAME) maps/map4.ber
+	@echo "$(CYAN)YaAaY yOu HaVe WoN!$(DEF_COLOR)"
+
+t5: $(NAME)
+	@echo "$(RED)RUN TEST 5, LET THE GAME BEGIN!$(DEF_COLOR)"
+	./$(NAME) maps/map5.ber
+	@echo "$(CYAN)YaAaY yOu HaVe WoN!$(DEF_COLOR)"
+
+tb: $(NAME)
+	@echo "$(RED)RUN BONUS TEST 1, LET THE GAME BEGIN!$(DEF_COLOR)"
+	./$(NAME) maps/mapb.ber
+	@echo "$(CYAN)YaAaY yOu HaVe Won!$(DEF_COLOR)"
+
+tb2: $(NAME)
+	@echo "$(RED)RUN BONUS TEST 2, LET THE GAME BEGIN!$(DEF_COLOR)"
+	./$(NAME) maps/mapb2.ber
+	@echo "$(CYAN)YaAaY yOu HaVe Won!$(DEF_COLOR)"
+
+tb3: $(NAME)
+	@echo "$(RED)RUN BONUS TEST 3, LET THE GAME BEGIN!$(DEF_COLOR)"
+	./$(NAME) maps/mapb3.ber
+	@echo "$(CYAN)YaAaY yOu HaVe Won!$(DEF_COLOR)"
+
+tb4: $(NAME)
+	@echo "$(RED)RUN BONUS TEST 4, LET THE GAME BEGIN!$(DEF_COLOR)"
+	./$(NAME) maps/mapb4.ber
+	@echo "$(CYAN)YaAaY yOu HaVe Won!$(DEF_COLOR)"
+
+tb5: $(NAME)
+	@echo "$(RED)RUN BONUS TEST 5, LET THE GAME BEGIN!$(DEF_COLOR)"
+	./$(NAME) maps/mapb5.ber
 	@echo "$(CYAN)YaAaY yOu HaVe Won!$(DEF_COLOR)"
 
 re: fclean all
 	@echo "$(YELLOW)Project has been rebuilt!$(DEF_COLOR)"
 	
 tre: tclean $(NAME)
+
 tclean:
 	rm -rf $(NAME)
-
+	@echo "$(YELLOW)so_long has been rebuilt!$(DEF_COLOR)"
 .PHONY: all clean fclean test tclean re
