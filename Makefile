@@ -6,12 +6,12 @@
 #    By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/18 16:05:40 by zstenger          #+#    #+#              #
-#    Updated: 2022/12/02 19:26:56 by zstenger         ###   ########.fr        #
+#    Updated: 2022/12/03 11:13:46 by zstenger         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
-CFLAGS = -Wall -Wextra 
+CFLAGS = -Wall -Wextra -Werror
 NAME = so_long
 LIBFT = libft/libft.a
 MLX42 = MLX42/libmlx42.a
@@ -129,8 +129,9 @@ re: fclean all
 	@echo "$(YELLOW)Project has been rebuilt!$(DEF_COLOR)"
 	
 tre: tclean $(NAME)
-
+	@echo "$(YELLOW)so_long executable has been rebuilt!$(DEF_COLOR)"
+	
 tclean:
 	rm -rf $(NAME)
-	@echo "$(YELLOW)so_long has been rebuilt!$(DEF_COLOR)"
+	@echo "$(YELLOW)so_long executable has been removed!$(DEF_COLOR)"
 .PHONY: all clean fclean test tclean re
