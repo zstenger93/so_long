@@ -6,7 +6,7 @@
 #    By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/18 16:05:40 by zstenger          #+#    #+#              #
-#    Updated: 2022/12/03 11:13:46 by zstenger         ###   ########.fr        #
+#    Updated: 2022/12/04 20:08:58 by zstenger         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -78,52 +78,52 @@ fclean:
 t: $(NAME)
 	@echo "$(RED)RUN TEST 1, LET THE GAME BEGIN!$(DEF_COLOR)"
 	./$(NAME) maps/map.ber
-	@echo "$(CYAN)YaAaY yOu HaVe Won!$(DEF_COLOR)"
+	@echo "$(CYAN)\nHow was it? Did you like it?$(DEF_COLOR)"
 
 t2: $(NAME)
 	@echo "$(RED)RUN TEST 2, LET THE GAME BEGIN!$(DEF_COLOR)"
 	./$(NAME) maps/map2.ber
-	@echo "$(CYAN)YaAaY yOu HaVe WoN!$(DEF_COLOR)"
+	@echo "$(CYAN)\nHow was it? Did you like it?$(DEF_COLOR)"
 
 t3: $(NAME)
 	@echo "$(RED)RUN TEST 3, LET THE GAME BEGIN!$(DEF_COLOR)"
 	./$(NAME) maps/map3.ber
-	@echo "$(CYAN)YaAaY yOu HaVe WoN!$(DEF_COLOR)"
+	@echo "$(CYAN)\nHow was it? Did you like it?$(DEF_COLOR)"
 
 t4: $(NAME)
 	@echo "$(RED)RUN TEST 4, LET THE GAME BEGIN!$(DEF_COLOR)"
 	./$(NAME) maps/map4.ber
-	@echo "$(CYAN)YaAaY yOu HaVe WoN!$(DEF_COLOR)"
+	@echo "$(CYAN)\nHow was it? Did you like it?$(DEF_COLOR)"
 
 t5: $(NAME)
 	@echo "$(RED)RUN TEST 5, LET THE GAME BEGIN!$(DEF_COLOR)"
 	./$(NAME) maps/map5.ber
-	@echo "$(CYAN)YaAaY yOu HaVe WoN!$(DEF_COLOR)"
+	@echo "$(CYAN)\nHow was it? Did you like it?$(DEF_COLOR)"
 
 tb: $(NAME)
 	@echo "$(RED)RUN BONUS TEST 1, LET THE GAME BEGIN!$(DEF_COLOR)"
 	./$(NAME) maps/mapb.ber
-	@echo "$(CYAN)YaAaY yOu HaVe Won!$(DEF_COLOR)"
+	@echo "$(CYAN)\nHow was it? Did you survive our beloved cat, norminette?$(DEF_COLOR)"
 
 tb2: $(NAME)
 	@echo "$(RED)RUN BONUS TEST 2, LET THE GAME BEGIN!$(DEF_COLOR)"
 	./$(NAME) maps/mapb2.ber
-	@echo "$(CYAN)YaAaY yOu HaVe Won!$(DEF_COLOR)"
+	@echo "$(CYAN)\nHow was it? Did you survive our beloved cat, norminette?$(DEF_COLOR)"
 
 tb3: $(NAME)
 	@echo "$(RED)RUN BONUS TEST 3, LET THE GAME BEGIN!$(DEF_COLOR)"
 	./$(NAME) maps/mapb3.ber
-	@echo "$(CYAN)YaAaY yOu HaVe Won!$(DEF_COLOR)"
+	@echo "$(CYAN)\nHow was it? Did you survive our beloved cat, norminette?$(DEF_COLOR)"
 
 tb4: $(NAME)
 	@echo "$(RED)RUN BONUS TEST 4, LET THE GAME BEGIN!$(DEF_COLOR)"
 	./$(NAME) maps/mapb4.ber
-	@echo "$(CYAN)YaAaY yOu HaVe Won!$(DEF_COLOR)"
+	@echo "$(CYAN)\nHow was it? Did you survive our beloved cat, norminette?$(DEF_COLOR)"
 
 tb5: $(NAME)
 	@echo "$(RED)RUN BONUS TEST 5, LET THE GAME BEGIN!$(DEF_COLOR)"
 	./$(NAME) maps/mapb5.ber
-	@echo "$(CYAN)YaAaY yOu HaVe Won!$(DEF_COLOR)"
+	@echo "$(CYAN)\nHow was it? Did you survive our beloved cat, norminette?$(DEF_COLOR)"
 
 re: fclean all
 	@echo "$(YELLOW)Project has been rebuilt!$(DEF_COLOR)"

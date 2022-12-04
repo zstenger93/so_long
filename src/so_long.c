@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 12:10:50 by zstenger          #+#    #+#             */
-/*   Updated: 2022/12/03 23:16:26 by zstenger         ###   ########.fr       */
+/*   Updated: 2022/12/04 23:24:19 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	main(int argc, char **argv)
 	ft_wrong_input(argc, argv);
 	if (ft_error_types(argv[1]) == 1)
 		exit(EXIT_FAILURE);
-	// ft_read_and_print_map(argv[1]);
+	ft_read_and_print_map(argv[1]);
 	mlx = gset_mlx(open_mapsize_window(argv[1], 0));
 	if (!mlx)
 		exit(EXIT_FAILURE);
@@ -31,7 +31,7 @@ int	main(int argc, char **argv)
 	gset_img(&img);
 	gset_tex(&tex);
 	ft_make_map(mlx, argv[1]);
-	mlx_loop_hook(mlx, hook, mlx);
+	mlx_loop_hook(mlx, ft_player_hook, mlx);
 	mlx_loop(mlx);
 	mlx_terminate(mlx);
 	return (EXIT_SUCCESS);
@@ -39,9 +39,12 @@ int	main(int argc, char **argv)
 
 bool	ft_wrong_input(int argc, char **argv)
 {
-	if (argc != 2 || ft_strstr(argv[1], ".ber") == false)
+	if (argc > 2 || ft_strstr(argv[1], ".ber") == false)
 	{
-		printf("add and only one map you idiot\n");
+		if (argc > 2)
+			ft_printf("\e[4;31mError!\e[0m\n\e[1;4;34mToo many arguments!\e[0m\n");
+		else
+			ft_printf("\e[4;31mError!\e[0m\n\e[1;4;34mMaybe something missing? oH, yEs! A MAP!\e[0m\n");
 		return (1);
 	}	
 	return (0);
@@ -83,7 +86,6 @@ void	ft_make_new_images(mlx_t *mlx, t_image *img)
 	img->wall = mlx_new_image(mlx, 32, 32);
 	img->pickitup = mlx_new_image(mlx, 32, 32);
 	img->exit = mlx_new_image(mlx, 32, 32);
-	img->exit_screen = mlx_new_image(mlx, 32, 32);
 	img->enemy = mlx_new_image(mlx, 32, 32);
 }
 
@@ -122,7 +124,7 @@ void	ft_put_loaded_image(mlx_t *mlx, char c, int x, int y)
 	if (c == '1')
 		ft_load_wall(mlx, x, y);
 	if (c == 'P')
-		ft_load_player(mlx, x, y);
+		ft_load_player(mlx, x, y, 'F');
 	if (c == 'C')
 		ft_load_pickitup(mlx, x, y);
 	if (c == 'E')
@@ -196,19 +198,69 @@ void	ft_load_exit(mlx_t *mlx, int x, int y)
 	mlx_delete_texture(tex->exit);
 }
 
-void	ft_load_player(mlx_t *mlx, int x, int y)
+void	ft_load_failure(mlx_t *mlx, int x, int y)
 {
 	t_texture	*tex;
 	t_image	*img;
-	int			itw;
+	
+	
+	tex = gset_tex(NULL);
+	img = gset_img(NULL);
+	
+	tex->failure_screen = mlx_load_png("png/lose.png");
+	img->failure_screen = mlx_new_image(mlx, x, y);
+	mlx_image_to_window(mlx, img->failure_screen, x, y);
+	mlx_draw_texture(img->failure_screen, tex->failure_screen, 0, 0);
+	mlx_set_instance_depth(img->failure_screen->instances, 8);
+	mlx_delete_texture(tex->failure_screen);
+	return ;
+}
+
+void	ft_load_victory(mlx_t *mlx, int x, int y)
+{
+	t_texture	*tex;
+	t_image	*img;
 
 	tex = gset_tex(NULL);
 	img = gset_img(NULL);
-	itw = mlx_image_to_window(mlx, img->player, x, y);
-	tex->player = mlx_load_png("png/playerR.png");
+	
+	tex->victory_screen = mlx_load_png("png/victorycopy.png");
+	img->victory_screen = mlx_new_image(mlx, x, y);
+	mlx_image_to_window(mlx, img->victory_screen, x, y);
+	mlx_draw_texture(img->victory_screen, tex->victory_screen, 0, 0);
+	mlx_set_instance_depth(img->victory_screen->instances, 8);
+	mlx_delete_texture(tex->victory_screen);
+	return ;	
+}
+
+char	ft_load_player(mlx_t *mlx, int x, int y, char keytype)
+{
+	t_texture	*tex;
+	t_image	*img;
+
+	tex = gset_tex(NULL);
+	img = gset_img(NULL);
+	if (keytype == 'W')
+		tex->player = mlx_load_png("png/playerU.png");
+	else if (keytype == 'S')
+		tex->player = mlx_load_png("png/playerD.png");
+	else if (keytype == 'A')
+		tex->player = mlx_load_png("png/playerL.png");
+	else if (keytype == 'D')
+		tex->player = mlx_load_png("png/playerR.png");
+	else if (keytype == 'F')
+	{
+		tex->player = mlx_load_png("png/playerR.png");
+		mlx_draw_texture(img->player, tex->player, 0, 0);
+		mlx_image_to_window(mlx, img->player, x, y);
+		mlx_set_instance_depth(img->player->instances, 5);
+	}
 	mlx_draw_texture(img->player, tex->player, 0, 0);
-	mlx_set_instance_depth(img->player->instances + itw, 3);
 	mlx_delete_texture(tex->player);
+	ft_player_location(img->pickitup, 'C');
+	ft_player_location(img->exit, 'E');
+	ft_player_location(img->enemy, 'F');
+	return (ft_player_location(img->wall, '1'));
 }
 
 void	ft_load_enemy(mlx_t *mlx, int x, int y)
@@ -235,21 +287,22 @@ char	ft_error_types(char *argv)
 	
 	error_type = ft_map_validator(argv);
 	if (error_type == '1')
-		ft_printf("Error!\nMap must be surrounded by walls!\n");
+		ft_printf("\e[1;4;31mError!\e[0m\n\e[4;33mMap must be surrounded by walls!\e[0m\n");
 	else if (error_type == 'M')
-		ft_printf("Error!\nMap must contain P, E and C!\n");
+		ft_printf("\e[1;4;31mError!\e[0m\n\e[4;33mMap must contain P, E and C!\e[0m\n");
 	else if (error_type == 'O')
-		ft_printf("Error!\nThere is more exit or/and player than one!\n");
+		ft_printf("\e[1;4;31mError!\e[0m\n\e[4;33mThere is NO or MORE exit or/and player than one!\e[0m\n");
 	else if (error_type == 'I')
-		ft_printf("Error!\nInvalid char/'s in the map!\nValid chars: 0, 1, P, E, C, F\n");
+		ft_printf("\e[1;4;31mError!\e[0m\n\e[4;33mInvalid char/'s in the map!\e[0m\n\e[1;4;34mValid chars: 0, 1, P, E, C, F.\e[0m\n");
 	else if (error_type == 'V')
-		ft_printf("Error!\nNo valid path to exit!\n");
+		ft_printf("\e[1;4;31mError!\e[0m\n\e[4;33mNo valid path to exit!\e[0m\n");
 	else if (error_type == 'R')
-		ft_printf("Error!\nMap must be rectangular!\n");
+		ft_printf("\e[1;4;31mError!\e[0m\n\e[4;33mMap must be rectangular!\e[0m\n");
 	else if (error_type == 'A')
-		ft_printf("Error!\nMemory allocation failed!\n");
+		ft_printf("\e[1;4;31mError!\e[0m\n\e[4;33mMemory allocation failed!\e[0m\n");
 	else
-		return (0);
+		{ft_printf("\e[1;4;32mThe map is valid and ready to launch!\e[0m\n");
+		return (0);}
 	return (1);
 }
 
@@ -320,9 +373,10 @@ char	ft_map_have_walls(int fd, size_t *length, size_t *row, size_t count)
 			}
 		}
 	}
-	//checking the the last row for the wall
+	//checking the the last row for the wall FFFFFUUUUUUUUCCCCCKKKK
 	if (line == NULL)
 	{
+		count = 0;
 		while (count < *length)
 		{
 			if (lineb[count++] != '1')
@@ -355,7 +409,7 @@ char	ft_map_have_all_elements(int fd, char ext, char pick, char plyr)
 		free(line);
 		line = get_next_line(fd);
 	}
-	if ((plyr + ext) != 2)
+	if (!plyr || !ext || plyr > 1 || ext > 1)
 		return ('O');
 	else if ((plyr + ext + pick) != 3)
 		return ('M');
@@ -370,7 +424,7 @@ char	ft_map_with_validpath(char *argv, size_t rows, size_t columns, int fd)
 {
 	size_t	x;
 	size_t	y;
-	size_t	count;
+	size_t	path;
 	char	**map;
 	char	*line;
 
@@ -379,23 +433,23 @@ char	ft_map_with_validpath(char *argv, size_t rows, size_t columns, int fd)
 	if (map == NULL)
 		return ('A');
 	line = get_next_line(fd);
-	count = 0;
+	path = 0;
 	while (line != NULL)
 	{
-		map[count] = malloc((columns + 1));
-		if (map[count] == NULL)
+		map[path] = malloc((columns + 1));
+		if (map[path] == NULL)
 			return ('A');
-		ft_strlcpy(map[count++], line, columns +1);
+		ft_strlcpy(map[path++], line, columns +1);
 		free(line);
 		line = get_next_line(fd);
 	}
 	ft_get_player(map, &x, &y, columns);
-	count = ft_dfs(map, x, y, rows);
-	free_map(map, rows);
-	return (count);
+	path = ft_dfs(map, x, y, rows);
+	ft_free_map(map, rows);
+	return (path);
 }
 
-void	free_map(char **map, size_t rows)
+void	ft_free_map(char **map, size_t rows)
 {
 	size_t	count;
 
@@ -431,11 +485,11 @@ void	ft_get_player(char **map, size_t *x, size_t *y, size_t columns)
 int	ft_dfs(char **map, size_t x, size_t y, size_t rows)
 {
 	if (x < 1 || y < 1 || x >= ft_strlen(*map) || y > rows
-		|| map[y][x] == '1' || map[y][x] == 'F')
+		|| map[y][x] == 'X' || map[y][x] == 'F')
 		return ('V');
 	if (map[y][x] == 'E')
 		return (0);
-	map[y][x] = '1';
+	map[y][x] = 'X';
 	if (ft_dfs(map, x - 1, y, rows) == 0
 		|| ft_dfs(map, x + 1, y, rows) == 0
 		|| ft_dfs(map, x, y - 1, rows) == 0
@@ -447,16 +501,143 @@ int	ft_dfs(char **map, size_t x, size_t y, size_t rows)
 }
 
 
+void	ft_player_movement(mlx_t *mlx, t_image *img)
+{
+	if (mlx_is_key_down(mlx, MLX_KEY_W))
+	{
+		if (ft_load_player(mlx, 0, 0, 'W') == true)
+			img->player->instances[0].y -= 4;
+	}
+	else if (mlx_is_key_down(mlx, MLX_KEY_S))
+	{
+		if (ft_load_player(mlx, 0, 0, 'S') == true)
+			img->player->instances[0].y += 4;
+	}
+	else if (mlx_is_key_down(mlx, MLX_KEY_A))
+	{
+		if (ft_load_player(mlx, 0, 0, 'A') == true)
+			img->player->instances[0].x -= 4;
+	}
+	else if (mlx_is_key_down(mlx, MLX_KEY_D))
+	{
+		if (ft_load_player(mlx, 0, 0, 'D') == true)
+			img->player->instances[0].x += 4;
+	}
+}
+
+void	ft_player_hook(void *mlx)
+{
+	t_image	*img;
+	
+	img = gset_img(NULL);
+	if (img->player->enabled == true)
+		ft_player_movement(mlx, img);
+	if (mlx_is_key_down(mlx, MLX_KEY_ESCAPE))
+		mlx_close_window(mlx);
+}
 
 
+char	ft_is_wall(int x_m, int y_m, mlx_instance_t *element_ins, char mapelement)
+{
+	mlx_instance_t	*player_ins;
+	t_image *img;
 
+	//if the map element isn't wall check if it is collectableee
+	if (mapelement != '1')
+		return (ft_isit_pickable(element_ins, mapelement));
+	img = gset_img(NULL);
+	player_ins = img->player->instances;
+	//checks player position and moves back to the original position before hitting the wall
+	if (!(fabs((float)((element_ins->x + 6) - player_ins->x)) < x_m))
+		player_ins->x -= 1;
+	if (!(fabs((float)(element_ins->x - (player_ins->x + 6))) < x_m))
+		player_ins->x += 1;
+	if (!(fabs((float)((element_ins->y + 6) - player_ins->y)) < y_m))
+		player_ins->y -= 1;
+	if (!(fabs((float)(element_ins->y - (player_ins->y + 6))) < y_m))
+		player_ins->y += 1;
+	return (0);
+}
 
+char	ft_isit_norminette(char mapelement)
+{
+	t_image	*img;
 
+	if (mapelement != 'F')
+		return (ft_can_we_exit());
+	img = gset_img(NULL);
+	if (img->player->enabled == true)
+		ft_load_failure(gset_mlx(NULL), 370, 140);
+	img->player->enabled = false;
+	img->pickitup->enabled = false;
+	return (1);
+}
 
+char	ft_isit_pickable(mlx_instance_t *element_ins, char mapelement)
+{
+	//if it isn't collectable checks for exit
+	if (mapelement != 'C')
+		return (ft_isit_norminette(mapelement));
+	//if it is indeed collectable then disable the current element
+	element_ins->enabled = false;
+	return (1);
+}
 
+char	ft_can_we_exit(void)
+{
+	t_image	*img;
+	int	amount;
+	
+	img = gset_img(NULL);
+	amount = 0;
+	//stays in the while loop until we have collectibles on the map
+	while (amount < img->pickitup->count)
+	{
+		if (img->pickitup->instances[amount].enabled == true)
+			return (0);
+		amount++;
+	}
+	// load exit img
+	img->player->enabled = false;
+	if (img->player->enabled == false)
+		ft_load_victory(gset_mlx(NULL), 389, 170);
+	//if there is no collectible
+	if (img->pickitup->enabled == false)
+		img->victory_screen->enabled = true;
+	return (1);
+}
 
-
-
+//x_m and y_m controls the bounce back from the walls
+char	ft_player_location(mlx_image_t *element, char mapelement)
+{
+	t_image	*img;
+	mlx_instance_t	*ins;
+	int	x_m;
+	int y_m;
+	int amount;
+	
+	amount = 0;
+	img = gset_img(NULL);
+	ins = element->instances;
+	while (amount < element->count)
+	{
+		//left right 2-2 pixel less for the better movement
+		if (ins[amount].x < img->player->instances->x)
+			x_m = 30;
+		else
+			x_m = 30;
+		//up and down left 4-4 pixel less for the better movement
+		if (ins[amount].y < img->player->instances->y)
+			y_m = 28;
+		else
+			y_m = 28;
+		if (fabs((float)(ins[amount].x - img->player->instances->x)) < x_m)
+			if (fabs((float)(ins[amount].y - img->player->instances->y)) < y_m)
+				return (ft_is_wall(x_m, y_m, ins + amount, mapelement));
+		amount++;
+	}
+	return (1);
+}
 
 
 
@@ -532,79 +713,69 @@ mlx_t	*gset_mlx(mlx_t *p_mlx)
 
 
 
-// void	ft_read_and_print_map(char *map)
-// {
-// 	int count;
-// 	int	x;
-// 	int y;
-// 	int fd;
-// 	char *line;
-
-// 	fd = open(map, O_RDONLY);
-// 	line = get_next_line(fd);
-// 	y = 0;
-// 	while (line)
-// 	{
-// 		count = 0;
-// 		x = 0;
-// 		while (line[count] != '\0')
-// 		{
-// 			put_chars(line[count]);
-// 			// x += 32;
-// 			count ++;
-// 		}
-// 		free(line);
-// 		line = get_next_line(fd);
-// 		// y += 32;
-// 	}
-// 	close(fd);
-// }
-
-// char	put_chars(char c)
-// {
-// 	if (c == '0')
-// 		write(1, &c, 1);
-// 	if (c == '1')
-// 		write(1, &c, 1);
-// 	if (c == 'C')
-// 		write(1, &c, 1);
-// 	if (c == 'E')
-// 		write(1, &c, 1);
-// 	if (c == 'P')
-// 		write(1, &c, 1);
-// 	if (c == 'F')
-// 		write(1, &c, 1);
-// 	if (c =='\n')
-// 		write(1, &c, 1);
-// 	return (0);
-// }
-
-
-
-
-
-
-
-
-
-
-
-void	hook(void *param)
+void	ft_read_and_print_map(char *map)
 {
-	mlx_t	*mlx;
+	int count;
+	int	x;
+	int y;
+	int fd;
+	char *line;
 
-	mlx = param;
-	if (mlx_is_key_down(mlx, MLX_KEY_ESCAPE))
-		mlx_close_window(mlx);
-	if (mlx_is_key_down(mlx, MLX_KEY_UP))
-		g_img->instances[0].y -= 5;
-	if (mlx_is_key_down(mlx, MLX_KEY_DOWN))
-		g_img->instances[0].y += 5;
-	if (mlx_is_key_down(mlx, MLX_KEY_LEFT))
-		g_img->instances[0].x -= 5;
-	if (mlx_is_key_down(mlx, MLX_KEY_RIGHT))
-		g_img->instances[0].x += 5;
+	fd = open(map, O_RDONLY);
+	line = get_next_line(fd);
+	y = 0;
+	while (line)
+	{
+		count = 0;
+		x = 0;
+		while (line[count] != '\0')
+		{
+			put_chars(line[count]);
+			// x += 32;
+			count ++;
+		}
+		free(line);
+		line = get_next_line(fd);
+		// y += 32;
+	}
+	close(fd);
 }
+
+char	put_chars(char c)
+{
+	if (c == '0')
+		write(1, &c, 1);
+	if (c == '1')
+		write(1, &c, 1);
+	if (c == 'C')
+		write(1, &c, 1);
+	if (c == 'E')
+		write(1, &c, 1);
+	if (c == 'P')
+		write(1, &c, 1);
+	if (c == 'F')
+		write(1, &c, 1);
+	if (c =='\n')
+		write(1, &c, 1);
+	return (0);
+}
+
+// void	hook(void *param)
+// {
+// 	mlx_t	*mlx;
+
+// 	mlx = param;
+// 	if (mlx_is_key_down(mlx, MLX_KEY_ESCAPE))
+// 		mlx_close_window(mlx);
+// 	if (mlx_is_key_down(mlx, MLX_KEY_UP))
+// 		g_img->instances[0].y -= 5;
+// 	if (mlx_is_key_down(mlx, MLX_KEY_DOWN))
+// 		g_img->instances[0].y += 5;
+// 	if (mlx_is_key_down(mlx, MLX_KEY_LEFT))
+// 		g_img->instances[0].x -= 5;
+// 	if (mlx_is_key_down(mlx, MLX_KEY_RIGHT))
+// 		g_img->instances[0].x += 5;
+// }
 
 
 

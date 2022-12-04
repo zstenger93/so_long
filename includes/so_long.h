@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 15:06:49 by zstenger          #+#    #+#             */
-/*   Updated: 2022/12/03 22:53:17 by zstenger         ###   ########.fr       */
+/*   Updated: 2022/12/04 23:19:39 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ typedef struct s_texture
 {
 	mlx_texture_t	*player;
 	mlx_texture_t	*exit;
-	mlx_texture_t	*exit_screen;
+	mlx_texture_t	*victory_screen;
+	mlx_texture_t	*failure_screen;
 	mlx_texture_t	*wall;
 	mlx_texture_t	*pickitup;
 	mlx_texture_t	*walking_path;
@@ -50,7 +51,8 @@ typedef struct s_image
 {
 	mlx_image_t	*player;
 	mlx_image_t	*exit;
-	mlx_image_t	*exit_screen;
+	mlx_image_t	*victory_screen;
+	mlx_image_t *failure_screen;
 	mlx_image_t	*wall;
 	mlx_image_t	*pickitup;
 	mlx_image_t	*walking_path;
@@ -89,8 +91,10 @@ void	ft_load_walking_path(mlx_t *mlx, int x, int y, char c);
 void	ft_load_wall(mlx_t *mlx, int x, int y);
 void	ft_load_pickitup(mlx_t *mlx, int x, int y);
 void	ft_load_exit(mlx_t *mlx, int x, int y);
-void	ft_load_player(mlx_t *mlx, int x, int y);
+char	ft_load_player(mlx_t *mlx, int x, int y, char keytype);
 void	ft_load_enemy(mlx_t *mlx, int x, int y);
+void	ft_load_failure(mlx_t *mlx, int x, int y);
+void	ft_load_victory(mlx_t *mlx, int x, int y);
 
 //in case of an error, returning the correct error output
 char	ft_error_types(char *argv);
@@ -122,7 +126,22 @@ void	ft_get_player(char **map, size_t *x, size_t *y, size_t columns);
 int	ft_dfs(char **map, size_t x, size_t y, size_t rows);
 
 //free the temporary map
-void	free_map(char **map, size_t rows);
+void	ft_free_map(char **map, size_t rows);
+
+
+
+
+//moving the player on the map
+void	ft_player_movement(mlx_t *mlx, t_image *img);
+
+char	ft_player_location(mlx_image_t *element, char mapelement);
+char	ft_is_wall(int x, int y, mlx_instance_t *element_ins, char mapelement);
+char	ft_isit_pickable(mlx_instance_t *element_ins, char mapelement);
+char	ft_can_we_exit(void);
+char	ft_isit_norminette(char mapelement);
+
+
+void	ft_player_hook(void *mlx);
 
 //null setting shitstorm
 mlx_t	*gset_mlx(mlx_t *p_mlx);
