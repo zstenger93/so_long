@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 12:10:50 by zstenger          #+#    #+#             */
-/*   Updated: 2022/12/04 23:24:19 by zstenger         ###   ########.fr       */
+/*   Updated: 2022/12/04 23:26:09 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -207,7 +207,7 @@ void	ft_load_failure(mlx_t *mlx, int x, int y)
 	tex = gset_tex(NULL);
 	img = gset_img(NULL);
 	
-	tex->failure_screen = mlx_load_png("png/lose.png");
+	tex->failure_screen = mlx_load_png("png/failure.png");
 	img->failure_screen = mlx_new_image(mlx, x, y);
 	mlx_image_to_window(mlx, img->failure_screen, x, y);
 	mlx_draw_texture(img->failure_screen, tex->failure_screen, 0, 0);
@@ -224,7 +224,7 @@ void	ft_load_victory(mlx_t *mlx, int x, int y)
 	tex = gset_tex(NULL);
 	img = gset_img(NULL);
 	
-	tex->victory_screen = mlx_load_png("png/victorycopy.png");
+	tex->victory_screen = mlx_load_png("png/victory.png");
 	img->victory_screen = mlx_new_image(mlx, x, y);
 	mlx_image_to_window(mlx, img->victory_screen, x, y);
 	mlx_draw_texture(img->victory_screen, tex->victory_screen, 0, 0);
