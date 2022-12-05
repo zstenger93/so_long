@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 15:06:49 by zstenger          #+#    #+#             */
-/*   Updated: 2022/12/04 23:19:39 by zstenger         ###   ########.fr       */
+/*   Updated: 2022/12/05 18:56:10 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	ft_read_and_print_map(char *map);
 char	put_chars(char c);
 
 //obviousi guess
-mlx_t	*open_mapsize_window(char *map, int i);
+mlx_t	*ft_open_mapsize_window(char *map, int i);
 
 
 //make the map
@@ -92,7 +92,7 @@ void	ft_load_wall(mlx_t *mlx, int x, int y);
 void	ft_load_pickitup(mlx_t *mlx, int x, int y);
 void	ft_load_exit(mlx_t *mlx, int x, int y);
 char	ft_load_player(mlx_t *mlx, int x, int y, char keytype);
-void	ft_load_enemy(mlx_t *mlx, int x, int y);
+char	ft_load_enemy(mlx_t *mlx, int x, int y, char keytype);
 void	ft_load_failure(mlx_t *mlx, int x, int y);
 void	ft_load_victory(mlx_t *mlx, int x, int y);
 
@@ -140,8 +140,19 @@ char	ft_isit_pickable(mlx_instance_t *element_ins, char mapelement);
 char	ft_can_we_exit(void);
 char	ft_isit_norminette(char mapelement);
 
+char	ft_enemy_location(mlx_image_t *element);
+void	ft_wall_enemy(int x_m, int y_m, mlx_instance_t *element_ins);
 
 void	ft_player_hook(void *mlx);
+
+
+
+
+void	ft_enemy_hook(void *mlx);
+void	ft_enemy_movement(mlx_t *mlx, t_image *img);
+
+
+
 
 //null setting shitstorm
 mlx_t	*gset_mlx(mlx_t *p_mlx);

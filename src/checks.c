@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 12:18:07 by zstenger          #+#    #+#             */
-/*   Updated: 2022/12/02 11:34:17 by zstenger         ###   ########.fr       */
+/*   Updated: 2022/12/05 19:53:46 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,26 +17,98 @@ check for collectible
 check for exit
 */
 
-char	error_type(char *argv)
-{
-	char	type;
+#include "../includes/so_long.h"
 
-	type = map_validator(argv);
-	if (type == 'i')
-		ft_printf("Error\nInvalid character in the map.\nValid characters are 0, 1, C, E\n");
-	else if (type == 'V')
-		ft_printf("Error\nThe map cannot be finished, no valid path to the exit.");
-	else if (type == 'N')
-		ft_printf("Error\nSomething wrong with malloc or malloc failed.");
-	else if (type == '1')
-		ft_printf("Error\nThe map must be surrounded by walls('1').");
-	else if (type == 'R')
-		ft_printf("Error\nMap must be rectangular.");
-	else if (type == 'M')
-		ft_printf("Error\nMap must contain 'P', 'E' and 'C'.");
-	else if (type == 'T')
-		ft_printf("Error\nOnly one exit and one player is accepted.");
-	else
-		return (0);
-	return (1);
+void	ft_enemy_hook(void *mlx)
+{
+	t_image *img;
+
+	img = gset_img(NULL);
+	if (img->enemy->enabled == true)
+		ft_enemy_movement(mlx, img);
+		
 }
+
+void	ft_enemy_movement(mlx_t *mlx, t_image *img)
+{
+	int	i;
+	
+	if (mlx_is_key_down(mlx, MLX_KEY_W))
+	{
+		if (ft_load_player(mlx, 0, 0, 'W') == 2)
+			{
+				i = 0;
+				while (i < img->enemy->count)
+				{
+					img->enemy->instances[i].x -= 3;
+					img->enemy->instances[i].y += 2;
+					i++;
+				}
+			}
+	}
+	else if (mlx_is_key_down(mlx, MLX_KEY_S))
+	{
+		if (ft_load_player(mlx, 0, 0, 'S') == 2)
+			{
+				i = 0;
+				while (i < img->enemy->count)
+				{
+					img->enemy->instances[i].x += 3;
+					img->enemy->instances[i].y -= 2;
+					i++;
+				}
+			}
+	}
+	else if (mlx_is_key_down(mlx, MLX_KEY_A))
+	{
+		if (ft_load_player(mlx, 0, 0, 'A') == 2)
+			{
+				i = 0;
+				while (i < img->enemy->count)
+				{
+					img->enemy->instances[i].y -= 3;
+					img->enemy->instances[i].x += 2;
+					i++;
+				}
+			}
+	}
+	else if (mlx_is_key_down(mlx, MLX_KEY_D))
+	{
+		if (ft_load_player(mlx, 0, 0, 'D') == 2)
+			{
+				i = 0;
+				while (i < img->enemy->count)
+				{
+					img->enemy->instances[i].y += 3;
+					img->enemy->instances[i].x -= 2;
+					i++;
+				}
+			}
+	}
+}
+
+
+
+
+
+// 	ft_load_enemy(mlx_t *mlx, int x, int y, char keytype)
+// {
+// 	t_texture	*tex;
+// 	t_image	*img;
+
+// 	tex = gset_tex(NULL);
+// 	img = gset_img(NULL);
+// 	if (keytype == 'W' || keytype == 'S' || keytype == 'A' || keytype == 'D')
+// 		tex->enemy = mlx_load_png("png/norminette.png");
+// 	else if (keytype == 'T')
+// 	{
+// 		tex->enemy = mlx_load_png("png/norminette.png");
+// 		mlx_draw_texture(img->enemy, tex->enemy, 0, 0);
+// 		mlx_image_to_window(mlx, img->enemy, x, y);
+// 		mlx_set_instance_depth(img->enemy->instances,  3);
+// 	}
+// 	mlx_draw_texture(img->enemy, tex->enemy, 0, 0);
+// 	mlx_delete_texture(tex->enemy);
+// 	// ft_enemy_location(img->wall, 'F');
+// 	return (0);
+// }

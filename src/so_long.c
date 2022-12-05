@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 12:10:50 by zstenger          #+#    #+#             */
-/*   Updated: 2022/12/04 23:26:09 by zstenger         ###   ########.fr       */
+/*   Updated: 2022/12/05 20:01:47 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,16 @@ int	main(int argc, char **argv)
 	if (ft_error_types(argv[1]) == 1)
 		exit(EXIT_FAILURE);
 	ft_read_and_print_map(argv[1]);
-	mlx = gset_mlx(open_mapsize_window(argv[1], 0));
+	mlx = gset_mlx(ft_open_mapsize_window(argv[1], 0));
 	if (!mlx)
 		exit(EXIT_FAILURE);
 	ft_make_new_images(mlx, &img);
 	gset_img(&img);
 	gset_tex(&tex);
 	ft_make_map(mlx, argv[1]);
+	mlx_loop_hook(mlx, ft_enemy_hook, mlx);
 	mlx_loop_hook(mlx, ft_player_hook, mlx);
+	
 	mlx_loop(mlx);
 	mlx_terminate(mlx);
 	return (EXIT_SUCCESS);
@@ -53,7 +55,7 @@ bool	ft_wrong_input(int argc, char **argv)
 
 
 //32pixel size for each byte
-mlx_t	*open_mapsize_window(char *map, int count)
+mlx_t	*ft_open_mapsize_window(char *map, int count)
 {
 	mlx_t	*mlx;
 	int		x;
@@ -130,7 +132,7 @@ void	ft_put_loaded_image(mlx_t *mlx, char c, int x, int y)
 	if (c == 'E')
 		ft_load_exit(mlx, x, y);
 	if (c == 'F')
-		ft_load_enemy(mlx, x, y);
+		ft_load_enemy(mlx, x, y, 'T');
 }
 
 void	ft_load_walking_path(mlx_t *mlx, int x, int y, char c)
@@ -260,22 +262,29 @@ char	ft_load_player(mlx_t *mlx, int x, int y, char keytype)
 	ft_player_location(img->pickitup, 'C');
 	ft_player_location(img->exit, 'E');
 	ft_player_location(img->enemy, 'F');
-	return (ft_player_location(img->wall, '1'));
+	return (ft_player_location(img->wall, '1') + ft_enemy_location(img->wall));
 }
 
-void	ft_load_enemy(mlx_t *mlx, int x, int y)
+char	ft_load_enemy(mlx_t *mlx, int x, int y, char keytype)
 {
 	t_texture	*tex;
 	t_image	*img;
-	int	itw;
 
 	tex = gset_tex(NULL);
 	img = gset_img(NULL);
-	itw = mlx_image_to_window(mlx, img->enemy, x, y);
-	tex->enemy = mlx_load_png("png/norminette.png");
+	if (keytype == 'W' || keytype == 'S' || keytype == 'A' || keytype == 'D')
+		tex->enemy = mlx_load_png("png/norminette.png");
+	else if (keytype == 'T')
+	{
+		tex->enemy = mlx_load_png("png/norminette.png");
+		mlx_draw_texture(img->enemy, tex->enemy, 0, 0);
+		mlx_image_to_window(mlx, img->enemy, x, y);
+		mlx_set_instance_depth(img->enemy->instances,  3);
+	}
 	mlx_draw_texture(img->enemy, tex->enemy, 0, 0);
-	mlx_set_instance_depth(img->enemy->instances + itw, 3);
 	mlx_delete_texture(tex->enemy);
+	// ft_enemy_location(img->wall, 'F');
+	return (0);
 }
 
 
@@ -495,7 +504,6 @@ int	ft_dfs(char **map, size_t x, size_t y, size_t rows)
 		|| ft_dfs(map, x, y - 1, rows) == 0
 		|| ft_dfs(map, x, y + 1, rows) == 0)
 		return (0);
-	
 	else
 		return ('V');
 }
@@ -503,25 +511,66 @@ int	ft_dfs(char **map, size_t x, size_t y, size_t rows)
 
 void	ft_player_movement(mlx_t *mlx, t_image *img)
 {
+	// int i;
 	if (mlx_is_key_down(mlx, MLX_KEY_W))
 	{
-		if (ft_load_player(mlx, 0, 0, 'W') == true)
-			img->player->instances[0].y -= 4;
+		if (ft_load_player(mlx, 0, 0, 'W') == 2)
+			{
+				img->player->instances[0].y -= 4;
+				// i = 0;
+				// while (i < img->enemy->count)
+				// {
+				//  	// if (img->enemy->instances[i].enabled == true)
+				// 	img->enemy->instances[i].x -= 3;
+				// 	img->enemy->instances[i].y += 2;
+				// 	i++;
+				// }
+			}
 	}
 	else if (mlx_is_key_down(mlx, MLX_KEY_S))
 	{
-		if (ft_load_player(mlx, 0, 0, 'S') == true)
-			img->player->instances[0].y += 4;
+		if (ft_load_player(mlx, 0, 0, 'S') == 2)
+			{
+				img->player->instances[0].y += 4;
+				// i = 0;
+				// while (i < img->enemy->count)
+				// {
+				// 	// if (img->enemy->instances[i].enabled == true)
+				// 	img->enemy->instances[i].x += 3;
+				// 	img->enemy->instances[i].y -= 2;
+				// 	i++;
+				// }
+			}
 	}
 	else if (mlx_is_key_down(mlx, MLX_KEY_A))
 	{
-		if (ft_load_player(mlx, 0, 0, 'A') == true)
-			img->player->instances[0].x -= 4;
+		if (ft_load_player(mlx, 0, 0, 'A') == 2)
+			{
+				img->player->instances[0].x -= 4;
+				// i = 0;
+				// while (i < img->enemy->count)
+				// {
+				// 	// if (img->enemy->instances[i].enabled == true)
+				// 	img->enemy->instances[i].y -= 3;
+				// 	img->enemy->instances[i].x += 2;
+				// 	i++;
+				// }
+			}
 	}
 	else if (mlx_is_key_down(mlx, MLX_KEY_D))
 	{
-		if (ft_load_player(mlx, 0, 0, 'D') == true)
-			img->player->instances[0].x += 4;
+		if (ft_load_player(mlx, 0, 0, 'D') == 2)
+			{
+				img->player->instances[0].x += 4;
+				// i = 0;
+				// while (i < img->enemy->count)
+				// {
+				// 	// if (img->enemy->instances[i].enabled == true)
+				// 	img->enemy->instances[i].y += 3;
+				// 	img->enemy->instances[i].x -= 2;
+				// 	i++;
+				// }
+			}
 	}
 }
 
@@ -549,13 +598,13 @@ char	ft_is_wall(int x_m, int y_m, mlx_instance_t *element_ins, char mapelement)
 	player_ins = img->player->instances;
 	//checks player position and moves back to the original position before hitting the wall
 	if (!(fabs((float)((element_ins->x + 6) - player_ins->x)) < x_m))
-		player_ins->x -= 1;
+		player_ins->x -= 2;
 	if (!(fabs((float)(element_ins->x - (player_ins->x + 6))) < x_m))
-		player_ins->x += 1;
+		player_ins->x += 2;
 	if (!(fabs((float)((element_ins->y + 6) - player_ins->y)) < y_m))
-		player_ins->y -= 1;
+		player_ins->y -= 2;
 	if (!(fabs((float)(element_ins->y - (player_ins->y + 6))) < y_m))
-		player_ins->y += 1;
+		player_ins->y += 2;
 	return (0);
 }
 
@@ -566,10 +615,14 @@ char	ft_isit_norminette(char mapelement)
 	if (mapelement != 'F')
 		return (ft_can_we_exit());
 	img = gset_img(NULL);
-	if (img->player->enabled == true)
-		ft_load_failure(gset_mlx(NULL), 370, 140);
+	if (mapelement == 'F' && img->player->enabled == true)
+		ft_load_failure(gset_mlx(NULL), 389, 170);
 	img->player->enabled = false;
 	img->pickitup->enabled = false;
+	img->enemy->enabled = false;
+	img->wall->enabled = false;
+	img->exit->enabled = false;
+	img->walking_path->enabled = false;
 	return (1);
 }
 
@@ -600,7 +653,15 @@ char	ft_can_we_exit(void)
 	// load exit img
 	img->player->enabled = false;
 	if (img->player->enabled == false)
-		ft_load_victory(gset_mlx(NULL), 389, 170);
+		{
+			ft_load_victory(gset_mlx(NULL), 389, 170);
+			img->player->enabled = false;
+			img->pickitup->enabled = false;
+			img->enemy->enabled = false;
+			img->wall->enabled = false;
+			img->exit->enabled = false;
+			img->walking_path->enabled = false;
+		}
 	//if there is no collectible
 	if (img->pickitup->enabled == false)
 		img->victory_screen->enabled = true;
@@ -615,10 +676,11 @@ char	ft_player_location(mlx_image_t *element, char mapelement)
 	int	x_m;
 	int y_m;
 	int amount;
-	
-	amount = 0;
+
 	img = gset_img(NULL);
 	ins = element->instances;
+	amount = 0;
+	//making player slightly smaller to be smoother to move
 	while (amount < element->count)
 	{
 		//left right 2-2 pixel less for the better movement
@@ -631,6 +693,8 @@ char	ft_player_location(mlx_image_t *element, char mapelement)
 			y_m = 28;
 		else
 			y_m = 28;
+		//getting from the plyer floating value (since its always changing) the
+		//absolute value and compare it to the position of the wall
 		if (fabs((float)(ins[amount].x - img->player->instances->x)) < x_m)
 			if (fabs((float)(ins[amount].y - img->player->instances->y)) < y_m)
 				return (ft_is_wall(x_m, y_m, ins + amount, mapelement));
@@ -639,20 +703,80 @@ char	ft_player_location(mlx_image_t *element, char mapelement)
 	return (1);
 }
 
+char	ft_enemy_location(mlx_image_t *element)
+{
+	t_image	*img;
+	mlx_instance_t	*ins;
+	int	x_m;
+	int y_m;
+	int amount;
+	// int	i;
+
+	img = gset_img(NULL);
+	ins = element->instances;
+	// i = 0;
+	amount = 0;
+	// while (i < img->enemy->count)
+	// {
+		
+		//making player slightly smaller to be smoother to move
+		while (amount < element->count)
+		{
+			//left right 2-2 pixel less for the better movement
+			if (ins[amount].x < img->enemy->instances->x)
+				x_m = 30;
+			else
+				x_m = 30;
+			//up and down left 4-4 pixel less for the better movement
+			if (ins[amount].y < img->enemy->instances->y)
+				y_m = 28;
+			else
+				y_m = 28;
+			if (fabs((float)(ins[amount].x - img->enemy->instances->x)) < x_m)
+				if (fabs((float)(ins[amount].y - img->enemy->instances->y)) < y_m)
+					ft_wall_enemy(x_m, y_m, ins + amount);
+			amount++;
+		}		
+	// 	i++;
+	// }
+	return (1);
+}
+
+void	ft_wall_enemy(int x_m, int y_m, mlx_instance_t *element_ins)
+{
+	mlx_instance_t	*enemy_ins;
+	t_image *img;
+	int i;
+
+	img = gset_img(NULL);
+	enemy_ins = img->enemy->instances;
+	i = 0;
+	while (i < img->enemy->count)
+	{
+		//checks player position and moves back to the original position before hitting the wall
+
+			if (!(fabs((float)((element_ins->x + 5) - enemy_ins->x)) < x_m))
+				enemy_ins->x -= 2;
+			if (!(fabs((float)(element_ins->x - (enemy_ins->x + 5))) < x_m))
+				enemy_ins->x += 2;
+			if (!(fabs((float)((element_ins->y + 5) - enemy_ins->y)) < y_m))
+				enemy_ins->y -= 2;
+			if (!(fabs((float)(element_ins->y - (enemy_ins->y + 5))) < y_m))
+				enemy_ins->y += 2;
+			i++;
+			// printf("%i\n", i);
+	}
+}
 
 
 
 
 
 
-
-
-
-
-
-
-
-
+// int mlx_put_string(mlx_t *mlx, const char *str, int32_t x, int32_t y)
+// {
+	
+// }
 
 
 
