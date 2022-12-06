@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 15:06:49 by zstenger          #+#    #+#             */
-/*   Updated: 2022/12/05 18:56:10 by zstenger         ###   ########.fr       */
+/*   Updated: 2022/12/06 17:58:01 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,11 @@ typedef struct s_texture
 	mlx_texture_t	*wall;
 	mlx_texture_t	*pickitup;
 	mlx_texture_t	*walking_path;
-	mlx_texture_t	*enemy;	
+	mlx_texture_t	*enemy;
+	mlx_texture_t	*enemy2;
+	mlx_texture_t	*enemy3;
+	mlx_texture_t	*enemy4;
+	mlx_texture_t	*enemy5;
 }	t_texture;
 
 
@@ -57,6 +61,10 @@ typedef struct s_image
 	mlx_image_t	*pickitup;
 	mlx_image_t	*walking_path;
 	mlx_image_t	*enemy;
+	mlx_image_t	*enemy2;
+	mlx_image_t	*enemy3;
+	mlx_image_t	*enemy4;
+	mlx_image_t	*enemy5;
 }	t_image;
 
 // temporary player
@@ -150,14 +158,36 @@ void	ft_player_hook(void *mlx);
 
 void	ft_enemy_hook(void *mlx);
 void	ft_enemy_movement(mlx_t *mlx, t_image *img);
+void	ft_move_enemy(mlx_t *mlx, t_image *img);
+void	ft_move_enemy_W(t_image *img);
+void	ft_move_enemy_S(t_image *img);
+void	ft_move_enemy_A(t_image *img);
+void	ft_move_enemy_D(t_image *img);
 
 
+char	ft_load_enemy2(mlx_t *mlx, int x, int y, char keytype);
+// char	ft_load_enemy3(mlx_t *mlx, int x, int y, char keytype);
+// char	ft_load_enemy4(mlx_t *mlx, int x, int y, char keytype);
+// char	ft_load_enemy5(mlx_t *mlx, int x, int y, char keytype);
+
+
+char	ft_enemy2_location(mlx_image_t *element);
+void	ft_wall_enemy2(int x_m, int y_m, mlx_instance_t *element_ins);
+
+
+
+// char	ft_enemy3_location(mlx_image_t *element);
+// void	ft_wall_enemy3(int x_m, int y_m, mlx_instance_t *element_ins);
+// char	ft_enemy4_location(mlx_image_t *element);
+// void	ft_wall_enemy4(int x_m, int y_m, mlx_instance_t *element_ins);
+// char	ft_enemy5_location(mlx_image_t *element);
+// void	ft_wall_enemy5(int x_m, int y_m, mlx_instance_t *element_ins);;
 
 
 //null setting shitstorm
-mlx_t	*gset_mlx(mlx_t *p_mlx);
-t_texture	*gset_tex(t_texture *p_tex);
-t_image	*gset_img(t_image *p_img);
+mlx_t	*gset_mlx(mlx_t *mlx_to_null);
+t_texture	*gset_tex(t_texture *tex_to_null);
+t_image	*gset_img(t_image *img_to_null);
 
 
 
