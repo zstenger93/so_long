@@ -6,14 +6,13 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 12:10:50 by zstenger          #+#    #+#             */
-/*   Updated: 2022/12/06 21:08:32 by zstenger         ###   ########.fr       */
+/*   Updated: 2022/12/07 18:56:58 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
 
-mlx_image_t	*g_img;
-
+// 0.
 int	main(int argc, char **argv)
 {
 	mlx_t	*mlx;
@@ -31,13 +30,16 @@ int	main(int argc, char **argv)
 	gset_tex(&tex);
 	ft_make_map(mlx, argv[1]);
 	ft_read_and_print_map(argv[1]);
-	mlx_loop_hook(mlx, ft_enemy_hook, mlx);
 	mlx_loop_hook(mlx, ft_player_hook, mlx);
+	mlx_loop_hook(mlx, ft_enemy_hook, mlx);
+	// mlx_loop_hook(mlx, ft_enemy2_hook, mlx);
 	mlx_loop(mlx);
 	mlx_terminate(mlx);
 	return (EXIT_SUCCESS);
+	
 }
 
+// 1.
 bool	ft_wrong_input(int argc, char **argv)
 {
 	if (argc > 2 || ft_strstr(argv[1], ".ber") == false)
@@ -51,250 +53,8 @@ bool	ft_wrong_input(int argc, char **argv)
 	return (0);
 }
 
-
-
-//32pixel size for each byte
-mlx_t	*ft_open_mapsize_window(char *map, int count)
-{
-	mlx_t	*mlx;
-	int		x;
-	int		y;
-	int		fd;
-	char	*buffer;
-
-	fd = open(map, O_RDWR);
-	buffer = get_next_line(fd);
-	y = 0;
-	while (buffer != 0)
-	{
-		x = 0;
-		while (buffer[count] != '\n' && buffer[count] != '\0')
-			count++;
-		x = count;
-		count = 0;
-		y++;
-		free(buffer);
-		buffer = get_next_line(fd);
-	}
-	mlx = mlx_init(x * 32, y * 32, "Survive The Norm", 1);
-	return (mlx);
-}
-
-void	ft_make_new_images(mlx_t *mlx, t_image *img)
-{
-	img->walking_path = mlx_new_image(mlx, 32, 32);
-	img->player = mlx_new_image(mlx, 32, 32);
-	img->wall = mlx_new_image(mlx, 32, 32);
-	img->pickitup = mlx_new_image(mlx, 32, 32);
-	img->exit = mlx_new_image(mlx, 32, 32);
-	img->enemy = mlx_new_image(mlx, 32, 32);
-	img->enemy2 = mlx_new_image(mlx, 32, 32);
-}
-
-void	ft_make_map(mlx_t *mlx, char *map)
-{
-	int	x;
-	int	y;
-	int	fd;
-	int	count;
-	char	*line;
-
-	fd = open(map, O_RDONLY);
-	line = get_next_line(fd);
-	y = 0;
-	while (line)
-	{
-		count = 0;
-		x = 0;
-		while (line[count] != '\n' && line[count] != '\0')
-		{
-			ft_put_loaded_image(mlx, line[count], x, y);
-			x += 32;
-			count++;
-		}
-		free(line);
-		line = get_next_line(fd);
-		y += 32;
-	}
-	close(fd);
-}
-
-void	ft_put_loaded_image(mlx_t *mlx, char c, int x, int y)
-{
-	if (c == 'F' || c == 'E' || c == '0' || c == 'P' || c == 'C' || c == 'N')
-		ft_load_walking_path(mlx, x, y, '0');
-	if (c == '1')
-		ft_load_wall(mlx, x, y);
-	if (c == 'P')
-		ft_load_player(mlx, x, y, 'F');
-	if (c == 'C')
-		ft_load_pickitup(mlx, x, y);
-	if (c == 'E')
-		ft_load_exit(mlx, x, y);
-	if (c == 'F')
-		ft_load_enemy(mlx, x, y, 'T');
-	if (c == 'N')
-		ft_load_enemy2(mlx, x, y, 'T');
-
-}
-
-void	ft_load_walking_path(mlx_t *mlx, int x, int y, char c)
-{
-	t_image		*img;
-	t_texture	*tex;
-	int			itw;
-
-	tex = gset_tex(NULL);
-	img = gset_img(NULL);
-
-	tex->walking_path = mlx_load_png("png/walking_path.png");
-	if (c == '0')
-	{
-		mlx_draw_texture(img->walking_path, tex->walking_path, 0, 0);
-		mlx_delete_texture(tex->walking_path);
-		itw = mlx_image_to_window(mlx, img->walking_path, x, y);
-		mlx_set_instance_depth(img->walking_path->instances + itw, 2);
-	}
-	if (c == 'C')
-		mlx_draw_texture(img->pickitup, tex->walking_path, 0, 0);
-}
-
-void	ft_load_wall(mlx_t *mlx, int x, int y)
-{
-	t_texture	*tex;
-	t_image	*img;
-	int			itw;
-
-	tex = gset_tex(NULL);
-	img = gset_img(NULL);
-	itw = mlx_image_to_window(mlx, img->wall, x, y);
-	tex->wall = mlx_load_png("png/wall.png");
-	mlx_draw_texture(img->wall, tex->wall, 0, 0);
-	mlx_set_instance_depth(img->wall->instances + itw, 2);
-	mlx_delete_texture(tex->wall);
-}
-
-void	ft_load_pickitup(mlx_t *mlx, int x, int y)
-{
-	t_texture	*tex;
-	t_image	*img;
-	int			itw;
-
-	tex = gset_tex(NULL);
-	img = gset_img(NULL);
-	itw = mlx_image_to_window(mlx, img->pickitup, x, y);
-	tex->pickitup = mlx_load_png("png/pickitup.png");
-	mlx_draw_texture(img->pickitup, tex->pickitup, 0, 0);
-	mlx_set_instance_depth(img->pickitup->instances + itw, 3);
-	mlx_delete_texture(tex->pickitup);
-}
-
-void	ft_load_exit(mlx_t *mlx, int x, int y)
-{
-	t_texture	*tex;
-	t_image	*img;
-
-	tex = gset_tex(NULL);
-	img = gset_img(NULL);
-	mlx_image_to_window(mlx, img->exit, x, y);
-	tex->exit = mlx_load_png("png/exit.png");
-	mlx_draw_texture(img->exit, tex->exit, 0, 0);
-	mlx_set_instance_depth(img->exit->instances, 3);
-	mlx_delete_texture(tex->exit);
-}
-
-void	ft_load_failure(mlx_t *mlx, int x, int y)
-{
-	t_texture	*tex;
-	t_image	*img;
-	
-	
-	tex = gset_tex(NULL);
-	img = gset_img(NULL);
-	
-	tex->failure_screen = mlx_load_png("png/failure.png");
-	img->failure_screen = mlx_new_image(mlx, x, y);
-	mlx_image_to_window(mlx, img->failure_screen, x, y);
-	mlx_draw_texture(img->failure_screen, tex->failure_screen, 0, 0);
-	mlx_set_instance_depth(img->failure_screen->instances, 8);
-	mlx_delete_texture(tex->failure_screen);
-	return ;
-}
-
-void	ft_load_victory(mlx_t *mlx, int x, int y)
-{
-	t_texture	*tex;
-	t_image	*img;
-
-	tex = gset_tex(NULL);
-	img = gset_img(NULL);
-	
-	tex->victory_screen = mlx_load_png("png/victory.png");
-	img->victory_screen = mlx_new_image(mlx, x, y);
-	mlx_image_to_window(mlx, img->victory_screen, x, y);
-	mlx_draw_texture(img->victory_screen, tex->victory_screen, 0, 0);
-	mlx_set_instance_depth(img->victory_screen->instances, 8);
-	mlx_delete_texture(tex->victory_screen);
-	return ;	
-}
-
-char	ft_load_player(mlx_t *mlx, int x, int y, char keytype)
-{
-	t_texture	*tex;
-	t_image	*img;
-
-	tex = gset_tex(NULL);
-	img = gset_img(NULL);
-	if (keytype == 'W')
-		tex->player = mlx_load_png("png/playerU.png");
-	else if (keytype == 'S')
-		tex->player = mlx_load_png("png/playerD.png");
-	else if (keytype == 'A')
-		tex->player = mlx_load_png("png/playerL.png");
-	else if (keytype == 'D')
-		tex->player = mlx_load_png("png/playerR.png");
-	else if (keytype == 'F')
-	{
-		tex->player = mlx_load_png("png/playerR.png");
-		mlx_draw_texture(img->player, tex->player, 0, 0);
-		mlx_image_to_window(mlx, img->player, x, y);
-		mlx_set_instance_depth(img->player->instances, 8);
-	}
-	mlx_draw_texture(img->player, tex->player, 0, 0);
-	mlx_delete_texture(tex->player);
-	ft_player_location(img->pickitup, 'C');
-	ft_player_location(img->exit, 'E');
-	ft_player_location(img->enemy2, 'N');
-	ft_player_location(img->enemy, 'F');
-	ft_enemy2_location(img->wall);
-	ft_enemy_location(img->wall);
-	return (ft_player_location(img->wall, '1'));
-}
-
-char	ft_load_enemy(mlx_t *mlx, int x, int y, char keytype)
-{
-	t_texture	*tex;
-	t_image	*img;
-
-	tex = gset_tex(NULL);
-	img = gset_img(NULL);
-	if (keytype == 'W' || keytype == 'S' || keytype == 'A' || keytype == 'D')
-		tex->enemy = mlx_load_png("png/norminette.png");
-	else if (keytype == 'T')
-	{
-		tex->enemy = mlx_load_png("png/norminette.png");
-		mlx_draw_texture(img->enemy, tex->enemy, 0, 0);
-		mlx_image_to_window(mlx, img->enemy, x, y);
-		mlx_set_instance_depth(img->enemy->instances, 4);
-	}
-	mlx_draw_texture(img->enemy, tex->enemy, 0, 0);
-	mlx_delete_texture(tex->enemy);
-	return (0);
-}
-
-
-
-
+// 2.
+//different error types
 char	ft_error_types(char *argv)
 {
 	char	error_type;
@@ -313,14 +73,16 @@ char	ft_error_types(char *argv)
 		ft_printf("\e[1;4;31mError!\e[0m\n\e[4;33mMap must be rectangular!\e[0m\n");
 	else if (error_type == 'A')
 		ft_printf("\e[1;4;31mError!\e[0m\n\e[4;33mMemory allocation failed!\e[0m\n");
+	else if (error_type == 'L')
+		ft_printf("\e[1;4;31mError!\e[0m\n\e[4;33mCan't be more or less enemy per type than one!\e[0m\n");
 	else
 		{ft_printf("\e[1;4;32mThe map is valid and ready to launch!\e[0m\n");
 		return (0);}
 	return (1);
 }
 
-
-
+// 3.
+//map checks
 char	ft_map_validator(char *argv)
 {
 	size_t	length;
@@ -328,10 +90,10 @@ char	ft_map_validator(char *argv)
 	char	error;
 
 	row = 0;
-	error = ft_map_have_walls(open(argv, O_RDONLY), &length, &row, 0);
+	error = ft_map_have_walls(open(argv, O_RDWR), &length, &row, 0);
 	if (error != 0)
 		return (error);
-	error = ft_map_have_all_elements(open(argv, O_RDONLY), 0, 0, 0);
+	error = ft_map_have_all_elements(open(argv, O_RDWR), 0, 0, 0, 0, 0);
 	if (error != 0)
 		return (error);
 	error = ft_map_with_validpath(argv, row, length, 0);
@@ -340,19 +102,7 @@ char	ft_map_validator(char *argv)
 	return (0);
 }
 
-char	ft_map_element_check(char c, char *plyr, char *pick, char *ext)
-{
-	if (c == 'C')
-		*pick = 1;
-	else if (c == 'E')
-		(*ext)++;
-	else if (c == 'P')
-		(*plyr)++;
-	else if (c != 'F' && c != '1' && c != '\n' && c != '0' && c != 'N')
-		return ('I');
-	return (0);
-}
-
+// 4.
 char	ft_map_have_walls(int fd, size_t *length, size_t *row, size_t count)
 {
 	char	*line;
@@ -401,7 +151,8 @@ char	ft_map_have_walls(int fd, size_t *length, size_t *row, size_t count)
 	return (0);
 }
 
-char	ft_map_have_all_elements(int fd, char ext, char pick, char plyr)
+// 5.
+char	ft_map_have_all_elements(int fd, char ext, char pick, char plyr, char n, char f)
 {
 	size_t	length;
 	size_t	count;
@@ -416,7 +167,7 @@ char	ft_map_have_all_elements(int fd, char ext, char pick, char plyr)
 		while (count < length)
 		{
 			linecopy = line[count++];
-			if (ft_map_element_check(linecopy, &plyr, &pick, &ext) == 'I')
+			if (ft_map_element_check(linecopy, &plyr, &pick, &ext, &n, &f) == 'I')
 				return ('I');
 		}
 		free(line);
@@ -424,15 +175,32 @@ char	ft_map_have_all_elements(int fd, char ext, char pick, char plyr)
 	}
 	if (!plyr || !ext || plyr > 1 || ext > 1)
 		return ('O');
+	if (!f || !n || f > 1 || n > 1)
+		return ('L');
 	else if ((plyr + ext + pick) != 3)
 		return ('M');
 	return (0);
 }
 
+// 6.
+char	ft_map_element_check(char c, char *plyr, char *pick, char *ext, char *n, char *f)
+{
+	if (c == 'C')
+		*pick = 1;
+	else if (c == 'E')
+		(*ext)++;
+	else if (c == 'P')
+		(*plyr)++;
+	else if (c == 'N')
+		(*n)++;
+	else if (c == 'F')
+		(*f)++;
+	else if (c != '1' && c != '\n' && c != '0')
+		return ('I');
+	return (0);
+}
 
-
-
-
+// 7.
 char	ft_map_with_validpath(char *argv, size_t rows, size_t columns, int fd)
 {
 	size_t	x;
@@ -462,19 +230,9 @@ char	ft_map_with_validpath(char *argv, size_t rows, size_t columns, int fd)
 	return (path);
 }
 
-void	ft_free_map(char **map, size_t rows)
-{
-	size_t	count;
 
-	count = 0;
-	while (count < rows)
-	{
-		free(map[count]);
-		count++;
-	}
-	free(map);
-}
 
+// 8.
 void	ft_get_player(char **map, size_t *x, size_t *y, size_t columns)
 {
 	char	player_position;
@@ -495,10 +253,11 @@ void	ft_get_player(char **map, size_t *x, size_t *y, size_t columns)
 	}
 }
 
+//9.
 int	ft_dfs(char **map, size_t x, size_t y, size_t rows)
 {
 	if (x < 1 || y < 1 || x >= ft_strlen(*map) || y > rows
-		|| map[y][x] == '1')
+		|| map[y][x] == '1' || map[y][x] == 'N' || map[y][x] == 'F')
 		return ('V');
 	if (map[y][x] == 'E')
 		return (0);
@@ -512,7 +271,278 @@ int	ft_dfs(char **map, size_t x, size_t y, size_t rows)
 		return ('V');
 }
 
+// 10.
+void	ft_free_map(char **map, size_t rows)
+{
+	size_t	count;
 
+	count = 0;
+	while (count < rows)
+	{
+		free(map[count]);
+		count++;
+	}
+	free(map);
+}
+
+// 11.
+//32pixel size for each element
+mlx_t	*ft_open_mapsize_window(char *map, int count)
+{
+	mlx_t	*mlx;
+	int		x;
+	int		y;
+	int		fd;
+	char	*buffer;
+
+	fd = open(map, O_RDWR);
+	buffer = get_next_line(fd);
+	y = 0;
+	while (buffer != 0)
+	{
+		x = 0;
+		while (buffer[count] != '\n' && buffer[count] != '\0')
+			count++;
+		x = count;
+		count = 0;
+		y++;
+		free(buffer);
+		buffer = get_next_line(fd);
+	}
+	mlx = mlx_init(x * 32, y * 32, "Survive The Norm", 1);
+	return (mlx);
+}
+
+// 12.
+void	ft_make_new_images(mlx_t *mlx, t_image *img)
+{
+	img->walking_path = mlx_new_image(mlx, 32, 32);
+	img->player = mlx_new_image(mlx, 32, 32);
+	img->wall = mlx_new_image(mlx, 32, 32);
+	img->pickitup = mlx_new_image(mlx, 32, 32);
+	img->exit = mlx_new_image(mlx, 32, 32);
+	img->enemy = mlx_new_image(mlx, 32, 32);
+	img->enemy2 = mlx_new_image(mlx, 32, 32);
+}
+
+// 13.
+void	ft_make_map(mlx_t *mlx, char *map)
+{
+	int	x;
+	int	y;
+	int	fd;
+	int	count;
+	char	*line;
+
+	fd = open(map, O_RDONLY);
+	line = get_next_line(fd);
+	y = 0;
+	while (line)
+	{
+		count = 0;
+		x = 0;
+		while (line[count] != '\n' && line[count] != '\0')
+		{
+			ft_put_loaded_image(mlx, line[count], x, y);
+			x += 32;
+			count++;
+		}
+		free(line);
+		line = get_next_line(fd);
+		y += 32;
+	}
+	close(fd);
+}
+
+// 14.
+//image loads
+void	ft_put_loaded_image(mlx_t *mlx, char c, int x, int y)
+{
+	if (c == 'F' || c == 'E' || c == '0' || c == 'P' || c == 'C' || c == 'N')
+		ft_load_walking_path(mlx, x, y, '0');
+	if (c == '1')
+		ft_load_wall(mlx, x, y);
+	if (c == 'C')
+		ft_load_pickitup(mlx, x, y);
+	if (c == 'E')
+		ft_load_exit(mlx, x, y);
+	if (c == 'F')
+		ft_load_enemy(mlx, x, y, 'T');
+	if (c == 'N')
+		ft_load_enemy2(mlx, x, y, 'K');
+	if (c == 'P')
+		ft_load_player(mlx, x, y, 'X');
+
+}
+
+// 15.
+void	ft_load_walking_path(mlx_t *mlx, int x, int y, char c)
+{
+	t_image		*img;
+	t_texture	*tex;
+	int			itw;
+
+	tex = gset_tex(NULL);
+	img = gset_img(NULL);
+	tex->walking_path = mlx_load_png("png/walking_path.png");
+	if (c == '0')
+	{
+		mlx_draw_texture(img->walking_path, tex->walking_path, 0, 0);
+		mlx_delete_texture(tex->walking_path);
+		itw = mlx_image_to_window(mlx, img->walking_path, x, y);
+		mlx_set_instance_depth(img->walking_path->instances + itw, 2);
+	}
+}
+
+// 16.
+void	ft_load_wall(mlx_t *mlx, int x, int y)
+{
+	t_texture	*tex;
+	t_image	*img;
+	int			itw;
+
+	tex = gset_tex(NULL);
+	img = gset_img(NULL);
+	itw = mlx_image_to_window(mlx, img->wall, x, y);
+	tex->wall = mlx_load_png("png/wall.png");
+	mlx_draw_texture(img->wall, tex->wall, 0, 0);
+	mlx_set_instance_depth(img->wall->instances + itw, 2);
+	mlx_delete_texture(tex->wall);
+}
+
+// 17.
+void	ft_load_pickitup(mlx_t *mlx, int x, int y)
+{
+	t_texture	*tex;
+	t_image	*img;
+	int			itw;
+
+	tex = gset_tex(NULL);
+	img = gset_img(NULL);
+	itw = mlx_image_to_window(mlx, img->pickitup, x, y);
+	tex->pickitup = mlx_load_png("png/pickitup.png");
+	mlx_draw_texture(img->pickitup, tex->pickitup, 0, 0);
+	mlx_set_instance_depth(img->pickitup->instances + itw, 3);
+	mlx_delete_texture(tex->pickitup);
+}
+
+// 18.
+void	ft_load_exit(mlx_t *mlx, int x, int y)
+{
+	t_texture	*tex;
+	t_image	*img;
+
+	tex = gset_tex(NULL);
+	img = gset_img(NULL);
+	mlx_image_to_window(mlx, img->exit, x, y);
+	tex->exit = mlx_load_png("png/exit.png");
+	mlx_draw_texture(img->exit, tex->exit, 0, 0);
+	mlx_set_instance_depth(img->exit->instances, 3);
+	mlx_delete_texture(tex->exit);
+}
+
+// 19.
+char	ft_load_enemy(mlx_t *mlx, int x, int y, char keytype)
+{
+	t_texture	*tex;
+	t_image	*img;
+
+	tex = gset_tex(NULL);
+	img = gset_img(NULL);
+	if (keytype == 'W' || keytype == 'S')
+		tex->enemy = mlx_load_png("png/norminetteL.png");
+	if (keytype == 'A')
+		tex->enemy = mlx_load_png("png/norminetteR.png");
+	if (keytype == 'D')
+		tex->enemy = mlx_load_png("png/norminetteL.png");
+	else if (keytype == 'T')
+	{
+		tex->enemy = mlx_load_png("png/norminetteR.png");
+		mlx_draw_texture(img->enemy, tex->enemy, 0, 0);
+		mlx_image_to_window(mlx, img->enemy, x, y);
+		mlx_set_instance_depth(img->enemy->instances, 4);
+	}
+	mlx_draw_texture(img->enemy, tex->enemy, 0, 0);
+	mlx_delete_texture(tex->enemy);
+	// ft_enemy2_location(img->wall);
+	ft_enemy_location(img->wall);
+	return (1);
+}
+
+// 20.
+char	ft_load_enemy2(mlx_t *mlx, int x, int y, char keytype)
+{
+	t_texture	*tex;
+	t_image	*img;
+
+	tex = gset_tex(NULL);
+	img = gset_img(NULL);
+	if (keytype == 'W' || keytype == 'S')
+		tex->enemy2 = mlx_load_png("png/norminetteL.png");
+	if (keytype == 'A')
+		tex->enemy2 = mlx_load_png("png/norminetteL.png");
+	if (keytype == 'D')
+		tex->enemy2 = mlx_load_png("png/norminetteR.png");
+	else if (keytype == 'K')
+	{
+		tex->enemy2 = mlx_load_png("png/norminetteL.png");
+		mlx_draw_texture(img->enemy2, tex->enemy2, 0, 0);
+		mlx_image_to_window(mlx, img->enemy2, x, y);
+		mlx_set_instance_depth(img->enemy2->instances,  4);
+	}
+	mlx_draw_texture(img->enemy2, tex->enemy2, 0, 0);
+	mlx_delete_texture(tex->enemy2);
+	ft_enemy2_location(img->wall);
+	return (1);
+}
+
+// 21.
+char	ft_load_player(mlx_t *mlx, int x, int y, char keytype)
+{
+	t_texture	*tex;
+	t_image	*img;
+
+	tex = gset_tex(NULL);
+	img = gset_img(NULL);
+	if (keytype == 'W')
+		tex->player = mlx_load_png("png/playerU.png");
+	else if (keytype == 'S')
+		tex->player = mlx_load_png("png/playerD.png");
+	else if (keytype == 'A')
+		tex->player = mlx_load_png("png/playerL.png");
+	else if (keytype == 'D')
+		tex->player = mlx_load_png("png/playerR.png");
+	else if (keytype == 'X')
+	{
+		tex->player = mlx_load_png("png/playerR.png");
+		mlx_draw_texture(img->player, tex->player, 0, 0);
+		mlx_image_to_window(mlx, img->player, x, y);
+		mlx_set_instance_depth(img->player->instances, 8);
+	}
+	mlx_draw_texture(img->player, tex->player, 0, 0);
+	mlx_delete_texture(tex->player);
+	// ft_enemy2_location(img->wall);
+	// ft_enemy_location(img->wall);
+	ft_player_location(img->pickitup, 'C');
+	ft_player_location(img->exit, 'E');
+	ft_player_location(img->enemy2, 'N');
+	ft_player_location(img->enemy, 'F');
+	return (ft_player_location(img->wall, '1'));
+}
+
+// 22.
+void	ft_player_hook(void *mlx)
+{
+	t_image	*img;
+	
+	img = gset_img(NULL);
+	if (img->player->enabled == true)
+		ft_player_movement(mlx, img);
+	if (mlx_is_key_down(mlx, MLX_KEY_ESCAPE))
+		mlx_close_window(mlx);
+}
+
+// 23.
 void	ft_player_movement(mlx_t *mlx, t_image *img)
 {
 	if (mlx_is_key_down(mlx, MLX_KEY_W))
@@ -537,20 +567,40 @@ void	ft_player_movement(mlx_t *mlx, t_image *img)
 	}
 }
 
-
-
-void	ft_player_hook(void *mlx)
+// 24.
+char	ft_player_location(mlx_image_t *element, char mapelement)
 {
 	t_image	*img;
-	
+	mlx_instance_t	*ins;
+	int	x_m;
+	int y_m;
+	int amount;
+
 	img = gset_img(NULL);
-	if (img->player->enabled == true)
-		ft_player_movement(mlx, img);
-	if (mlx_is_key_down(mlx, MLX_KEY_ESCAPE))
-		mlx_close_window(mlx);
+	ins = element->instances;
+	amount = 0;
+	while (amount < element->count)
+	{
+		if (ins[amount].x < img->player->instances->x)
+			x_m = 30;
+		else
+			x_m = 30;
+		if (ins[amount].y < img->player->instances->y)
+			y_m = 30;
+		else
+			y_m = 30;
+		if (fabs((float)(ins[amount].x - img->player->instances->x)) < x_m)
+			if (fabs((float)(ins[amount].y - img->player->instances->y)) < y_m)
+				return (ft_is_wall(x_m, y_m, ins + amount, mapelement));
+		amount++;
+	}
+	return (1);
 }
 
-
+// 25.
+//sets the x & y margin values for the wall elements so we have something
+//to compare to the enemy position
+// if it's at the wall then goes into the wall check function
 char	ft_is_wall(int x_m, int y_m, mlx_instance_t *element_ins, char mapelement)
 {
 	mlx_instance_t	*player_ins;
@@ -573,6 +623,18 @@ char	ft_is_wall(int x_m, int y_m, mlx_instance_t *element_ins, char mapelement)
 	return (0);
 }
 
+// 26.
+char	ft_isit_pickable(mlx_instance_t *element_ins, char mapelement)
+{
+	//if it isn't collectable checks for exit
+	if (mapelement != 'C')
+		return (ft_isit_norminette(mapelement));
+	//if it is indeed collectable then disable the current element
+	element_ins->enabled = false;
+	return (1);
+}
+
+// 27.
 char	ft_isit_norminette(char mapelement)
 {
 	t_image	*img;
@@ -592,16 +654,26 @@ char	ft_isit_norminette(char mapelement)
 	return (1);
 }
 
-char	ft_isit_pickable(mlx_instance_t *element_ins, char mapelement)
+// 27.1
+void	ft_load_failure(mlx_t *mlx, int x, int y)
 {
-	//if it isn't collectable checks for exit
-	if (mapelement != 'C')
-		return (ft_isit_norminette(mapelement));
-	//if it is indeed collectable then disable the current element
-	element_ins->enabled = false;
-	return (1);
+	t_texture	*tex;
+	t_image	*img;
+	
+	
+	tex = gset_tex(NULL);
+	img = gset_img(NULL);
+	
+	tex->failure_screen = mlx_load_png("png/failure.png");
+	img->failure_screen = mlx_new_image(mlx, x, y);
+	mlx_image_to_window(mlx, img->failure_screen, x, y);
+	mlx_draw_texture(img->failure_screen, tex->failure_screen, 0, 0);
+	mlx_set_instance_depth(img->failure_screen->instances, 8);
+	mlx_delete_texture(tex->failure_screen);
+	return ;
 }
 
+// 28.
 char	ft_can_we_exit(void)
 {
 	t_image	*img;
@@ -635,39 +707,25 @@ char	ft_can_we_exit(void)
 	return (1);
 }
 
-
-char	ft_player_location(mlx_image_t *element, char mapelement)
+// 28.1
+void	ft_load_victory(mlx_t *mlx, int x, int y)
 {
+	t_texture	*tex;
 	t_image	*img;
-	mlx_instance_t	*ins;
-	int	x_m;
-	int y_m;
-	int amount;
 
+	tex = gset_tex(NULL);
 	img = gset_img(NULL);
-	ins = element->instances;
-	amount = 0;
-	while (amount < element->count)
-	{
-		if (ins[amount].x < img->player->instances->x)
-			x_m = 30;
-		else
-			x_m = 30;
-		if (ins[amount].y < img->player->instances->y)
-			y_m = 30;
-		else
-			y_m = 30;
-		if (fabs((float)(ins[amount].x - img->player->instances->x)) < x_m)
-			if (fabs((float)(ins[amount].y - img->player->instances->y)) < y_m)
-				return (ft_is_wall(x_m, y_m, ins + amount, mapelement));
-		amount++;
-	}
-	return (1);
+	
+	tex->victory_screen = mlx_load_png("png/victory.png");
+	img->victory_screen = mlx_new_image(mlx, x, y);
+	mlx_image_to_window(mlx, img->victory_screen, x, y);
+	mlx_draw_texture(img->victory_screen, tex->victory_screen, 0, 0);
+	mlx_set_instance_depth(img->victory_screen->instances, 8);
+	mlx_delete_texture(tex->victory_screen);
+	return ;	
 }
 
-//sets the x & y margin values for the wall elements so we have something
-//to compare to the enemy position
-// if it's at the wall then goes into the wall check function
+// 29.
 char	ft_enemy_location(mlx_image_t *element)
 {
 	t_image	*img;
@@ -697,6 +755,7 @@ char	ft_enemy_location(mlx_image_t *element)
 	return (1);
 }
 
+// 30.
 //checks player position, if it's less than 5pixels from the edge it bounces back
 //else "cut" the corner and move on
 void	ft_wall_enemy(int x_m, int y_m, mlx_instance_t *element_ins)
@@ -716,33 +775,120 @@ void	ft_wall_enemy(int x_m, int y_m, mlx_instance_t *element_ins)
 		enemy_ins->y += 5;
 }
 
+// 31.
+char	ft_enemy2_location(mlx_image_t *element)
+{
+	t_image	*img;
+	mlx_instance_t	*ins;
+	int	x_m;
+	int y_m;
+	int amount;
 
+	img = gset_img(NULL);
+	ins = element->instances;
+	amount = 0;
+	while (amount < element->count)
+	{
+		if (ins[amount].x < img->enemy2->instances->x)
+			x_m = 30;
+		else
+			x_m = 30;
+		if (ins[amount].y < img->enemy2->instances->y)
+			y_m = 30;
+		else
+			y_m = 30;
+		if (fabs((float)(ins[amount].x - img->enemy2->instances->x)) < x_m)
+			if (fabs((float)(ins[amount].y - img->enemy2->instances->y)) < y_m)
+				ft_wall_enemy2(x_m, y_m, ins + amount);
+		amount++;
+	}		
+	return (1);
+}
 
+// 32.
+void	ft_wall_enemy2(int x_m, int y_m, mlx_instance_t *element_ins)
+{
+	mlx_instance_t	*enemy_ins;
+	t_image *img;
 
+	img = gset_img(NULL);
+	enemy_ins = img->enemy2->instances;
+	if (!(fabs((float)((element_ins->x + 6) - enemy_ins->x)) < x_m))
+		enemy_ins->x -= 5;
+	if (!(fabs((float)(element_ins->x - (enemy_ins->x + 6))) < x_m))
+		enemy_ins->x += 5;
+	if (!(fabs((float)((element_ins->y + 6) - enemy_ins->y)) < y_m))
+		enemy_ins->y -= 5;
+	if (!(fabs((float)(element_ins->y - (enemy_ins->y + 6))) < y_m))
+		enemy_ins->y += 5;
+}
 
-
-// int mlx_put_string(mlx_t *mlx, const char *str, int32_t x, int32_t y)
-// {
+// 33.
+void	ft_enemy_hook(void *mlx)
+{
+	t_image	*img;
 	
-// }
+	img = gset_img(NULL);
+	if (img->enemy->enabled == true)
+		ft_move_enemy(mlx, img);
+}
+
+// 34.
+void	ft_move_enemy(mlx_t *mlx, t_image *img)
+{
+	if (mlx_is_key_down(mlx, MLX_KEY_W))
+	{
+		if (ft_load_enemy(mlx, 0, 0, 'W') == 1 && ft_load_enemy2(mlx, 0, 0, 'W') == 1)
+			ft_move_enemy_W(img);
+	}
+	else if (mlx_is_key_down(mlx, MLX_KEY_S))
+	{
+		if (ft_load_enemy(mlx, 0, 0, 'S') == 1 && ft_load_enemy2(mlx, 0, 0, 'S') == 1)
+			ft_move_enemy_S(img);
+	}
+	else if (mlx_is_key_down(mlx, MLX_KEY_A))
+	{
+		if (ft_load_enemy(mlx, 0, 0, 'A') == 1 && ft_load_enemy2(mlx, 0, 0, 'A') == 1)
+			ft_move_enemy_A(img);
+	}
+	else if (mlx_is_key_down(mlx, MLX_KEY_D))
+	{
+		if (ft_load_enemy(mlx, 0, 0, 'D') == 1 && ft_load_enemy2(mlx, 0, 0, 'D') == 1)
+			ft_move_enemy_D(img);
+	}
+}
+
+// 35.
+void	ft_move_enemy_W(t_image *img)
+{
+	img->enemy->instances->y += 3;
+	img->enemy2->instances->y -= 3;
+}
+
+// 36.
+void	ft_move_enemy_S(t_image *img)
+{
+	img->enemy->instances->y -= 3;
+	img->enemy2->instances->y += 3;
+}
+
+// 37.
+void	ft_move_enemy_A(t_image *img)
+{
+	img->enemy->instances->x += 3;
+	img->enemy2->instances->x -= 3;
+}
+
+// 38.
+void	ft_move_enemy_D(t_image *img)
+{
+	img->enemy->instances->x -= 3;
+	img->enemy2->instances->x += 3;
+}
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// replace this shitpile later on
+// null sets
 t_image	*gset_img(t_image *img_to_null)
 {
 	static t_image	*img;
@@ -769,20 +915,6 @@ mlx_t	*gset_mlx(mlx_t *mlx_to_null)
 		mlx = mlx_to_null;
 	return (mlx);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 void	ft_read_and_print_map(char *map)
@@ -815,46 +947,42 @@ void	ft_read_and_print_map(char *map)
 
 char	put_chars(char c)
 {
+	char colored0[] = "\e[1;37mO\e[0m";
+	char colored1[] = "\e[1;31m1\e[0m";
+	char coloredC[] = "\e[1;33mC\e[0m";
+	char coloredP[] = "\e[1;32mP\e[0m";
+	char coloredE[] = "\e[1;35mE\e[0m";
+	char coloredF[] = "\e[1;34mF\e[0m";
+	char coloredN[] = "\e[1;34mN\e[0m";
+	
 	if (c == '0')
-		write(1, &c, 1);
+		write(1, &colored0, 13);
 	if (c == '1')
-		write(1, &c, 1);
+		write(1, &colored1, 13);
 	if (c == 'C')
-		write(1, &c, 1);
+		write(1, &coloredC, 13);
 	if (c == 'E')
-		write(1, &c, 1);
+		write(1, &coloredE, 13);
 	if (c == 'P')
-		write(1, &c, 1);
+		write(1, &coloredP, 13);
 	if (c == 'F')
-		write(1, &c, 1);
+		write(1, &coloredF, 13);
 	if (c =='\n')
 		write(1, &c, 1);
 	if (c == 'N')
-		write(1, &c, 1);
+		write(1, &coloredN, 13);
 	return (0);
 }
 
-// void	hook(void *param)
+
+
+
+
+
+// int mlx_put_string(mlx_t *mlx, const char *str, int32_t x, int32_t y)
 // {
-// 	mlx_t	*mlx;
-
-// 	mlx = param;
-// 	if (mlx_is_key_down(mlx, MLX_KEY_ESCAPE))
-// 		mlx_close_window(mlx);
-// 	if (mlx_is_key_down(mlx, MLX_KEY_UP))
-// 		g_img->instances[0].y -= 5;
-// 	if (mlx_is_key_down(mlx, MLX_KEY_DOWN))
-// 		g_img->instances[0].y += 5;
-// 	if (mlx_is_key_down(mlx, MLX_KEY_LEFT))
-// 		g_img->instances[0].x -= 5;
-// 	if (mlx_is_key_down(mlx, MLX_KEY_RIGHT))
-// 		g_img->instances[0].x += 5;
+	
 // }
-
-
-
-
-
 
 
 

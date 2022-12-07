@@ -6,7 +6,7 @@
 #    By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/18 16:05:40 by zstenger          #+#    #+#              #
-#    Updated: 2022/12/05 18:46:07 by zstenger         ###   ########.fr        #
+#    Updated: 2022/12/07 18:57:40 by zstenger         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,8 +16,8 @@ NAME = so_long
 LIBFT = libft/libft.a
 MLX42 = MLX42/libmlx42.a
 GLFW3 = MLX42/glfw_lib/libglfw3.a
-SRCS = src/so_long.c \
-		src/checks.c
+SRCS = src/so_long.c 
+		
 
 DEF_COLOR = \033[0;39m
 RED = \033[1;91m

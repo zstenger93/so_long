@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 15:06:49 by zstenger          #+#    #+#             */
-/*   Updated: 2022/12/06 17:58:01 by zstenger         ###   ########.fr       */
+/*   Updated: 2022/12/07 18:14:00 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,11 +118,11 @@ char	ft_map_validator(char *argv);
 char	ft_map_have_walls(int fd, size_t *length, size_t *row, size_t count);
 
 //check the map elements
-char	ft_map_element_check(char c, char *plyr, char *pick, char *ext);
+char	ft_map_element_check(char c, char *plyr, char *pick, char *ext, char *n, char *f);
 
 //checking the elements of the map if there is only one player and exit
 //if P, C, E, are all present on the map
-char	ft_map_have_all_elements(int fd, char ext, char pick, char plyr);
+char	ft_map_have_all_elements(int fd, char ext, char pick, char plyr, char n, char f);
 
 //checking fo valid path on the map to the exit
 char	ft_map_with_validpath(char *argv, size_t rows, size_t columns, int fd);
@@ -192,9 +192,8 @@ t_image	*gset_img(t_image *img_to_null);
 
 
 //WTF
-
-
-
+void	ft_enemy2_hook(void *mlx);
+void	ft_move_enemy2(mlx_t *mlx, t_image *img);
 
 
 #endif
