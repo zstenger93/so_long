@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 15:06:49 by zstenger          #+#    #+#             */
-/*   Updated: 2022/12/07 18:14:00 by zstenger         ###   ########.fr       */
+/*   Updated: 2022/12/07 23:03:31 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include "../MLX42/include/MLX42/MLX42.h"
 # include "../libft/libft.h"
-
 # include <stdlib.h>
 # include <stdio.h>
 # include <unistd.h>
@@ -23,16 +22,6 @@
 # include <fcntl.h>
 # include <math.h>
 # include <stdbool.h>
-
-
-typedef struct s_mapsize
-{
-	int	width;
-	int	height;
-	char	**temp_map;
-	int	p_x;
-	int	p_y;
-}	t_mapsize;
 
 typedef struct s_texture
 {
@@ -45,45 +34,32 @@ typedef struct s_texture
 	mlx_texture_t	*walking_path;
 	mlx_texture_t	*enemy;
 	mlx_texture_t	*enemy2;
-	mlx_texture_t	*enemy3;
-	mlx_texture_t	*enemy4;
-	mlx_texture_t	*enemy5;
 }	t_texture;
-
 
 typedef struct s_image
 {
 	mlx_image_t	*player;
 	mlx_image_t	*exit;
 	mlx_image_t	*victory_screen;
-	mlx_image_t *failure_screen;
+	mlx_image_t	*failure_screen;
 	mlx_image_t	*wall;
 	mlx_image_t	*pickitup;
 	mlx_image_t	*walking_path;
 	mlx_image_t	*enemy;
 	mlx_image_t	*enemy2;
-	mlx_image_t	*enemy3;
-	mlx_image_t	*enemy4;
-	mlx_image_t	*enemy5;
 }	t_image;
-
-// temporary player
-void	hook(void *param);
-
-
 
 //checking for wrong input
 bool	ft_wrong_input(int argc, char **argv);
 
 //reading the map and print it to terminal
-void	ft_read_and_print_map(char *map);
+// void	ft_read_and_print_map(char *map);
 
 //temporary for printing the map to terminal
-char	put_chars(char c);
+// char	put_chars(char c);
 
-//obviousi guess
+//obvious i guess
 mlx_t	*ft_open_mapsize_window(char *map, int i);
-
 
 //make the map
 void	ft_make_map(mlx_t *mlx, char *map);
@@ -106,6 +82,7 @@ void	ft_load_victory(mlx_t *mlx, int x, int y);
 
 //in case of an error, returning the correct error output
 char	ft_error_types(char *argv);
+char	ft_error_types2(char *argv);
 
 //looking thru the whole map and checking for walls around it
 //if there is a valid path to exit or not
@@ -131,19 +108,16 @@ char	ft_map_with_validpath(char *argv, size_t rows, size_t columns, int fd);
 void	ft_get_player(char **map, size_t *x, size_t *y, size_t columns);
 
 //search the map for a valid path from the player to the exit
-int	ft_dfs(char **map, size_t x, size_t y, size_t rows);
+int		ft_dfs(char **map, size_t x, size_t y, size_t rows);
 
 //free the temporary map
 void	ft_free_map(char **map, size_t rows);
-
-
-
 
 //moving the player on the map
 void	ft_player_movement(mlx_t *mlx, t_image *img);
 
 char	ft_player_location(mlx_image_t *element, char mapelement);
-char	ft_is_wall(int x, int y, mlx_instance_t *element_ins, char mapelement);
+char	ft_is_wall(int x, int y, mlx_instance_t *element_ins, char maplmnt);
 char	ft_isit_pickable(mlx_instance_t *element_ins, char mapelement);
 char	ft_can_we_exit(void);
 char	ft_isit_norminette(char mapelement);
@@ -153,68 +127,32 @@ void	ft_wall_enemy(int x_m, int y_m, mlx_instance_t *element_ins);
 
 void	ft_player_hook(void *mlx);
 
-
-
-
 void	ft_enemy_hook(void *mlx);
 void	ft_enemy_movement(mlx_t *mlx, t_image *img);
 void	ft_move_enemy(mlx_t *mlx, t_image *img);
-void	ft_move_enemy_W(t_image *img);
-void	ft_move_enemy_S(t_image *img);
-void	ft_move_enemy_A(t_image *img);
-void	ft_move_enemy_D(t_image *img);
-
+void	ft_move_enemy_w(t_image *img);
+void	ft_move_enemy_s(t_image *img);
+void	ft_move_enemy_a(t_image *img);
+void	ft_move_enemy_d(t_image *img);
 
 char	ft_load_enemy2(mlx_t *mlx, int x, int y, char keytype);
 // char	ft_load_enemy3(mlx_t *mlx, int x, int y, char keytype);
-// char	ft_load_enemy4(mlx_t *mlx, int x, int y, char keytype);
-// char	ft_load_enemy5(mlx_t *mlx, int x, int y, char keytype);
-
 
 char	ft_enemy2_location(mlx_image_t *element);
 void	ft_wall_enemy2(int x_m, int y_m, mlx_instance_t *element_ins);
 
-
-
 // char	ft_enemy3_location(mlx_image_t *element);
 // void	ft_wall_enemy3(int x_m, int y_m, mlx_instance_t *element_ins);
-// char	ft_enemy4_location(mlx_image_t *element);
-// void	ft_wall_enemy4(int x_m, int y_m, mlx_instance_t *element_ins);
-// char	ft_enemy5_location(mlx_image_t *element);
-// void	ft_wall_enemy5(int x_m, int y_m, mlx_instance_t *element_ins);;
-
 
 //null setting shitstorm
 mlx_t	*gset_mlx(mlx_t *mlx_to_null);
 t_texture	*gset_tex(t_texture *tex_to_null);
 t_image	*gset_img(t_image *img_to_null);
 
-
-
 //WTF
-void	ft_enemy2_hook(void *mlx);
-void	ft_move_enemy2(mlx_t *mlx, t_image *img);
+// void	ft_enemy2_hook(void *mlx);
+// void	ft_move_enemy2(mlx_t *mlx, t_image *img);
 
+void	ft_images_disabled(void);
 
 #endif
-
-
-
-
-// wall: something rocky
-// player: marine?
-// exit: spaceship
-// collectible: people to save
-// enemy: aliens
-// walking path: metal texture?
-
-//movement: make it diagonal as well
-
-
-
-// wall: red bricks?
-// player: man/woman
-// exit: company building
-// collectible: projects/xp
-// enemy: blackhole
-// walking path: something floorish?

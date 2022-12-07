@@ -6,7 +6,7 @@
 #    By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/18 16:05:40 by zstenger          #+#    #+#              #
-#    Updated: 2022/12/07 18:57:40 by zstenger         ###   ########.fr        #
+#    Updated: 2022/12/07 19:38:16 by zstenger         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,8 +16,11 @@ NAME = so_long
 LIBFT = libft/libft.a
 MLX42 = MLX42/libmlx42.a
 GLFW3 = MLX42/glfw_lib/libglfw3.a
-SRCS = src/so_long.c 
-		
+SRCS = src/so_long.c src/ft_so_long_utils.c src/ft_dfs_utils.c \
+		src/ft_enemy_location.c src/ft_enemy_movement.c src/ft_error_cases.c \
+		src/ft_load_characters.c src/ft_load_elements.c src/ft_make_map.c \
+		src/ft_map_validator.c src/ft_player_movement.c
+
 
 DEF_COLOR = \033[0;39m
 RED = \033[1;91m
