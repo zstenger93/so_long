@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 18:59:37 by zstenger          #+#    #+#             */
-/*   Updated: 2022/12/07 23:03:19 by zstenger         ###   ########.fr       */
+/*   Updated: 2022/12/08 18:29:50 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,13 @@ char	ft_map_validator(char *argv)
 	char	error;
 
 	row = 0;
-	error = ft_map_have_walls(open(argv, O_RDWR), &length, &row, 0);
+	error = ft_map_have_walls(open(argv, O_RDONLY), &length, &row, 0);
 	if (error != 0)
 		return (error);
-	error = ft_map_have_all_elements(open(argv, O_RDWR), 0, 0, 0, 0, 0);
+	error = ft_map_have_all_elements(open(argv, O_RDONLY), 0, 0, 0);
+	if (error != 0)
+		return (error);
+	error = ft_map_have_all_enemies(open(argv, O_RDONLY), 0, 0);
 	if (error != 0)
 		return (error);
 	error = ft_map_with_validpath(argv, row, length, 0);
@@ -50,30 +53,15 @@ char	ft_map_have_walls(int fd, size_t *length, size_t *row, size_t count)
 		ft_strlcpy(lineb, line, *length + 1);
 		free(line);
 		line = get_next_line(fd);
-		count = 0;
 		if ((*row)++ == 0)
-		{
 			while (count < *length)
-			{
 				if (lineb[count++] != '1')
 					return ('1');
-			}
-		}
 	}
-	if (line == NULL)
-	{
-		count = 0;
-		while (count < *length)
-		{
-			if (lineb[count++] != '1')
-				return ('1');
-		}
-	}
-	free(lineb);
-	return (0);
+	return (ft_last_line(line, lineb, length, count));
 }
 
-char	ft_map_have_all_elements(int fd, char ext, char pick, char plyr, char n, char f)
+char	ft_map_have_all_elements(int fd, char ext, char pick, char plyr)
 {
 	size_t	length;
 	size_t	count;
@@ -88,22 +76,18 @@ char	ft_map_have_all_elements(int fd, char ext, char pick, char plyr, char n, ch
 		while (count < length)
 		{
 			linecopy = line[count++];
-			if (ft_map_element_check(linecopy, &plyr, &pick, &ext, &n, &f) == 'I')
+			if (ft_map_element_check(linecopy, &plyr, &pick, &ext) == 'I')
 				return ('I');
 		}
 		free(line);
 		line = get_next_line(fd);
 	}
-	if (!plyr || !ext || plyr > 1 || ext > 1)
+	if (!plyr || !ext || plyr > 1 || ext > 1 || ((plyr + ext + pick) != 3))
 		return ('O');
-	else if ((plyr + ext + pick) != 3)
-		return ('M');
-	if (!f || !n || f > 1 || n > 1)
-		return ('L');
 	return (0);
 }
 
-char	ft_map_element_check(char c, char *plyr, char *pick, char *ext, char *n, char *f)
+char	ft_map_element_check(char c, char *plyr, char *pick, char *ext)
 {
 	if (c == 'C')
 		*pick = 1;
@@ -111,11 +95,7 @@ char	ft_map_element_check(char c, char *plyr, char *pick, char *ext, char *n, ch
 		(*ext)++;
 	else if (c == 'P')
 		(*plyr)++;
-	else if (c == 'N')
-		(*n)++;
-	else if (c == 'F')
-		(*f)++;
-	else if (c != '1' && c != '0' && c != '\n')
+	else if (c != '1' && c != '0' && c != '\n' && c != 'N' && c != 'F')
 		return ('I');
 	return (0);
 }

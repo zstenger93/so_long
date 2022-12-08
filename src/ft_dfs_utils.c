@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 19:02:46 by zstenger          #+#    #+#             */
-/*   Updated: 2022/12/07 19:43:57 by zstenger         ###   ########.fr       */
+/*   Updated: 2022/12/08 18:25:05 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,13 @@ void	ft_get_player(char **map, size_t *x, size_t *y, size_t columns)
 
 int	ft_dfs(char **map, size_t x, size_t y, size_t rows)
 {
+	printf("%s", &map[y][x]);
 	if (x < 1 || y < 1 || x >= ft_strlen(*map) || y > rows
-		|| map[y][x] == '1' || map[y][x] == 'N' || map[y][x] == 'F')
+		|| map[y][x] == '4' || map[y][x] == '1')
 		return ('V');
 	if (map[y][x] == 'E')
 		return (0);
-	map[y][x] = '1';
+	map[y][x] = '4';
 	if (ft_dfs(map, x - 1, y, rows) == 0
 		|| ft_dfs(map, x + 1, y, rows) == 0
 		|| ft_dfs(map, x, y - 1, rows) == 0

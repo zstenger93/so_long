@@ -6,13 +6,13 @@
 #    By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/18 16:05:40 by zstenger          #+#    #+#              #
-#    Updated: 2022/12/07 19:38:16 by zstenger         ###   ########.fr        #
+#    Updated: 2022/12/08 14:14:10 by zstenger         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
+NAME = so_long
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
-NAME = so_long
 LIBFT = libft/libft.a
 MLX42 = MLX42/libmlx42.a
 GLFW3 = MLX42/glfw_lib/libglfw3.a
@@ -21,7 +21,9 @@ SRCS = src/so_long.c src/ft_so_long_utils.c src/ft_dfs_utils.c \
 		src/ft_load_characters.c src/ft_load_elements.c src/ft_make_map.c \
 		src/ft_map_validator.c src/ft_player_movement.c
 
+OBJS = $(SRCS:.c=.o)
 
+# colors for echo messages
 DEF_COLOR = \033[0;39m
 RED = \033[1;91m
 GREEN = \033[4;92m
@@ -32,22 +34,29 @@ BWhite = \033[1;37m
 
 all: $(NAME)
 
-$(NAME):$(GLFW3) $(LIBFT) $(MLX42)
+# compiling so_long with the right flags
+$(NAME):$(OBJS) $(GLFW3) $(LIBFT) $(MLX42)
 	@echo "$(YELLOW)Compiling: $(DEF_COLOR)$(CYAN)$(NAME)$(DEF_COLOR)"
-	@$(CC) $(CFLAGS) -o so_long $(SRCS) \
+	@$(CC) $(CFLAGS) -o $(NAME) $(SRCS) \
 	$(LIBFT) $(MLX42) $(GLFW3) -framework Cocoa -framework OpenGL -framework IOKit
 	@echo "$(PURPLE)$(NAME) $(DEF_COLOR)$(GREEN)Compiling done.$(DEF_COLOR)"
 
+%.o : %.c
+	$(CC) $(CFLAGS) -c $< -o $@
+
+# compiling libft
 $(LIBFT):
 	@echo "$(YELLOW)Compiling: $(DEF_COLOR)$(CYAN)LIBFT. $(DEF_COLOR)"
 	make -C ./libft
 	@echo "$(PURPLE)LIBFT $(DEF_COLOR)$(GREEN)has been compiled.$(DEF_COLOR)"
 
+# compiling MLX42
 $(MLX42):
 	@echo "$(YELLOW)Compiling: $(DEF_COLOR)$(CYAN) MLX42.$(DEF_COLOR)"
 	make -C ./MLX42
 	@echo "$(PURPLE)MLX42 $(DEF_COLOR)$(GREEN)has been compiled.$(DEF_COLOR)"
 
+# downloading, installing and moving GLFW to the correct folder if ther is none
 $(GLFW3):
 	@if [ -d ./MLX42/glfw_lib ]; \
 	then echo "$(GREEN)./MLX42/glfw_lib Exists, no further action required.$(DEF_COLOR)"; \
@@ -64,21 +73,23 @@ $(GLFW3):
 	rm -rf glfw-3.3.8.bin.MACOS && \
 	echo "$(GREEN)./MLX42/glfw_lib is installed.$(DEF_COLOR)"; \
 	fi
-	
+
 clean:
 	@echo "$(RED)Removing .o files.$(DEF_COLOR)"
+	$(RM) $(OBJS)
 	make clean -C ./libft
 	make clean -C ./MLX42
-	@echo "$(CYAN)MLX42 and libft .o files has been removed.$(DEF_COLOR)"
+	@echo "$(CYAN)MLX42 and libft, so_long .o files has been removed.$(DEF_COLOR)"
 
 fclean:
 	@echo "$(RED)Deleting objects.$(DEF_COLOR)"
+	$(RM) $(OBJS)
 	make fclean -C ./libft
 	make fclean -C ./MLX42
 	rm -rf MLX42/glfw_lib/ MLX42/include/GLFW/
-	@echo "$(CYAN)MLX42, libft .o & .a files and GLFW has been removed.$(DEF_COLOR)"
+	@echo "$(CYAN)MLX42, libft, so_long .o & .a files and GLFW has been removed.$(DEF_COLOR)"
 
-
+# for easier test running with different maps
 t: $(NAME)
 	@echo "$(RED)RUN TEST 1, LET THE GAME BEGIN!$(DEF_COLOR)"
 	./$(NAME) maps/map.ber
@@ -131,11 +142,13 @@ tb5: $(NAME)
 
 re: fclean all
 	@echo "$(YELLOW)Project has been rebuilt!$(DEF_COLOR)"
-	
+
+# removing and remaking only the so_long executable 
 tre: tclean $(NAME)
 	@echo "$(YELLOW)so_long executable has been rebuilt!$(DEF_COLOR)"
-	
+
 tclean:
 	rm -rf $(NAME)
 	@echo "$(YELLOW)so_long executable has been removed!$(DEF_COLOR)"
-.PHONY: all clean fclean test tclean re
+
+.PHONY: all clean fclean t t2 t3 t4 t5 tb tb2 tb3 tb4 tb5 re tre tclean

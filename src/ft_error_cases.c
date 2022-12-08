@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 12:18:07 by zstenger          #+#    #+#             */
-/*   Updated: 2022/12/07 21:20:55 by zstenger         ###   ########.fr       */
+/*   Updated: 2022/12/08 11:00:33 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ char	ft_error_types(char *argv)
 			"\e[4;33mMap must contain P, E and C!\e[0m\n");
 	else if (error_type == 'O')
 		ft_printf("\e[1;4;31mError!\e[0m\n"
-			"\e[4;33mThere is NO or MORE exit or/and player than one!\e[0m\n");
+			"\e[4;33mThere is NO or MORE exit or/and player than one!\e[0m\n"
+			"\e[4;33mElse you don't anything to collect on the map!\e[0m\n");
 	else if (error_type == 'I')
 		ft_printf("\e[1;4;31mError!\e[0m\n"
 			"\e[4;33mInvalid char/'s in the map!\e[0m\n"

@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 19:20:21 by zstenger          #+#    #+#             */
-/*   Updated: 2022/12/07 20:07:38 by zstenger         ###   ########.fr       */
+/*   Updated: 2022/12/08 10:59:21 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,45 @@ mlx_t	*gset_mlx(mlx_t *mlx_to_null)
 		mlx = mlx_to_null;
 	return (mlx);
 }
+
+char	ft_map_have_all_enemies(int fd, char n, char f)
+{
+	size_t	length;
+	size_t	count;
+	char	*line;
+	char	linecopy;
+
+	line = get_next_line(fd);
+	length = ft_gnlinelen(line);
+	while (line)
+	{
+		count = 0;
+		while (count < length)
+		{
+			linecopy = line[count++];
+			if (ft_map_enemies_check(linecopy, &n, &f) == 'I')
+				return ('I');
+		}
+		free(line);
+		line = get_next_line(fd);
+	}
+	if (!f || !n || f > 1 || n > 1)
+		return ('L');
+	return (0);
+}
+
+char	ft_map_enemies_check(char c, char *n, char *f)
+{
+	if (c == 'N')
+		(*n)++;
+	else if (c == 'F')
+		(*f)++;
+	else if (c != '1' && c != '0' && c != '\n' && c != 'P' && c != 'E'
+		&& c != 'C')
+		return ('I');
+	return (0);
+}
+
 /*
 ft_read_and_print_map(argv[1]);
 void	ft_read_and_print_map(char *map)
@@ -68,30 +107,30 @@ void	ft_read_and_print_map(char *map)
 
 char	put_chars(char c)
 {
-	char colored0[] = "\e[1;37mO\e[0m";
-	char colored1[] = "\e[1;31m1\e[0m";
-	char coloredC[] = "\e[1;33mC\e[0m";
-	char coloredP[] = "\e[1;32mP\e[0m";
-	char coloredE[] = "\e[1;35mE\e[0m";
-	char coloredF[] = "\e[1;34mF\e[0m";
-	char coloredN[] = "\e[1;34mN\e[0m";
-
+	char	colored_0[] = "\e[1;37mO\e[0m";
+	char	colored_1[] = "\e[1;31m1\e[0m";
+	char	colored_c[] = "\e[1;33mC\e[0m";
+	char	colored_p[] = "\e[1;32mP\e[0m";
+	char	colored_e[] = "\e[1;35mE\e[0m";
+	char	colored_f[] = "\e[1;34mF\e[0m";
+	char	colored_n[] = "\e[1;34mN\e[0m";
+	
 	if (c == '0')
-		write(1, &colored0, 13);
+		write(1, &colored_0, 13);
 	if (c == '1')
-		write(1, &colored1, 13);
+		write(1, &colored_1, 13);
 	if (c == 'C')
-		write(1, &coloredC, 13);
+		write(1, &colored_c, 13);
 	if (c == 'E')
-		write(1, &coloredE, 13);
+		write(1, &colored_e, 13);
 	if (c == 'P')
-		write(1, &coloredP, 13);
+		write(1, &colored_p, 13);
 	if (c == 'F')
-		write(1, &coloredF, 13);
-	if (c =='\n')
+		write(1, &colored_f, 13);
+	if (c == '\n')
 		write(1, &c, 1);
 	if (c == 'N')
-		write(1, &coloredN, 13);
+		write(1, &colored_n, 13);
 	return (0);
 }
 */

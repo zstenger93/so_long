@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 12:19:44 by zstenger          #+#    #+#             */
-/*   Updated: 2022/12/07 19:49:17 by zstenger         ###   ########.fr       */
+/*   Updated: 2022/12/08 13:43:23 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,4 +93,20 @@ void	ft_put_loaded_image(mlx_t *mlx, char c, int x, int y)
 		ft_load_enemy2(mlx, x, y, 'K');
 	if (c == 'P')
 		ft_load_player(mlx, x, y, 'X');
+}
+
+char	ft_last_line(char *line, char *lineb, size_t *length, size_t count)
+{
+	count = 0;
+	if (line == NULL)
+	{
+		while (count < *length)
+		{
+			if (lineb[count++] != '1')
+				return ('1');
+		}
+	}
+	free(line);
+	free(lineb);
+	return (0);
 }
