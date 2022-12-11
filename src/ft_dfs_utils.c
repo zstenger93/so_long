@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 19:02:46 by zstenger          #+#    #+#             */
-/*   Updated: 2022/12/11 15:10:07 by zstenger         ###   ########.fr       */
+/*   Updated: 2022/12/11 18:51:24 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ char	ft_dfs_check(char **map, size_t x, size_t y, size_t rows)
 	i = 0;
 	while (i < rows)
 	{
-		// printf("%s\n", map[i]);
 		if ((!ft_pf_strchr(map[i], 'C')) == false)
 			return ('Q');
 		else if (ft_pf_strchr(map[i], 'E'))
@@ -82,22 +81,26 @@ char	ft_move_and_count(mlx_t *mlx, t_image *img)
 	if (mlx_is_key_down(mlx, MLX_KEY_W))
 	{
 		img->move->count++;
-		ft_printf("Moves:%i Pixels moved: %d\n", img->move->count, img->move->count * 4);
+		ft_printf("Moves:%i Pixels moved: %d\n",
+			img->move->count, img->move->count * 4);
 	}
 	else if (mlx_is_key_down(mlx, MLX_KEY_S))
 	{
 		img->move->count++;
-		ft_printf("Moves:%i Pixels moved: %d\n", img->move->count, img->move->count * 4);
+		ft_printf("Moves:%i Pixels moved: %d\n",
+			img->move->count, img->move->count * 4);
 	}
 	else if (mlx_is_key_down(mlx, MLX_KEY_A))
 	{
 		img->move->count++;
-		ft_printf("Moves:%i Pixels moved: %d\n", img->move->count, img->move->count * 4);
+		ft_printf("Moves:%i Pixels moved: %d\n",
+			img->move->count, img->move->count * 4);
 	}
 	else if (mlx_is_key_down(mlx, MLX_KEY_D))
 	{
 		img->move->count++;
-		ft_printf("Moves:%i Pixels moved: %d\n", img->move->count, img->move->count * 4);
+		ft_printf("Moves:%i Pixels moved: %d\n",
+			img->move->count, img->move->count * 4);
 	}
 	return (0);
 }

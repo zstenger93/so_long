@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 12:21:52 by zstenger          #+#    #+#             */
-/*   Updated: 2022/12/11 14:31:51 by zstenger         ###   ########.fr       */
+/*   Updated: 2022/12/11 20:03:00 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	ft_load_wall(mlx_t *mlx, int x, int y)
 	mlx_delete_texture(tex->wall);
 }
 
-void	ft_load_pickitup(mlx_t *mlx, int x, int y)
+void	ft_load_pickitup(mlx_t *mlx, int x, int y, char keytype)
 {
 	t_texture	*tex;
 	t_image		*img;
@@ -50,10 +50,18 @@ void	ft_load_pickitup(mlx_t *mlx, int x, int y)
 
 	tex = gset_tex(NULL);
 	img = gset_img(NULL);
-	itw = mlx_image_to_window(mlx, img->pickitup, x, y);
-	tex->pickitup = mlx_load_png("png/pickitupclosed.png");
+	if (keytype == 'W' || keytype == 'A')
+		tex->pickitup = mlx_load_png("png/coffee.png");
+	if (keytype == 'S' || keytype == 'D')
+		tex->pickitup = mlx_load_png("png/coffee2.png");
+	else if (keytype == 'H')
+	{
+		tex->pickitup = mlx_load_png("png/coffee.png");
+		mlx_draw_texture(img->pickitup, tex->pickitup, 0, 0);
+		itw = mlx_image_to_window(mlx, img->pickitup, x, y);
+		mlx_set_instance_depth(img->pickitup->instances + itw, 3);
+	}
 	mlx_draw_texture(img->pickitup, tex->pickitup, 0, 0);
-	mlx_set_instance_depth(img->pickitup->instances + itw, 3);
 	mlx_delete_texture(tex->pickitup);
 }
 
@@ -68,7 +76,7 @@ void	ft_load_exit(mlx_t *mlx, int x, int y, char keytype)
 		tex->exit = mlx_load_png("png/exitfire.png");
 	if (keytype == 'S' || keytype == 'D')
 		tex->exit = mlx_load_png("png/exit.png");
-	else if (keytype == 'J' || keytype == 'S' || keytype == 'D')
+	else if (keytype == 'J')
 	{
 		tex->exit = mlx_load_png("png/exit.png");
 		mlx_draw_texture(img->exit, tex->exit, 0, 0);

@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 18:59:37 by zstenger          #+#    #+#             */
-/*   Updated: 2022/12/11 10:53:12 by zstenger         ###   ########.fr       */
+/*   Updated: 2022/12/11 18:58:43 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	ft_map_validator(char *argv)
 	char	error;
 
 	row = 0;
-	error = ft_map_have_walls(open(argv, O_RDONLY), &length, &row, 0);
+	error = ft_have_walls(open(argv, O_RDONLY), &length, &row, 0);
 	if (error != 0)
 		return (error);
 	error = ft_map_have_all_elements(open(argv, O_RDONLY), 0, 0, 0);
@@ -28,13 +28,13 @@ char	ft_map_validator(char *argv)
 	error = ft_map_have_all_enemies(open(argv, O_RDONLY), 0, 0, 0);
 	if (error != 0)
 		return (error);
-	error = ft_map_with_validpath(argv, row, length, 0);
+	error = ft_map_validpath(argv, row, length, 0);
 	if (error != 0)
 		return (error);
 	return (0);
 }
 
-char	ft_map_have_walls(int fd, size_t *length, size_t *row, size_t count)
+char	ft_have_walls(int fd, size_t *length, size_t *row, size_t count)
 {
 	char	*line;
 	char	*lineb;
@@ -101,7 +101,7 @@ char	ft_map_element_check(char c, char *plyr, char *pick, char *ext)
 	return (0);
 }
 
-char	ft_map_with_validpath(char *argv, size_t rows, size_t columns, int fd)
+char	ft_map_validpath(char *argv, size_t rows, size_t columns, int fd)
 {
 	size_t	x;
 	size_t	y;

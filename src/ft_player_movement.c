@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 19:13:31 by zstenger          #+#    #+#             */
-/*   Updated: 2022/12/11 18:00:43 by zstenger         ###   ########.fr       */
+/*   Updated: 2022/12/11 19:50:16 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,6 @@ char	ft_is_wall(int x_m, int y_m, mlx_instance_t *element_ins, char maplmnt)
 		player_ins->y -= 2;
 	if (!(fabs((float)(element_ins->y - (player_ins->y + 12))) < y_m))
 		player_ins->y += 2;
-	
 	return (0);
 }
 
@@ -101,7 +100,7 @@ char	ft_isit_norminette(char mapelement)
 	if (mapelement != 'F' && mapelement != 'N' && mapelement != 'B')
 		return (ft_can_we_exit());
 	img = gset_img(NULL);
-	if ((mapelement == 'F' || mapelement == 'N' || mapelement != 'B')
+	if ((mapelement == 'F' || mapelement == 'N' || mapelement == 'B')
 		&& img->player->enabled == true)
 		ft_load_failure(gset_mlx(NULL), 0, 0);
 	ft_images_disabled();

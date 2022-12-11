@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 12:19:44 by zstenger          #+#    #+#             */
-/*   Updated: 2022/12/11 15:04:23 by zstenger         ###   ########.fr       */
+/*   Updated: 2022/12/11 19:54:51 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ void	ft_make_map(mlx_t *mlx, char *map)
 		while (line[count] != '\n' && line[count] != '\0')
 		{
 			ft_put_loaded_image(mlx, line[count], x, y);
-			
 			x += 32;
 			count++;
 		}
@@ -88,7 +87,7 @@ void	ft_put_loaded_image(mlx_t *mlx, char c, int x, int y)
 	if (c == '1')
 		ft_load_wall(mlx, x, y);
 	if (c == 'C')
-		ft_load_pickitup(mlx, x, y);
+		ft_load_pickitup(mlx, x, y, 'H');
 	if (c == 'E')
 		ft_load_exit(mlx, x, y, 'J');
 	if (c == 'F')

@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 19:10:04 by zstenger          #+#    #+#             */
-/*   Updated: 2022/12/11 17:27:54 by zstenger         ###   ########.fr       */
+/*   Updated: 2022/12/11 19:45:10 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char	ft_load_enemy(mlx_t *mlx, int x, int y, char keytype)
 		tex->enemy = mlx_load_png("png/norminette_r.png");
 		mlx_draw_texture(img->enemy, tex->enemy, 0, 0);
 		mlx_image_to_window(mlx, img->enemy, x, y);
-		mlx_set_instance_depth(img->enemy->instances, 4);
+		mlx_set_instance_depth(img->enemy->instances, 5);
 	}
 	mlx_draw_texture(img->enemy, tex->enemy, 0, 0);
 	mlx_delete_texture(tex->enemy);
@@ -61,7 +61,7 @@ char	ft_l_e2(mlx_t *mlx, int x, int y, char keytype)
 		tex->enemy2 = mlx_load_png("png/norminette_blue_l.png");
 		mlx_draw_texture(img->enemy2, tex->enemy2, 0, 0);
 		mlx_image_to_window(mlx, img->enemy2, x, y);
-		mlx_set_instance_depth(img->enemy2->instances, 5);
+		mlx_set_instance_depth(img->enemy2->instances, 6);
 	}
 	mlx_draw_texture(img->enemy2, tex->enemy2, 0, 0);
 	mlx_delete_texture(tex->enemy2);
