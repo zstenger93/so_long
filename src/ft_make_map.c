@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 12:19:44 by zstenger          #+#    #+#             */
-/*   Updated: 2022/12/09 14:54:39 by zstenger         ###   ########.fr       */
+/*   Updated: 2022/12/11 15:04:23 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void	ft_make_new_images(mlx_t *mlx, t_image *img)
 	img->enemy = mlx_new_image(mlx, 32, 32);
 	img->enemy2 = mlx_new_image(mlx, 32, 32);
 	img->enemy3 = mlx_new_image(mlx, 32, 32);
+	img->move = mlx_new_image(mlx, 32, 32);
 }
 
 void	ft_make_map(mlx_t *mlx, char *map)
@@ -68,6 +69,7 @@ void	ft_make_map(mlx_t *mlx, char *map)
 		while (line[count] != '\n' && line[count] != '\0')
 		{
 			ft_put_loaded_image(mlx, line[count], x, y);
+			
 			x += 32;
 			count++;
 		}

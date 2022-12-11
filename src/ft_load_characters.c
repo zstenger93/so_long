@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 19:10:04 by zstenger          #+#    #+#             */
-/*   Updated: 2022/12/11 13:04:07 by zstenger         ###   ########.fr       */
+/*   Updated: 2022/12/11 17:27:54 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,13 +108,12 @@ void	ft_player_hook(void *mlx)
 	{
 		ft_player_movement(mlx, img);
 		ft_move_and_count(mlx, img);
-		ft_moves_to_window(mlx, img);
+		ft_moves_to_window(mlx);
 	}
 	if (mlx_is_key_down(mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(mlx);
 }
 
-// check the if!!!
 void	ft_enemy_hook(void *mlx)
 {
 	t_image	*img;

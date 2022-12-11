@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 12:10:50 by zstenger          #+#    #+#             */
-/*   Updated: 2022/12/11 13:04:45 by zstenger         ###   ########.fr       */
+/*   Updated: 2022/12/11 17:38:53 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	ft_load_failure(mlx_t *mlx, int x, int y)
 	img = gset_img(NULL);
 	tex->failure_screen = mlx_load_png("png/failure.png");
 	img->failure_screen = mlx_new_image(mlx, x, y);
-	mlx_image_to_window(mlx, img->failure_screen, x, y);
+	mlx_image_to_window(mlx, img->failure_screen, 0, 0);
 	mlx_draw_texture(img->failure_screen, tex->failure_screen, 0, 0);
 	mlx_set_instance_depth(img->failure_screen->instances, 8);
 	mlx_delete_texture(tex->failure_screen);

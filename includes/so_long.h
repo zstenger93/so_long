@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 15:06:49 by zstenger          #+#    #+#             */
-/*   Updated: 2022/12/11 12:13:12 by zstenger         ###   ########.fr       */
+/*   Updated: 2022/12/11 15:12:29 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ typedef struct s_texture
 
 typedef struct s_image
 {
-	int	move;
+	mlx_image_t	*move;
 	mlx_image_t	*player;
 	mlx_image_t	*exit;
 	mlx_image_t	*victory_screen;
@@ -175,6 +175,6 @@ char	ft_move_and_count(mlx_t *mlx, t_image *img);
 
 char	ft_dfs_check(char **map,  size_t x, size_t y, size_t rows);
 
-void	ft_moves_to_window(mlx_t *mlx, t_image *img);
+void	ft_moves_to_window(mlx_t *mlx);
 
 #endif
