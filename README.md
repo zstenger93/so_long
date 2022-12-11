@@ -53,7 +53,7 @@ Feel free to ask me anything on slack.
 
 ## How to build a map 🗺 :
 
-'0' = SPACE
+'0' = WALKING_PATH
 
 '1' = WALL
 
@@ -61,13 +61,13 @@ Feel free to ask me anything on slack.
 
 'E' = EXIT
 
-'C' = COLLECTIBLE
+'C' = COFFEE
 
-'F' = ENEMY (only with bonus)
+'F' = NORMINETTE (only with bonus)
 
-'F' = ENEMY2 (only with bonus)
+'F' = NORMINETTE2 (only with bonus)
 
-'B' = ENEMY3 (only with bonus)
+'B' = NORMINETTE3 (only with bonus)
 
 ## 🛠️ Usage
 
