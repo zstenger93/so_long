@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 12:19:44 by zstenger          #+#    #+#             */
-/*   Updated: 2022/12/08 13:43:23 by zstenger         ###   ########.fr       */
+/*   Updated: 2022/12/09 14:54:39 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void	ft_make_new_images(mlx_t *mlx, t_image *img)
 	img->exit = mlx_new_image(mlx, 32, 32);
 	img->enemy = mlx_new_image(mlx, 32, 32);
 	img->enemy2 = mlx_new_image(mlx, 32, 32);
+	img->enemy3 = mlx_new_image(mlx, 32, 32);
 }
 
 void	ft_make_map(mlx_t *mlx, char *map)
@@ -79,18 +80,21 @@ void	ft_make_map(mlx_t *mlx, char *map)
 
 void	ft_put_loaded_image(mlx_t *mlx, char c, int x, int y)
 {
-	if (c == 'F' || c == 'E' || c == '0' || c == 'P' || c == 'C' || c == 'N')
-		ft_load_walking_path(mlx, x, y, '0');
+	if (c == 'F' || c == 'E' || c == '0' || c == 'P' || c == 'C' || c == 'N'
+		|| c == 'B')
+		ft_load_walking_path(mlx, x, y);
 	if (c == '1')
 		ft_load_wall(mlx, x, y);
 	if (c == 'C')
 		ft_load_pickitup(mlx, x, y);
 	if (c == 'E')
-		ft_load_exit(mlx, x, y);
+		ft_load_exit(mlx, x, y, 'J');
 	if (c == 'F')
 		ft_load_enemy(mlx, x, y, 'T');
 	if (c == 'N')
-		ft_load_enemy2(mlx, x, y, 'K');
+		ft_l_e2(mlx, x, y, 'K');
+	if (c == 'B')
+		ft_l_e3(mlx, x, y, 'Z');
 	if (c == 'P')
 		ft_load_player(mlx, x, y, 'X');
 }

@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 18:59:37 by zstenger          #+#    #+#             */
-/*   Updated: 2022/12/08 18:29:50 by zstenger         ###   ########.fr       */
+/*   Updated: 2022/12/11 10:53:12 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char	ft_map_validator(char *argv)
 	error = ft_map_have_all_elements(open(argv, O_RDONLY), 0, 0, 0);
 	if (error != 0)
 		return (error);
-	error = ft_map_have_all_enemies(open(argv, O_RDONLY), 0, 0);
+	error = ft_map_have_all_enemies(open(argv, O_RDONLY), 0, 0, 0);
 	if (error != 0)
 		return (error);
 	error = ft_map_with_validpath(argv, row, length, 0);
@@ -95,7 +95,8 @@ char	ft_map_element_check(char c, char *plyr, char *pick, char *ext)
 		(*ext)++;
 	else if (c == 'P')
 		(*plyr)++;
-	else if (c != '1' && c != '0' && c != '\n' && c != 'N' && c != 'F')
+	else if (c != '1' && c != '0' && c != '\n' && c != 'N' && c != 'F'
+		&& c != 'B')
 		return ('I');
 	return (0);
 }
@@ -124,7 +125,7 @@ char	ft_map_with_validpath(char *argv, size_t rows, size_t columns, int fd)
 		line = get_next_line(fd);
 	}
 	ft_get_player(map, &x, &y, columns);
-	path = ft_dfs(map, x, y, rows);
+	path = ft_dfs_check(map, x, y, rows);
 	ft_free_map(map, rows);
 	return (path);
 }

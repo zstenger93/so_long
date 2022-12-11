@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 12:10:50 by zstenger          #+#    #+#             */
-/*   Updated: 2022/12/08 13:59:13 by zstenger         ###   ########.fr       */
+/*   Updated: 2022/12/09 17:10:44 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ void	ft_images_disabled(void)
 	img->pickitup->enabled = false;
 	img->enemy->enabled = false;
 	img->enemy2->enabled = false;
+	img->enemy3->enabled = false;
 	img->wall->enabled = false;
 	img->exit->enabled = false;
 	img->walking_path->enabled = false;

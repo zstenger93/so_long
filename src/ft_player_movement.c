@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 19:13:31 by zstenger          #+#    #+#             */
-/*   Updated: 2022/12/07 20:26:15 by zstenger         ###   ########.fr       */
+/*   Updated: 2022/12/11 11:27:08 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,22 +17,22 @@ void	ft_player_movement(mlx_t *mlx, t_image *img)
 	if (mlx_is_key_down(mlx, MLX_KEY_W))
 	{
 		if (ft_load_player(mlx, 0, 0, 'W') == 1)
-			img->player->instances[0].y -= 3.5;
+			img->player->instances[0].y -= 4;
 	}
 	else if (mlx_is_key_down(mlx, MLX_KEY_S))
 	{
 		if (ft_load_player(mlx, 0, 0, 'S') == 1)
-			img->player->instances[0].y += 3.5;
+			img->player->instances[0].y += 4;
 	}
 	else if (mlx_is_key_down(mlx, MLX_KEY_A))
 	{
 		if (ft_load_player(mlx, 0, 0, 'A') == 1)
-			img->player->instances[0].x -= 3.5;
+			img->player->instances[0].x -= 4;
 	}
 	else if (mlx_is_key_down(mlx, MLX_KEY_D))
 	{
 		if (ft_load_player(mlx, 0, 0, 'D') == 1)
-			img->player->instances[0].x += 3.5;
+			img->player->instances[0].x += 4;
 	}
 }
 
@@ -78,9 +78,9 @@ char	ft_is_wall(int x_m, int y_m, mlx_instance_t *element_ins, char maplmnt)
 		player_ins->x -= 2;
 	if (!(fabs((float)(element_ins->x - (player_ins->x + 14))) < x_m))
 		player_ins->x += 2;
-	if (!(fabs((float)((element_ins->y + 10) - player_ins->y)) < y_m))
+	if (!(fabs((float)((element_ins->y + 12) - player_ins->y)) < y_m))
 		player_ins->y -= 2;
-	if (!(fabs((float)(element_ins->y - (player_ins->y + 10))) < y_m))
+	if (!(fabs((float)(element_ins->y - (player_ins->y + 12))) < y_m))
 		player_ins->y += 2;
 	return (0);
 }
@@ -97,10 +97,10 @@ char	ft_isit_norminette(char mapelement)
 {
 	t_image	*img;
 
-	if (mapelement != 'F' && mapelement != 'N')
+	if (mapelement != 'F' && mapelement != 'N' && mapelement != 'B')
 		return (ft_can_we_exit());
 	img = gset_img(NULL);
-	if ((mapelement == 'F' || mapelement == 'N')
+	if ((mapelement == 'F' || mapelement == 'N' || mapelement != 'B')
 		&& img->player->enabled == true)
 		ft_load_failure(gset_mlx(NULL), 389, 170);
 	ft_images_disabled();

@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 15:06:49 by zstenger          #+#    #+#             */
-/*   Updated: 2022/12/08 18:25:09 by zstenger         ###   ########.fr       */
+/*   Updated: 2022/12/11 10:52:29 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@
 # include <math.h>
 # include <stdbool.h>
 
+
+
 typedef struct s_texture
 {
 	mlx_texture_t	*player;
@@ -34,10 +36,12 @@ typedef struct s_texture
 	mlx_texture_t	*walking_path;
 	mlx_texture_t	*enemy;
 	mlx_texture_t	*enemy2;
+	mlx_texture_t	*enemy3;
 }	t_texture;
 
 typedef struct s_image
 {
+	int	move;
 	mlx_image_t	*player;
 	mlx_image_t	*exit;
 	mlx_image_t	*victory_screen;
@@ -47,16 +51,17 @@ typedef struct s_image
 	mlx_image_t	*walking_path;
 	mlx_image_t	*enemy;
 	mlx_image_t	*enemy2;
+	mlx_image_t	*enemy3;
 }	t_image;
 
 //checking for wrong input
 bool	ft_wrong_input(int argc, char **argv);
 
-//reading the map and print it to terminal
-// void	ft_read_and_print_map(char *map);
+// reading the map and print it to terminal
+void	ft_read_and_print_map(char *map);
 
-//temporary for printing the map to terminal
-// char	put_chars(char c);
+// temporary for printing the map to terminal
+char	put_chars(char c);
 
 //obvious i guess
 mlx_t	*ft_open_mapsize_window(char *map, int i);
@@ -71,10 +76,10 @@ void	ft_make_new_images(mlx_t *mlx, t_image *img);
 void	ft_put_loaded_image(mlx_t *mlx, char c, int x, int y);
 
 //load the png's on the new images
-void	ft_load_walking_path(mlx_t *mlx, int x, int y, char c);
+void	ft_load_walking_path(mlx_t *mlx, int x, int y);
 void	ft_load_wall(mlx_t *mlx, int x, int y);
 void	ft_load_pickitup(mlx_t *mlx, int x, int y);
-void	ft_load_exit(mlx_t *mlx, int x, int y);
+void	ft_load_exit(mlx_t *mlx, int x, int y, char keytype);
 char	ft_load_player(mlx_t *mlx, int x, int y, char keytype);
 char	ft_load_enemy(mlx_t *mlx, int x, int y, char keytype);
 void	ft_load_failure(mlx_t *mlx, int x, int y);
@@ -102,9 +107,9 @@ char	ft_map_element_check(char c, char *plyr, char *pick, char *ext);
 //if P, C, E, are all present on the map
 char	ft_map_have_all_elements(int fd, char ext, char pick, char plyr);
 
-char	ft_map_enemies_check(char c, char *n, char *f);
+char	ft_map_enemies_check(char c, char *n, char *f, char *b);
 
-char	ft_map_have_all_enemies(int fd, char n, char f);
+char	ft_map_have_all_enemies(int fd, char n, char f, char b);
 
 //checking fo valid path on the map to the exit
 char	ft_map_with_validpath(char *argv, size_t rows, size_t columns, int fd);
@@ -135,12 +140,12 @@ void	ft_player_hook(void *mlx);
 void	ft_enemy_hook(void *mlx);
 void	ft_enemy_movement(mlx_t *mlx, t_image *img);
 void	ft_move_enemy(mlx_t *mlx, t_image *img);
-void	ft_move_enemy_w(t_image *img);
-void	ft_move_enemy_s(t_image *img);
-void	ft_move_enemy_a(t_image *img);
-void	ft_move_enemy_d(t_image *img);
+void	ft_move_enemy_w(mlx_t *mlx, t_image *img);
+void	ft_move_enemy_s(mlx_t *mlx, t_image *img);
+void	ft_move_enemy_a(mlx_t *mlx, t_image *img);
+void	ft_move_enemy_d(mlx_t *mlx, t_image *img);
 
-char	ft_load_enemy2(mlx_t *mlx, int x, int y, char keytype);
+char	ft_l_e2(mlx_t *mlx, int x, int y, char keytype);
 // char	ft_load_enemy3(mlx_t *mlx, int x, int y, char keytype);
 
 char	ft_enemy2_location(mlx_image_t *element);
@@ -162,6 +167,12 @@ void	ft_images_disabled(void);
 
 char	ft_last_line(char *line, char *lineb, size_t *length, size_t count);
 
+char	ft_l_e3(mlx_t *mlx, int x, int y, char keytype);
+char	ft_enemy3_location(mlx_image_t *element);
+void	ft_wall_enemy3(int x_m, int y_m, mlx_instance_t *element_ins);
 
+char	ft_move_and_count(mlx_t *mlx, t_image *img);
+
+char	ft_dfs_check(char **map,  size_t x, size_t y, size_t rows);
 
 #endif

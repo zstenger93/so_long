@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 12:18:07 by zstenger          #+#    #+#             */
-/*   Updated: 2022/12/08 11:00:33 by zstenger         ###   ########.fr       */
+/*   Updated: 2022/12/09 20:59:54 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ char	ft_error_types(char *argv)
 	else if (error_type == 'O')
 		ft_printf("\e[1;4;31mError!\e[0m\n"
 			"\e[4;33mThere is NO or MORE exit or/and player than one!\e[0m\n"
-			"\e[4;33mElse you don't anything to collect on the map!\e[0m\n");
+			"\e[4;33mElse there is nothing to collect on the map!\e[0m\n");
 	else if (error_type == 'I')
 		ft_printf("\e[1;4;31mError!\e[0m\n"
 			"\e[4;33mInvalid char/'s in the map!\e[0m\n"
@@ -71,6 +71,9 @@ char	ft_error_types2(char *argv)
 	else if (error_type == 'L')
 		ft_printf("\e[1;4;31mError!\e[0m\n"
 			"\e[4;33mCan't be more or less enemy per type than one!\e[0m\n");
+	else if (error_type == 'Q')
+		ft_printf("\e[1;4;31mError!\e[0m\n"
+			"\e[4;33mCan't collect everything!\e[0m\n");
 	else
 		return (0);
 	return (1);
