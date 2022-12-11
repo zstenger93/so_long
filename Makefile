@@ -6,7 +6,7 @@
 #    By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/18 16:05:40 by zstenger          #+#    #+#              #
-#    Updated: 2022/12/09 14:22:29 by zstenger         ###   ########.fr        #
+#    Updated: 2022/12/11 13:05:07 by zstenger         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ SRCS = src/so_long.c src/ft_so_long_utils.c src/ft_dfs_utils.c \
 		src/ft_enemy_location.c src/ft_enemy_movement.c src/ft_error_cases.c \
 		src/ft_load_characters.c src/ft_load_elements.c src/ft_make_map.c \
 		src/ft_map_validator.c src/ft_player_movement.c \
-		src/ft_load_characters2.c
+		src/ft_load_characters2.c src/ft_moves_to_window.c
 
 OBJS = $(SRCS:.c=.o)
 
@@ -41,6 +41,17 @@ $(NAME):$(OBJS) $(GLFW3) $(LIBFT) $(MLX42)
 	@$(CC) $(CFLAGS) -o $(NAME) $(SRCS) \
 	$(LIBFT) $(MLX42) $(GLFW3) -framework Cocoa -framework OpenGL -framework IOKit
 	@echo "$(PURPLE)$(NAME) $(DEF_COLOR)$(GREEN)Compiling done.$(DEF_COLOR)"
+	@echo "\033[4;34m                                                            \n\
+	  ▄████████  ▄██████▄          ▄█          ▄██████▄  ███▄▄▄▄▄     ▄███████▄      \n\
+	 ███    ███ ███    ███        ███         ███    ███ ███▀▀▀▀██▄  ███     ███     \n\
+	 ███    █▀  ███    ███        ███         ███    ███ ███    ███ ███        █▀      \n\
+	 ███        ███    ███        ███         ███    ███ ███    ███ ███               \n\
+	███████████ ███    ███        ███         ███    ███ ███    ███ ███     ███▄      \n\
+	        ███ ███    ███        ███         ███    ███ ███    ███ ███       ███     \n\
+	  ▄█    ███ ███    ███        ███▌     ▄  ███    ███ ███    ███  ███     ███     \n\
+	▄████████▀   ▀██████▀  █████  ███████▄▄██  ▀██████▀   ▀█    █▀    ▀███████▀      \n\
+																				\033[0m$(DEF_COLOR)"
+	@echo "                                \033[1;37mBy: zstenger$(DEF_COLOR)"
 
 %.o : %.c
 	$(CC) $(CFLAGS) -c $< -o $@

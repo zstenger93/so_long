@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 15:06:49 by zstenger          #+#    #+#             */
-/*   Updated: 2022/12/11 10:52:29 by zstenger         ###   ########.fr       */
+/*   Updated: 2022/12/11 12:13:12 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,5 +174,7 @@ void	ft_wall_enemy3(int x_m, int y_m, mlx_instance_t *element_ins);
 char	ft_move_and_count(mlx_t *mlx, t_image *img);
 
 char	ft_dfs_check(char **map,  size_t x, size_t y, size_t rows);
+
+void	ft_moves_to_window(mlx_t *mlx, t_image *img);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 19:02:46 by zstenger          #+#    #+#             */
-/*   Updated: 2022/12/11 11:32:12 by zstenger         ###   ########.fr       */
+/*   Updated: 2022/12/11 12:46:13 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ char	ft_dfs_check(char **map, size_t x, size_t y, size_t rows)
 	i = 0;
 	while (i < rows)
 	{
-		printf("%s\n", map[i]);
+		// printf("%s\n", map[i]);
 		if ((!ft_pf_strchr(map[i], 'C')) == false)
 			return ('Q');
 		else if (ft_pf_strchr(map[i], 'E'))

@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 12:10:50 by zstenger          #+#    #+#             */
-/*   Updated: 2022/12/09 17:10:44 by zstenger         ###   ########.fr       */
+/*   Updated: 2022/12/11 13:04:45 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,10 +105,3 @@ void	ft_images_disabled(void)
 	img->exit->enabled = false;
 	img->walking_path->enabled = false;
 }
-/*
-int mlx_put_string(mlx_t *mlx, const char *str, int32_t x, int32_t y)
-{
-	
-}
-
-*/
