@@ -6,12 +6,13 @@
 #    By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/18 16:05:40 by zstenger          #+#    #+#              #
-#    Updated: 2022/12/11 14:06:04 by zstenger         ###   ########.fr        #
+#    Updated: 2022/12/11 20:47:07 by zstenger         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = so_long
 CC = cc
+RM = rm -rf
 CFLAGS = -Wall -Wextra -Werror
 LIBFT = libft/libft.a
 MLX42 = MLX42/libmlx42.a
@@ -95,7 +96,7 @@ clean:
 
 fclean:
 	@echo "$(RED)Deleting objects.$(DEF_COLOR)"
-	$(RM) $(OBJS)
+	$(RM) $(OBJS) $(NAME)
 	make fclean -C ./libft
 	make fclean -C ./MLX42
 	rm -rf MLX42/glfw_lib/ MLX42/include/GLFW/
@@ -160,7 +161,7 @@ tre: tclean $(NAME)
 	@echo "$(YELLOW)so_long executable has been rebuilt!$(DEF_COLOR)"
 
 tclean:
-	rm -rf $(NAME)
+	$(RM) $(NAME)
 	@echo "$(YELLOW)so_long executable has been removed!$(DEF_COLOR)"
 
 .PHONY: all clean fclean t t2 t3 t4 t5 tb tb2 tb3 tb4 tb5 re tre tclean
