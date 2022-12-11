@@ -20,7 +20,15 @@
 > _This project is a very small 2D game._
 
 	Its purpose is to make you work with textures, sprites,
-	and some other very basic gameplay elements.
+	and some other very basic gameplay elements. 
+
+> _You will try to survive our greatest enemy, the NORM._
+
+	You will be our 42 astronaut,
+	trying to drinking enough coffe,
+	to be able to debug your code,
+	and avoid our beloved cat,
+	Norminette!
 
 For more information about 42 projects [**visit my repository**](https://github.com/zstenger93).
 
@@ -28,8 +36,38 @@ My approach was kinda different because I haven't used structs before so I haven
 but enough to learn the concept for future projects.
 Mainly used them for images, textures and the movement counter.
 I have 2 hooks, one for the player and one for the enemies because together my player was a bit laggy.
+Spaghetti ala zstenger, hope you're hungry.
+Feel free to ask me anything on slack.
 
+## Keys for qwerty keyboard ⌥ :
 
+[FORWARD] = W
+
+[GO_LEFT] = A
+
+[GO_RIGHT] = D
+
+[BACKWARD] = S
+
+[EXIT] = ESC
+
+## How to build a map 🗺 :
+
+'0' = SPACE
+
+'1' = WALL
+
+'P' = PLAYER
+
+'E' = EXIT
+
+'C' = COLLECTIBLE
+
+'F' = ENEMY (only with bonus)
+
+'F' = ENEMY2 (only with bonus)
+
+'B' = ENEMY3 (only with bonus)
 
 ## 🛠️ Usage
 

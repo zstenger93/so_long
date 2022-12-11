@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 12:19:44 by zstenger          #+#    #+#             */
-/*   Updated: 2022/12/11 19:54:51 by zstenger         ###   ########.fr       */
+/*   Updated: 2022/12/11 20:38:58 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ mlx_t	*ft_open_mapsize_window(char *map, int count)
 		free(buffer);
 		buffer = get_next_line(fd);
 	}
-	mlx = mlx_init(x * 32, y * 32, "Survive The Norm", 1);
+	mlx = mlx_init(x * 32, y * 32, "Survive The NORM", 1);
 	return (mlx);
 }
 
