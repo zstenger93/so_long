@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 12:10:50 by zstenger          #+#    #+#             */
-/*   Updated: 2022/12/11 17:38:53 by zstenger         ###   ########.fr       */
+/*   Updated: 2022/12/11 18:29:59 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ char	ft_can_we_exit(void)
 	img->player->enabled = false;
 	if (img->player->enabled == false)
 	{
-		ft_load_victory(gset_mlx(NULL), 389, 170);
+		ft_load_victory(gset_mlx(NULL), 0, 0);
 		ft_images_disabled();
 	}
 	if (img->pickitup->enabled == false)
@@ -67,11 +67,12 @@ void	ft_load_failure(mlx_t *mlx, int x, int y)
 	tex = gset_tex(NULL);
 	img = gset_img(NULL);
 	tex->failure_screen = mlx_load_png("png/failure.png");
-	img->failure_screen = mlx_new_image(mlx, x, y);
-	mlx_image_to_window(mlx, img->failure_screen, 0, 0);
+	img->failure_screen = mlx_new_image(mlx, 389, 170);
+	mlx_image_to_window(mlx, img->failure_screen, x, y);
 	mlx_draw_texture(img->failure_screen, tex->failure_screen, 0, 0);
 	mlx_set_instance_depth(img->failure_screen->instances, 8);
 	mlx_delete_texture(tex->failure_screen);
+	mlx_set_window_size(mlx, 389, 170);
 	return ;
 }
 
@@ -83,11 +84,12 @@ void	ft_load_victory(mlx_t *mlx, int x, int y)
 	tex = gset_tex(NULL);
 	img = gset_img(NULL);
 	tex->victory_screen = mlx_load_png("png/victory.png");
-	img->victory_screen = mlx_new_image(mlx, x, y);
+	img->victory_screen = mlx_new_image(mlx, 389, 170);
 	mlx_image_to_window(mlx, img->victory_screen, x, y);
 	mlx_draw_texture(img->victory_screen, tex->victory_screen, 0, 0);
 	mlx_set_instance_depth(img->victory_screen->instances, 8);
 	mlx_delete_texture(tex->victory_screen);
+	mlx_set_window_size(mlx, 389, 170);
 	return ;
 }
 
