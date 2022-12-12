@@ -131,23 +131,22 @@ Feel free to ask me anything on slack.
 
 ---
 
-### Instructions
+## Instructions
 
-My Makefile is configured for Mac use. To be able to use it on Linux it NEEDS to be modified.
+> - My Makefile is configured for Mac use. To be able to use it on Linux it NEEDS to be modified.
 
-When you run make or one of my other options (you cansee in Testing):
-	-it will download MLX42 and libft from github, since they are submodules
-	-compile MLX42 and libft
-	-if there is no GLFW downloads GLFW
-	-unzip and moves GLFW to the right directory
-	-compiles so_long
-	-in case the right make option, runs the program right after
+### When you run make or one of my other options (you cansee in Testing):
+> - it will download MLX42 and libft from github, since they are submodules
+> - compile MLX42 and libft
+> - if there is no GLFW downloads GLFW
+> - unzip and moves GLFW to the right directory
+> - compiles so_long
+> - in case the right make option, runs the program right after
 
 ---
 
 ## 📋 Testing
 
-Multiple options:
-	-You can just run make to compile everything.
-	-Or run commands from make t to make t5 or make tb to make tb5 to run the test
-		right after compiling without any extra command.
+### Multiple options:
+> - You can just run make to compile everything.
+> - Or run commands from make t to make t5 or make tb to make tb5 to run the test right after compiling without any extra command.
