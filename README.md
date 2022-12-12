@@ -24,7 +24,9 @@
 > _This project is a very small 2D game._
 
 	Its purpose is to make you work with textures, sprites,
-	and some other very basic gameplay elements. 
+	and some other very basic gameplay elements
+	and you will hit your head into the table if you haven't
+	used structs before.
 
 > _You will try to survive our greatest enemy, the NORM._
 
@@ -49,33 +51,33 @@ Feel free to ask me anything on slack.
 
 ### Keys for qwerty keyboard ⌥ :
 
-`[FORWARD] = W`
+`FORWARD` = `W`
 
-`[GO_LEFT] = A`
+`LEFT` = `A`
 
-`[GO_RIGHT] = D`
+`RIGHT` = `D`
 
-`[BACKWARD] = S`
+`BACKWARD` = `S`
 
-`[EXIT] = ESC`
+`EXIT` = `ESC`
 
 ### How to build a map 🗺 :
 
-`'0' = WALKING_PATH`
+`0` = `WALKING_PATH`
 
-`'1' = WALL`
+`1` = `WALL`
 
-`'P' = PLAYER`
+`P` = `PLAYER`
 
-`'E' = EXIT`
+`E` = `EXIT`
 
-`'C' = COFFEE`
+`C` = `COFFEE`
 
-`'F' = NORMINETTE` (only with bonus)
+`F` = `NORMINETTE` (only with bonus)
 
-`'F' = NORMINETTE2` (only with bonus)
+`N` = `NORMINETTE2` (only with bonus)
 
-`'B' = NORMINETTE3` (only with bonus)
+`B` = `NORMINETTE3` (only with bonus)
 
 ### Mandatory map example:
 ```
@@ -137,14 +139,14 @@ Feel free to ask me anything on slack.
 
 ## Instructions
 
-> - My Makefile is configured for Mac use. To be able to use it on Linux it `NEEDS` to be modified.
+> - `My Makefile` is configured for Mac use. To be able to use it `on Linux` it `NEEDS to be modified`.
 
 ### When you run make or one of my other options (you can see in Testing):
-> - it will download MLX42 and libft from github, since they are submodules
-> - compile MLX42 and libft
-> - if there is no GLFW downloads GLFW
-> - unzip and moves GLFW to the right directory
-> - compiles so_long
+> - it will download `MLX42` and `libft` from github, since they are `submodules`
+> - compile `MLX42` and `libft`
+> - if there is no `GLFW` downloads `GLFW`
+> - unzip and moves `GLFW` to the right directory
+> - compiles `so_long`
 > - in case the right make option, runs the program right after
 
 ![run](https://media4.giphy.com/media/pZISzrkzYha50THHc5/giphy.gif?cid=790b76116c6215c75f7acbe135c7dc1093b7458ce935622c&rid=giphy.gif&ct=g)
@@ -154,6 +156,15 @@ Feel free to ask me anything on slack.
 ## 📋 Testing
 
 ### Multiple options:
-> - You can just run `make` to compile the mandatory part.
+> - You can just run `make` to compile the mandatory part eg:
+```shell
+$ make
+```
 > - Run `make bonus` to compile the bonus version.
+```shell
+$ make bonus
+```
 > - Or run commands from `make t` to `make t5` or `make tb` to `make tb5` to run the test right after compiling without any extra command.
+```shell
+$ make tb2
+```
