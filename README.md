@@ -31,7 +31,7 @@
 > _You will try to survive our greatest enemy, the NORM._
 
 	You will be our 42 astronaut,
-	trying to drinking enough coffe,
+	trying to drink enough coffe,
 	to be able to debug your code,
 	and avoid our beloved cat,
 	Norminette!
