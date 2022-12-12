@@ -49,10 +49,10 @@ Feel free to ask me anything on slack.
 > - Checking for the input with `ft_wrong_input` when you try to run the program and if you included a `.ber` map as well
 ### 2nd step:
 > - Checking the error cases on the provided map with `ft_error_types`.
-> - 	Inside using `ft_map_validator` function where
-> - 		we check for walls with `ft_have_walls`
-> - 		`ft_map_have_all_elements` for the map elements and if they are correct or not
-> - 		and finally `ft_map_validpath` to check if the exit and al the collectables are reachable.
+> - Inside using `ft_map_validator` function where
+> - We check for walls with `ft_have_walls`
+> - With `ft_map_have_all_elements` for the map elements and if they are correct or not
+> - And finally `ft_map_validpath` to check if the exit and al the collectables are reachable.
 ### 3rd step:
 > - Open a window which is the size of the map with `ft_open_mapsize_window`.
 ### 4th step:
