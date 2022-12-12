@@ -40,7 +40,7 @@ My approach was kinda different because I haven't used structs before so I haven
 but enough to learn the concept for future projects.
 Mainly used them for images, textures and the movement counter.
 I have 2 hooks, one for the player and one for the enemies because together my player was a bit laggy.
-Spaghetti ala zstenger, hope you're hungry.
+`Spaghetti ala zstenger, hope you're hungry.`
 Feel free to ask me anything on slack.
 
 ---
@@ -48,36 +48,36 @@ Feel free to ask me anything on slack.
 ## 🛠️ How to play and make different maps:
 
 ### Keys for qwerty keyboard ⌥ :
+```
+`[FORWARD] = W`
 
-[FORWARD] = W
+`[GO_LEFT] = A`
 
-[GO_LEFT] = A
+`[GO_RIGHT] = D`
 
-[GO_RIGHT] = D
+`[BACKWARD] = S`
 
-[BACKWARD] = S
-
-[EXIT] = ESC
-
+`[EXIT] = ESC`
+```
 ### How to build a map 🗺 :
 ```
-'0' = WALKING_PATH
+`'0' = WALKING_PATH`
 
-'1' = WALL
+`'1' = WALL`
 
-'P' = PLAYER
+`'P' = PLAYER`
 
-'E' = EXIT
+`'E' = EXIT`
 
-'C' = COFFEE
+`'C' = COFFEE`
 
-'F' = NORMINETTE (only with bonus)
+`'F' = NORMINETTE` (only with bonus)
 
-'F' = NORMINETTE2 (only with bonus)
+`'F' = NORMINETTE2` (only with bonus)
 
-'B' = NORMINETTE3 (only with bonus)
+`'B' = NORMINETTE3` (only with bonus)
 ```
-> _This project is a very small 2D game._
+> _Mandatory map example._
 
 	1111111111111
 	10010000000C1
@@ -85,7 +85,7 @@ Feel free to ask me anything on slack.
 	1P0011E000001
 	1111111111111
 
-> _This project is a very small 2D game._
+> _Bonus part example._
 
 	1111111111111111111111111111111111
 	1E0000000000B00C00000C0000N0000001
@@ -137,7 +137,7 @@ Feel free to ask me anything on slack.
 
 ## Instructions
 
-> - My Makefile is configured for Mac use. To be able to use it on Linux it NEEDS to be modified.
+> - My Makefile is configured for Mac use. To be able to use it on Linux it `NEEDS` to be modified.
 
 ### When you run make or one of my other options (you can see in Testing):
 > - it will download MLX42 and libft from github, since they are submodules
@@ -154,5 +154,6 @@ Feel free to ask me anything on slack.
 ## 📋 Testing
 
 ### Multiple options:
-> - You can just run make to compile everything.
-> - Or run commands from make t to make t5 or make tb to make tb5 to run the test right after compiling without any extra command.
+> - You can just run `make` to compile the mandatory part.
+> - Run `make bonus` to compile the bonus version.
+> - Or run commands from `make t` to `make t5` or `make tb` to `make tb5` to run the test right after compiling without any extra command.
