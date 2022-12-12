@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_map_validator.c                                 :+:      :+:    :+:   */
+/*   ft_map_validator_bonus.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 18:59:37 by zstenger          #+#    #+#             */
-/*   Updated: 2022/12/12 12:44:54 by zstenger         ###   ########.fr       */
+/*   Updated: 2022/12/12 10:50:53 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/so_long.h"
+#include "../../includes/so_long_bonus.h"
 
 char	ft_map_validator(char *argv)
 {
@@ -23,6 +23,9 @@ char	ft_map_validator(char *argv)
 	if (error != 0)
 		return (error);
 	error = ft_map_have_all_elements(open(argv, O_RDONLY), 0, 0, 0);
+	if (error != 0)
+		return (error);
+	error = ft_map_have_all_enemies(open(argv, O_RDONLY), 0, 0, 0);
 	if (error != 0)
 		return (error);
 	error = ft_map_validpath(argv, row, length, 0);
@@ -92,7 +95,8 @@ char	ft_map_element_check(char c, char *plyr, char *pick, char *ext)
 		(*ext)++;
 	else if (c == 'P')
 		(*plyr)++;
-	else if (c != '1' && c != '0' && c != '\n')
+	else if (c != '1' && c != '0' && c != '\n' && c != 'N' && c != 'F'
+		&& c != 'B')
 		return ('I');
 	return (0);
 }

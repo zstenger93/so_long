@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_enemy_movement.c                                :+:      :+:    :+:   */
+/*   ft_enemy_movement_bonus.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 19:21:51 by zstenger          #+#    #+#             */
-/*   Updated: 2022/12/11 19:57:43 by zstenger         ###   ########.fr       */
+/*   Updated: 2022/12/12 10:51:09 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/so_long.h"
+#include "../../includes/so_long_bonus.h"
 
 void	ft_move_enemy(mlx_t *mlx, t_image *img)
 {

@@ -135,7 +135,7 @@ Feel free to ask me anything on slack.
 
 > - My Makefile is configured for Mac use. To be able to use it on Linux it NEEDS to be modified.
 
-### When you run make or one of my other options (you cansee in Testing):
+### When you run make or one of my other options (you can see in Testing):
 > - it will download MLX42 and libft from github, since they are submodules
 > - compile MLX42 and libft
 > - if there is no GLFW downloads GLFW

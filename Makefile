@@ -6,11 +6,12 @@
 #    By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/18 16:05:40 by zstenger          #+#    #+#              #
-#    Updated: 2022/12/11 20:47:07 by zstenger         ###   ########.fr        #
+#    Updated: 2022/12/12 13:14:55 by zstenger         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = so_long
+BONUS_NAME = so_long_bonus
 CC = cc
 RM = rm -rf
 CFLAGS = -Wall -Wextra -Werror
@@ -18,12 +19,20 @@ LIBFT = libft/libft.a
 MLX42 = MLX42/libmlx42.a
 GLFW3 = MLX42/glfw_lib/libglfw3.a
 SRCS = src/so_long.c src/ft_so_long_utils.c src/ft_dfs_utils.c \
-		src/ft_enemy_location.c src/ft_enemy_movement.c src/ft_error_cases.c \
-		src/ft_load_characters.c src/ft_load_elements.c src/ft_make_map.c \
-		src/ft_map_validator.c src/ft_player_movement.c \
-		src/ft_load_characters2.c src/ft_moves_to_window.c
+		src/ft_load_character.c src/ft_load_elements.c src/ft_make_map.c \
+		src/ft_map_validator.c src/ft_player_movement.c src/ft_error_cases.c \
 
 OBJS = $(SRCS:.c=.o)
+
+BONUS = src/bonus/so_long_bonus.c src/bonus/ft_so_long_utils_bonus.c \
+		src/bonus/ft_dfs_utils_bonus.c src/bonus/ft_enemy_location_bonus.c \
+		src/bonus/ft_enemy_movement_bonus.c src/bonus/ft_error_cases_bonus.c \
+		src/bonus/ft_load_characters_bonus.c src/bonus/ft_load_elements_bonus.c \
+		src/bonus/ft_make_map_bonus.c src/bonus/ft_load_characters2_bonus.c \
+		src/bonus/ft_player_movement_bonus.c src/bonus/ft_map_validator_bonus.c \
+		src/bonus/ft_moves_to_window_bonus.c
+
+BONUS_OBJS = $(BONUS:.c=.o)
 
 # colors for echo messages
 DEF_COLOR = \033[0;39m
@@ -52,7 +61,7 @@ $(NAME):$(OBJS) $(GLFW3) $(LIBFT) $(MLX42)
 	  ▄█    ███ ███    ███        ███▌     ▄  ███    ███ ███    ███  ███     ███     \n\
 	▄████████▀   ▀██████▀  ██████ ███████▄▄██  ▀██████▀   ▀█    █▀    ▀███████▀      \n\
 																				\033[0m$(DEF_COLOR)"
-	@echo "                                \033[1;37mBy: zstenger$(DEF_COLOR)"
+	@echo "                                \033[1;37mMandatory part By: zstenger$(DEF_COLOR)"
 
 %.o : %.c
 	$(CC) $(CFLAGS) -c $< -o $@
@@ -87,16 +96,35 @@ $(GLFW3):
 	echo "$(GREEN)./MLX42/glfw_lib is installed.$(DEF_COLOR)"; \
 	fi
 
+bonus: $(BONUS_NAME)
+
+$(BONUS_NAME):$(BONUS_OBJS) $(GLFW3) $(LIBFT) $(MLX42)
+	@echo "$(YELLOW)Compiling: $(DEF_COLOR)$(CYAN)$(BONUS_NAME)$(DEF_COLOR)"
+	@$(CC) $(CFLAGS) -o $(BONUS_NAME) $(BONUS_OBJS) \
+	$(LIBFT) $(MLX42) $(GLFW3) -framework Cocoa -framework OpenGL -framework IOKit
+	@echo "$(PURPLE)$(BONUS_NAME) $(DEF_COLOR)$(GREEN)Compiling done.$(DEF_COLOR)"
+	@echo "\033[4;34m                                                            \n\
+	  ▄████████  ▄██████▄          ▄█          ▄██████▄  ███▄▄▄▄▄     ▄███████▄      \n\
+	 ███    ███ ███    ███        ███         ███    ███ ███▀▀▀▀██▄  ███     ███     \n\
+	 ███    █▀  ███    ███        ███         ███    ███ ███    ███ ███        █▀      \n\
+	 ███        ███    ███        ███         ███    ███ ███    ███ ███               \n\
+	███████████ ███    ███        ███         ███    ███ ███    ███ ███     ███▄      \n\
+	        ███ ███    ███        ███         ███    ███ ███    ███ ███       ███     \n\
+	  ▄█    ███ ███    ███        ███▌     ▄  ███    ███ ███    ███  ███     ███     \n\
+	▄████████▀   ▀██████▀  ██████ ███████▄▄██  ▀██████▀   ▀█    █▀    ▀███████▀      \n\
+																				\033[0m$(DEF_COLOR)"
+	@echo "                                \033[1;37mBonus Part By: zstenger$(DEF_COLOR)" 
+
 clean:
 	@echo "$(RED)Removing .o files.$(DEF_COLOR)"
-	$(RM) $(OBJS)
+	$(RM) $(OBJS) $(BONUS_OBJS)
 	make clean -C ./libft
 	make clean -C ./MLX42
 	@echo "$(CYAN)MLX42 and libft, so_long .o files has been removed.$(DEF_COLOR)"
 
 fclean:
 	@echo "$(RED)Deleting objects.$(DEF_COLOR)"
-	$(RM) $(OBJS) $(NAME)
+	$(RM) $(OBJS) $(NAME) $(BONUS_OBJS) $(BONUS_NAME)
 	make fclean -C ./libft
 	make fclean -C ./MLX42
 	rm -rf MLX42/glfw_lib/ MLX42/include/GLFW/
@@ -128,40 +156,40 @@ t5: $(NAME)
 	./$(NAME) maps/map5.ber
 	@echo "$(CYAN)\nHow was it? Did you like it?$(DEF_COLOR)"
 
-tb: $(NAME)
+tb: $(BONUS_NAME)
 	@echo "$(RED)RUN BONUS TEST 1, LET THE GAME BEGIN!$(DEF_COLOR)"
-	./$(NAME) maps/mapb.ber
+	./$(BONUS_NAME) maps/mapb.ber
 	@echo "$(CYAN)\nHow was it? Did you survive our beloved cat, norminette?$(DEF_COLOR)"
 
-tb2: $(NAME)
+tb2: $(BONUS_NAME)
 	@echo "$(RED)RUN BONUS TEST 2, LET THE GAME BEGIN!$(DEF_COLOR)"
-	./$(NAME) maps/mapb2.ber
+	./$(BONUS_NAME) maps/mapb2.ber
 	@echo "$(CYAN)\nHow was it? Did you survive our beloved cat, norminette?$(DEF_COLOR)"
 
-tb3: $(NAME)
+tb3: $(BONUS_NAME)
 	@echo "$(RED)RUN BONUS TEST 3, LET THE GAME BEGIN!$(DEF_COLOR)"
-	./$(NAME) maps/mapb3.ber
+	./$(BONUS_NAME) maps/mapb3.ber
 	@echo "$(CYAN)\nHow was it? Did you survive our beloved cat, norminette?$(DEF_COLOR)"
 
-tb4: $(NAME)
+tb4: $(BONUS_NAME)
 	@echo "$(RED)RUN BONUS TEST 4, LET THE GAME BEGIN!$(DEF_COLOR)"
-	./$(NAME) maps/mapb4.ber
+	./$(BONUS_NAME) maps/mapb4.ber
 	@echo "$(CYAN)\nHow was it? Did you survive our beloved cat, norminette?$(DEF_COLOR)"
 
-tb5: $(NAME)
+tb5: $(BONUS_NAME)
 	@echo "$(RED)RUN BONUS TEST 5, LET THE GAME BEGIN!$(DEF_COLOR)"
-	./$(NAME) maps/mapb5.ber
+	./$(BONUS_NAME) maps/mapb5.ber
 	@echo "$(CYAN)\nHow was it? Did you survive our beloved cat, norminette?$(DEF_COLOR)"
 
 re: fclean all
 	@echo "$(YELLOW)Project has been rebuilt!$(DEF_COLOR)"
 
 # removing and remaking only the so_long executable 
-tre: tclean $(NAME)
+tre: tclean $(BONUS_NAME)
 	@echo "$(YELLOW)so_long executable has been rebuilt!$(DEF_COLOR)"
 
 tclean:
-	$(RM) $(NAME)
+	$(RM) $(BONUS_NAME)
 	@echo "$(YELLOW)so_long executable has been removed!$(DEF_COLOR)"
 
 .PHONY: all clean fclean t t2 t3 t4 t5 tb tb2 tb3 tb4 tb5 re tre tclean

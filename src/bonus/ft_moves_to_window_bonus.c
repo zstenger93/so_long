@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_moves_to_window.c                               :+:      :+:    :+:   */
+/*   ft_moves_to_window_bonus.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 13:04:00 by zstenger          #+#    #+#             */
-/*   Updated: 2022/12/11 19:22:19 by zstenger         ###   ########.fr       */
+/*   Updated: 2022/12/12 10:50:50 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/so_long.h"
+#include "../../includes/so_long_bonus.h"
 
 void	ft_moves_to_window(mlx_t *mlx)
 {

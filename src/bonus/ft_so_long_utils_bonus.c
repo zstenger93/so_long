@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_so_long_utils.c                                 :+:      :+:    :+:   */
+/*   ft_so_long_utils_bonus.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 19:20:21 by zstenger          #+#    #+#             */
-/*   Updated: 2022/12/12 12:09:27 by zstenger         ###   ########.fr       */
+/*   Updated: 2022/12/12 12:08:20 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/so_long.h"
+#include "../../includes/so_long_bonus.h"
 
 t_image	*gset_img(t_image *img_to_null)
 {

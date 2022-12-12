@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_make_map.c                                      :+:      :+:    :+:   */
+/*   ft_make_map_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 12:19:44 by zstenger          #+#    #+#             */
-/*   Updated: 2022/12/12 13:03:38 by zstenger         ###   ########.fr       */
+/*   Updated: 2022/12/12 11:26:44 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/so_long.h"
+#include "../../includes/so_long_bonus.h"
 
 mlx_t	*ft_open_mapsize_window(char *map, int count)
 {
@@ -45,6 +45,9 @@ void	ft_make_new_images(mlx_t *mlx, t_image *img)
 	img->wall = mlx_new_image(mlx, 32, 32);
 	img->pickitup = mlx_new_image(mlx, 32, 32);
 	img->exit = mlx_new_image(mlx, 32, 32);
+	img->enemy = mlx_new_image(mlx, 32, 32);
+	img->enemy2 = mlx_new_image(mlx, 32, 32);
+	img->enemy3 = mlx_new_image(mlx, 32, 32);
 	img->move = mlx_new_image(mlx, 32, 32);
 }
 
@@ -78,7 +81,8 @@ void	ft_make_map(mlx_t *mlx, char *map)
 
 void	ft_put_loaded_image(mlx_t *mlx, char c, int x, int y)
 {
-	if (c == 'E' || c == '0' || c == 'P' || c == 'C')
+	if (c == 'F' || c == 'E' || c == '0' || c == 'P' || c == 'C' || c == 'N'
+		|| c == 'B')
 		ft_load_walking_path(mlx, x, y);
 	if (c == '1')
 		ft_load_wall(mlx, x, y);
@@ -86,6 +90,12 @@ void	ft_put_loaded_image(mlx_t *mlx, char c, int x, int y)
 		ft_load_pickitup(mlx, x, y, 'H');
 	if (c == 'E')
 		ft_load_exit(mlx, x, y, 'J');
+	if (c == 'F')
+		ft_load_enemy(mlx, x, y, 'T');
+	if (c == 'N')
+		ft_l_e2(mlx, x, y, 'K');
+	if (c == 'B')
+		ft_l_e3(mlx, x, y, 'Z');
 	if (c == 'P')
 		ft_load_player(mlx, x, y, 'X');
 }

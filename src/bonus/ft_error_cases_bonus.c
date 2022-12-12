@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_error_cases.c                                   :+:      :+:    :+:   */
+/*   ft_error_cases_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 12:18:07 by zstenger          #+#    #+#             */
-/*   Updated: 2022/12/12 12:49:09 by zstenger         ###   ########.fr       */
+/*   Updated: 2022/12/12 12:48:11 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/so_long.h"
+#include "../../includes/so_long_bonus.h"
 
 bool	ft_wrong_input(int argc, char **argv)
 {
@@ -45,7 +45,7 @@ char	ft_error_types(char *argv)
 	else if (error_type == 'I')
 		ft_printf("\e[1;4;31mError!\e[0m\n"
 			"\e[4;33mInvalid char/'s in the map!\e[0m\n"
-			"\e[1;4;34mValid chars: 0, 1, P, E and C.\e[0m\n");
+			"\e[1;4;34mValid chars: 0, 1, P, E, C, F, B and N.\e[0m\n");
 	else if (ft_error_types2(argv) != 1)
 	{
 		ft_printf("\e[1;4;32mThe map is valid and ready to launch!\e[0m\n");
@@ -68,6 +68,9 @@ char	ft_error_types2(char *argv)
 	else if (error_type == 'A')
 		ft_printf("\e[1;4;31mError!\e[0m\n"
 			"\e[4;33mMemory allocation failed!\e[0m\n");
+	else if (error_type == 'L')
+		ft_printf("\e[1;4;31mError!\e[0m\n"
+			"\e[4;33mCan't be more or less enemy per type than one!\e[0m\n");
 	else if (error_type == 'Q')
 		ft_printf("\e[1;4;31mError!\e[0m\n"
 			"\e[4;33mCan't collect everything!\e[0m\n");

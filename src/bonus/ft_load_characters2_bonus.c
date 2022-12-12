@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_load_characters2.c                              :+:      :+:    :+:   */
+/*   ft_load_characters2_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 13:30:55 by zstenger          #+#    #+#             */
-/*   Updated: 2022/12/09 14:53:07 by zstenger         ###   ########.fr       */
+/*   Updated: 2022/12/12 10:50:56 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/so_long.h"
+#include "../../includes/so_long_bonus.h"
 
 char	ft_l_e3(mlx_t *mlx, int x, int y, char keytype)
 {

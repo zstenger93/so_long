@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_enemy_location.c                                :+:      :+:    :+:   */
+/*   ft_enemy_location_bonus.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 19:18:35 by zstenger          #+#    #+#             */
-/*   Updated: 2022/12/08 09:56:34 by zstenger         ###   ########.fr       */
+/*   Updated: 2022/12/12 10:51:11 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/so_long.h"
+#include "../../includes/so_long_bonus.h"
 
 char	ft_enemy_location(mlx_image_t *element)
 {

@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_load_characters.c                               :+:      :+:    :+:   */
+/*   ft_load_characters_bonus.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 19:10:04 by zstenger          #+#    #+#             */
-/*   Updated: 2022/12/11 19:45:10 by zstenger         ###   ########.fr       */
+/*   Updated: 2022/12/12 10:51:03 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/so_long.h"
+#include "../../includes/so_long_bonus.h"
 
 char	ft_load_enemy(mlx_t *mlx, int x, int y, char keytype)
 {

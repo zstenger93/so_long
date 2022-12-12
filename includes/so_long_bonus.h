@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.h                                          :+:      :+:    :+:   */
+/*   so_long_bonus.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 15:06:49 by zstenger          #+#    #+#             */
-/*   Updated: 2022/12/12 13:12:45 by zstenger         ###   ########.fr       */
+/*   Updated: 2022/12/12 12:35:49 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SO_LONG_H
-# define SO_LONG_H
+#ifndef SO_LONG_BONUS_H
+# define SO_LONG_BONUS_H
 
 # include "../MLX42/include/MLX42/MLX42.h"
 # include "../libft/libft.h"
@@ -71,6 +71,8 @@ char		ft_have_walls(int fd, size_t *length, size_t *row, size_t count);
 char		ft_last_line(char *line, char *lineb, size_t *length, size_t count);
 char		ft_map_have_all_elements(int fd, char ext, char pick, char plyr);
 char		ft_map_element_check(char c, char *plyr, char *pick, char *ext);
+char		ft_map_have_all_enemies(int fd, char n, char f, char b);
+char		ft_map_enemies_check(char c, char *n, char *f, char *b);
 //CHECK VALID PATH TO THE EXIT AND ALL THE COLLECTIBLES with DFS
 char		ft_map_validpath(char *argv, size_t rows, size_t columns, int fd);
 void		ft_get_player(char **map, size_t *x, size_t *y, size_t columns);
@@ -89,21 +91,43 @@ void		ft_load_wall(mlx_t *mlx, int x, int y);
 void		ft_load_pickitup(mlx_t *mlx, int x, int y, char keytype);
 void		ft_load_exit(mlx_t *mlx, int x, int y, char keytype);
 char		ft_load_player(mlx_t *mlx, int x, int y, char keytype);
-//HOOK
+char		ft_load_enemy(mlx_t *mlx, int x, int y, char keytype);
+char		ft_l_e2(mlx_t *mlx, int x, int y, char keytype);
+char		ft_l_e3(mlx_t *mlx, int x, int y, char keytype);
+//HOOKS
 void		ft_player_hook(void *mlx);
+void		ft_enemy_hook(void *mlx);
 //PLAYERMOVEMENTS
 void		ft_player_movement(mlx_t *mlx, t_image *img);
+//ENEMY MOVEMENTS
+void		ft_enemy_movement(mlx_t *mlx, t_image *img);
+void		ft_move_enemy(mlx_t *mlx, t_image *img);
+void		ft_move_enemy_w(mlx_t *mlx, t_image *img);
+void		ft_move_enemy_s(mlx_t *mlx, t_image *img);
+void		ft_move_enemy_a(mlx_t *mlx, t_image *img);
+void		ft_move_enemy_d(mlx_t *mlx, t_image *img);
 //PLAYER LOCATION CHECKS
 char		ft_player_location(mlx_image_t *element, char mapelement);
 char		ft_is_wall(int x, int y, mlx_instance_t *element_ins, char maplmnt);
 char		ft_isit_pickable(mlx_instance_t *element_ins, char mapelement);
+char		ft_isit_norminette(char mapelement);
 char		ft_can_we_exit(void);
-//IMAGES TO LOAD CASE OF WINNING
+//ENEMY LOCATION CHECKS
+char		ft_enemy_location(mlx_image_t *element);
+void		ft_wall_enemy(int x_m, int y_m, mlx_instance_t *element_ins);
+char		ft_enemy2_location(mlx_image_t *element);
+void		ft_wall_enemy2(int x_m, int y_m, mlx_instance_t *element_ins);
+char		ft_enemy3_location(mlx_image_t *element);
+void		ft_wall_enemy3(int x_m, int y_m, mlx_instance_t *element_ins);
+//IMAGES TO LOAD CASE OF LOSING OR WINNING
+void		ft_load_failure(mlx_t *mlx, int x, int y);
 void		ft_load_victory(mlx_t *mlx, int x, int y);
 //DISABLE ALL OTHER IMAGES
 void		ft_images_disabled(void);
 //PRINT MOVEMENT TO THE TERMINAL
 char		ft_move_and_count(mlx_t *mlx, t_image *img);
+//PUT THE MOVEMENT ON THE SCREEN
+void		ft_moves_to_window(mlx_t *mlx);
 //NULL SETTING MLX, IMAGES NAD TEXTURES
 mlx_t		*gset_mlx(mlx_t *mlx_to_null);
 t_texture	*gset_tex(t_texture *tex_to_null);

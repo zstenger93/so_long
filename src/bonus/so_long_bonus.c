@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.c                                          :+:      :+:    :+:   */
+/*   so_long_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 12:10:50 by zstenger          #+#    #+#             */
-/*   Updated: 2022/12/12 13:01:44 by zstenger         ###   ########.fr       */
+/*   Updated: 2022/12/12 12:08:29 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/so_long.h"
+#include "../../includes/so_long_bonus.h"
 
 int	main(int argc, char **argv)
 {
@@ -29,6 +29,7 @@ int	main(int argc, char **argv)
 	gset_tex(&tex);
 	ft_make_map(mlx, argv[1]);
 	mlx_loop_hook(mlx, ft_player_hook, mlx);
+	mlx_loop_hook(mlx, ft_enemy_hook, mlx);
 	mlx_loop(mlx);
 	mlx_terminate(mlx);
 	return (EXIT_SUCCESS);
@@ -99,6 +100,9 @@ void	ft_images_disabled(void)
 	img = gset_img(NULL);
 	img->player->enabled = false;
 	img->pickitup->enabled = false;
+	img->enemy->enabled = false;
+	img->enemy2->enabled = false;
+	img->enemy3->enabled = false;
 	img->wall->enabled = false;
 	img->exit->enabled = false;
 	img->walking_path->enabled = false;
