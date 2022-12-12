@@ -59,12 +59,29 @@ Feel free to ask me anything on slack.
 > - Creating the new imgages we will use with `ft_make_new_images`.
 ### 5th step:
 > - Creating the actual map we will see in the window with `ft_make_map`.
+> - Putting the loaded images with `ft_put_loaded_image` where we tell it each should be 32*32 pixel
+> - Inside of `ft_put_loaded_image` we call each image loading function depending on the map element
+> - If it's `P`, `0`, `C`, `E` elements, I load the `walking_path` as well 
+> - In case of bonus I do the same with the enemies
+> - Also at the image loads I check `ft_player_location` where I compare a few things like:
+> - Wall, I guess you don't want to fall off of the map!
+> - If it's pickable, removes it from the map
+> - In bonus if it's norminette? -> death
+> - Other than that, for exit and activate it if there is nothing else to collect.
 ### 6th step:
 > - Opening the `mlx_loop_hook` for the game.
+> - It is open until the window is closed, this is where the game is playing.
+> - Here in the `ft_player_hook` we have the `ft_move_and count` and `ft_player_movement` functions.
+> - First is obvious, calculates the movement and prints it to the terminal.
+> - The latter controls the movement and the exit/coffee animations.
 ### 7th step:
 > - Using the `mlx_loop` function to deal with rendering and refreshing.
 ### 8th step:
 > - Calling `mlx_terminate` function when closing the window to clean up everything.
+### Sprite animation:
+> - I handle it in my `load` and `movement` functions in a very simplistic way.
+> - Everything moves when the player does.
+> - From the enemies 2 moves the oposite and one in the same direction, each has different speed.
 
 ---
 
