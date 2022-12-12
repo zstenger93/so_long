@@ -42,8 +42,29 @@ My approach was kinda different because I haven't used structs before so I haven
 but enough to learn the concept for future projects.
 Mainly used them for images, textures and the movement counter.
 I have 2 hooks, one for the player and one for the enemies because together my player was a bit laggy.
-	`Spaghetti ala zstenger, hope you're hungry.`
 Feel free to ask me anything on slack.
+`Spaghetti ala zstenger, hope you're hungry.`
+
+### 1st step:
+> - Checking for the input with `ft_wrong_input` when you try to run the program and if you included a `.ber` map as well
+### 2nd step:
+> - Checking the error cases on the provided map with `ft_error_types`.
+	> - Inside using `ft_map_validator` function where
+		> - we check for walls with `ft_have_walls`
+		> - `ft_map_have_all_elements` for the map elements and if they are correct or not
+		> - and finally `ft_map_validpath` to check if the exit and al the collectables are reachable.
+### 3rd step:
+> - Open a window which is the size of the map with `ft_open_mapsize_window`.
+### 4th step:
+> - Creating the new imgages we will use with `ft_make_new_images`.
+### 5th step:
+> - Creating the actual map we will see in the window with `ft_make_map`.
+### 6th step:
+> - Opening the `mlx_loop_hook` for the game.
+### 7th step:
+> - Using the `mlx_loop` function to deal with rendering and refreshing.
+### 8th step:
+> - Calling `mlx_terminate` function when closing the window to clean up everything.
 
 ---
 
@@ -160,11 +181,11 @@ Feel free to ask me anything on slack.
 ```shell
 $ make
 ```
-> - Run `make bonus` to compile the bonus version.
+> - Run `make bonus` to compile the bonus version eg:
 ```shell
 $ make bonus
 ```
-> - Or run commands from `make t` to `make t5` or `make tb` to `make tb5` to run the test right after compiling without any extra command.
+> - Or run commands from `make t` to `make t5` or `make tb` to `make tb5` to run the test right after compiling without any extra command eg:
 ```shell
 $ make tb2
 ```
