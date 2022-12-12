@@ -6,7 +6,7 @@
 #    By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/18 16:05:40 by zstenger          #+#    #+#              #
-#    Updated: 2022/12/12 13:14:55 by zstenger         ###   ########.fr        #
+#    Updated: 2022/12/12 14:07:58 by zstenger         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,7 +45,7 @@ BWhite = \033[1;37m
 
 all: $(NAME)
 
-# compiling so_long with the right flags
+# compiling so_long
 $(NAME):$(OBJS) $(GLFW3) $(LIBFT) $(MLX42)
 	@echo "$(YELLOW)Compiling: $(DEF_COLOR)$(CYAN)$(NAME)$(DEF_COLOR)"
 	@$(CC) $(CFLAGS) -o $(NAME) $(SRCS) \
@@ -96,6 +96,7 @@ $(GLFW3):
 	echo "$(GREEN)./MLX42/glfw_lib is installed.$(DEF_COLOR)"; \
 	fi
 
+# compiling so_long_bonus
 bonus: $(BONUS_NAME)
 
 $(BONUS_NAME):$(BONUS_OBJS) $(GLFW3) $(LIBFT) $(MLX42)
@@ -130,7 +131,7 @@ fclean:
 	rm -rf MLX42/glfw_lib/ MLX42/include/GLFW/
 	@echo "$(CYAN)MLX42, libft, so_long .o & .a files and GLFW has been removed.$(DEF_COLOR)"
 
-# for easier test running with different maps
+# for easier testing to run tests with different maps faster than the speed of light
 t: $(NAME)
 	@echo "$(RED)RUN TEST 1, LET THE GAME BEGIN!$(DEF_COLOR)"
 	./$(NAME) maps/map.ber
@@ -184,10 +185,11 @@ tb5: $(BONUS_NAME)
 re: fclean all
 	@echo "$(YELLOW)Project has been rebuilt!$(DEF_COLOR)"
 
-# removing and remaking only the so_long executable 
+# remaking only the so_long executable 
 tre: tclean $(BONUS_NAME)
 	@echo "$(YELLOW)so_long executable has been rebuilt!$(DEF_COLOR)"
 
+# removing only the the so_long executable
 tclean:
 	$(RM) $(BONUS_NAME)
 	@echo "$(YELLOW)so_long executable has been removed!$(DEF_COLOR)"
