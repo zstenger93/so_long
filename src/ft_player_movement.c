@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 19:13:31 by zstenger          #+#    #+#             */
-/*   Updated: 2022/12/12 12:59:23 by zstenger         ###   ########.fr       */
+/*   Updated: 2022/12/12 15:25:44 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,32 +91,4 @@ char	ft_isit_pickable(mlx_instance_t *element_ins, char mapelement)
 		return (ft_can_we_exit());
 	element_ins->enabled = false;
 	return (1);
-}
-
-void	ft_move_player_w(mlx_t *mlx, t_image *img)
-{
-	img->player->instances[0].y -= 4;
-	ft_load_exit(mlx, 0, 0, 'W');
-	ft_load_pickitup(mlx, 0, 0, 'W');
-}
-
-void	ft_move_player_s(mlx_t *mlx, t_image *img)
-{
-	img->player->instances[0].y += 4;
-	ft_load_exit(mlx, 0, 0, 'S');
-	ft_load_pickitup(mlx, 0, 0, 'S');
-}
-
-void	ft_move_player_a(mlx_t *mlx, t_image *img)
-{
-	img->player->instances[0].x -= 4;
-	ft_load_exit(mlx, 0, 0, 'A');
-	ft_load_pickitup(mlx, 0, 0, 'A');
-}
-
-void	ft_move_player_d(mlx_t *mlx, t_image *img)
-{
-	img->player->instances[0].x += 4;
-	ft_load_exit(mlx, 0, 0, 'D');
-	ft_load_pickitup(mlx, 0, 0, 'D');
 }

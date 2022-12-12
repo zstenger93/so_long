@@ -6,11 +6,25 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 19:20:21 by zstenger          #+#    #+#             */
-/*   Updated: 2022/12/12 12:09:27 by zstenger         ###   ########.fr       */
+/*   Updated: 2022/12/12 15:25:24 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
+
+void	ft_player_hook(void *mlx)
+{
+	t_image		*img;
+
+	img = gset_img(NULL);
+	if (img->player->enabled == true)
+	{
+		ft_player_movement(mlx, img);
+		ft_move_and_count(mlx, img);
+	}
+	if (mlx_is_key_down(mlx, MLX_KEY_ESCAPE))
+		mlx_close_window(mlx);
+}
 
 t_image	*gset_img(t_image *img_to_null)
 {
@@ -37,46 +51,6 @@ mlx_t	*gset_mlx(mlx_t *mlx_to_null)
 	if (mlx_to_null != NULL)
 		mlx = mlx_to_null;
 	return (mlx);
-}
-
-char	ft_map_have_all_enemies(int fd, char n, char f, char b)
-{
-	size_t	length;
-	size_t	count;
-	char	*line;
-	char	linecopy;
-
-	line = get_next_line(fd);
-	length = ft_gnlinelen(line);
-	while (line)
-	{
-		count = 0;
-		while (count < length)
-		{
-			linecopy = line[count++];
-			if (ft_map_enemies_check(linecopy, &n, &f, &b) == 'I')
-				return ('I');
-		}
-		free(line);
-		line = get_next_line(fd);
-	}
-	if (!f || !n || !b || f > 1 || n > 1 || b > 1)
-		return ('L');
-	return (0);
-}
-
-char	ft_map_enemies_check(char c, char *n, char *f, char *b)
-{
-	if (c == 'N')
-		(*n)++;
-	else if (c == 'F')
-		(*f)++;
-	else if (c == 'B')
-		(*b)++;
-	else if (c != '1' && c != '0' && c != '\n' && c != 'P' && c != 'E'
-		&& c != 'C')
-		return ('I');
-	return (0);
 }
 
 /*

@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 15:06:49 by zstenger          #+#    #+#             */
-/*   Updated: 2022/12/12 13:12:45 by zstenger         ###   ########.fr       */
+/*   Updated: 2022/12/12 14:46:01 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ typedef struct s_texture
 	mlx_texture_t	*enemy3;
 }	t_texture;
 
-//IMAGES WE WILL SHOW IN THE WINDOW AND MOVE FOR MEVEMENT COUNT
+//IMAGES WE WILL SHOW IN THE WINDOW AND MOVE FOR MOVEMENT COUNT
 typedef struct s_image
 {
 	mlx_image_t	*move;
@@ -93,6 +93,10 @@ char		ft_load_player(mlx_t *mlx, int x, int y, char keytype);
 void		ft_player_hook(void *mlx);
 //PLAYERMOVEMENTS
 void		ft_player_movement(mlx_t *mlx, t_image *img);
+void		ft_move_player_w(mlx_t *mlx, t_image *img);
+void		ft_move_player_s(mlx_t *mlx, t_image *img);
+void		ft_move_player_a(mlx_t *mlx, t_image *img);
+void		ft_move_player_d(mlx_t *mlx, t_image *img);
 //PLAYER LOCATION CHECKS
 char		ft_player_location(mlx_image_t *element, char mapelement);
 char		ft_is_wall(int x, int y, mlx_instance_t *element_ins, char maplmnt);

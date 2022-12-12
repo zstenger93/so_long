@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 15:06:49 by zstenger          #+#    #+#             */
-/*   Updated: 2022/12/12 12:35:49 by zstenger         ###   ########.fr       */
+/*   Updated: 2022/12/12 14:38:53 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ typedef struct s_texture
 	mlx_texture_t	*enemy3;
 }	t_texture;
 
-//IMAGES WE WILL SHOW IN THE WINDOW AND MOVE FOR MEVEMENT COUNT
+//IMAGES WE WILL SHOW IN THE WINDOW AND MOVE FOR MOVEMENT COUNT
 typedef struct s_image
 {
 	mlx_image_t	*move;
@@ -100,7 +100,6 @@ void		ft_enemy_hook(void *mlx);
 //PLAYERMOVEMENTS
 void		ft_player_movement(mlx_t *mlx, t_image *img);
 //ENEMY MOVEMENTS
-void		ft_enemy_movement(mlx_t *mlx, t_image *img);
 void		ft_move_enemy(mlx_t *mlx, t_image *img);
 void		ft_move_enemy_w(mlx_t *mlx, t_image *img);
 void		ft_move_enemy_s(mlx_t *mlx, t_image *img);

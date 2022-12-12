@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 19:10:04 by zstenger          #+#    #+#             */
-/*   Updated: 2022/12/12 10:51:03 by zstenger         ###   ########.fr       */
+/*   Updated: 2022/12/12 15:19:35 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ char	ft_l_e2(mlx_t *mlx, int x, int y, char keytype)
 
 	tex = gset_tex(NULL);
 	img = gset_img(NULL);
-	if (keytype == 'W' || keytype == 'S')
+	if (keytype == 'W')
 		tex->enemy2 = mlx_load_png("png/norminette_blue_u.png");
 	if (keytype == 'S')
 		tex->enemy2 = mlx_load_png("png/norminette_blue_d.png");

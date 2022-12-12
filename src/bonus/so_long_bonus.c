@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 12:10:50 by zstenger          #+#    #+#             */
-/*   Updated: 2022/12/12 12:08:29 by zstenger         ###   ########.fr       */
+/*   Updated: 2022/12/12 15:23:48 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int	main(int argc, char **argv)
 	mlx_loop_hook(mlx, ft_enemy_hook, mlx);
 	mlx_loop(mlx);
 	mlx_terminate(mlx);
+	system("leaks so_long_bonus");
 	return (EXIT_SUCCESS);
 }
 

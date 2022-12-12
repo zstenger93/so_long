@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 19:10:04 by zstenger          #+#    #+#             */
-/*   Updated: 2022/12/12 12:53:49 by zstenger         ###   ########.fr       */
+/*   Updated: 2022/12/12 15:25:47 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,16 +41,30 @@ char	ft_load_player(mlx_t *mlx, int x, int y, char keytype)
 	return (ft_player_location(img->wall, '1'));
 }
 
-void	ft_player_hook(void *mlx)
+void	ft_move_player_w(mlx_t *mlx, t_image *img)
 {
-	t_image		*img;
+	img->player->instances[0].y -= 4;
+	ft_load_exit(mlx, 0, 0, 'W');
+	ft_load_pickitup(mlx, 0, 0, 'W');
+}
 
-	img = gset_img(NULL);
-	if (img->player->enabled == true)
-	{
-		ft_player_movement(mlx, img);
-		ft_move_and_count(mlx, img);
-	}
-	if (mlx_is_key_down(mlx, MLX_KEY_ESCAPE))
-		mlx_close_window(mlx);
+void	ft_move_player_s(mlx_t *mlx, t_image *img)
+{
+	img->player->instances[0].y += 4;
+	ft_load_exit(mlx, 0, 0, 'S');
+	ft_load_pickitup(mlx, 0, 0, 'S');
+}
+
+void	ft_move_player_a(mlx_t *mlx, t_image *img)
+{
+	img->player->instances[0].x -= 4;
+	ft_load_exit(mlx, 0, 0, 'A');
+	ft_load_pickitup(mlx, 0, 0, 'A');
+}
+
+void	ft_move_player_d(mlx_t *mlx, t_image *img)
+{
+	img->player->instances[0].x += 4;
+	ft_load_exit(mlx, 0, 0, 'D');
+	ft_load_pickitup(mlx, 0, 0, 'D');
 }
