@@ -146,6 +146,7 @@ Feel free to ask me anything on slack.
 > - unzip and moves GLFW to the right directory
 > - compiles so_long
 > - in case the right make option, runs the program right after
+![run](https://media4.giphy.com/media/pZISzrkzYha50THHc5/giphy.gif?cid=790b76116c6215c75f7acbe135c7dc1093b7458ce935622c&rid=giphy.gif&ct=g)
 
 ---
 
