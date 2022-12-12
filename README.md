@@ -87,12 +87,12 @@ Feel free to ask me anything on slack.
 
 > _This project is a very small 2D game._
 
-	1111111111111111111111111111111111
+	```1111111111111111111111111111111111
 	1E0000000000B00C00000C0000N0000001
 	1010010100100000101001000000010101
 	1010010010101010001001000000010101
 	1P0000000C00C000F000000000000000C1
-	1111111111111111111111111111111111
+	1111111111111111111111111111111111```
 
 ---
 
@@ -146,6 +146,7 @@ Feel free to ask me anything on slack.
 > - unzip and moves GLFW to the right directory
 > - compiles so_long
 > - in case the right make option, runs the program right after
+
 ![run](https://media4.giphy.com/media/pZISzrkzYha50THHc5/giphy.gif?cid=790b76116c6215c75f7acbe135c7dc1093b7458ce935622c&rid=giphy.gif&ct=g)
 
 ---
