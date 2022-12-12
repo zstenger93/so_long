@@ -38,6 +38,8 @@
 
 For more 42 projects [**visit my repository**](https://github.com/zstenger93).
 
+![42](https://media1.giphy.com/media/gbnrIActVDTKljeCrd/giphy.gif?cid=790b7611d7da81e2b3f02e67f5c235528dd1c3d96f69bcdd&rid=giphy.gif&ct=g)
+
 My approach was kinda different because I haven't used structs before so I haven't used much of them,
 but enough to learn the concept for future projects.
 Mainly used them for images, textures and the movement counter.
