@@ -60,7 +60,7 @@ Feel free to ask me anything on slack.
 [EXIT] = ESC
 
 ### How to build a map 🗺 :
-
+```
 '0' = WALKING_PATH
 
 '1' = WALL
@@ -76,7 +76,7 @@ Feel free to ask me anything on slack.
 'F' = NORMINETTE2 (only with bonus)
 
 'B' = NORMINETTE3 (only with bonus)
-
+```
 > _This project is a very small 2D game._
 
 	1111111111111
@@ -87,12 +87,12 @@ Feel free to ask me anything on slack.
 
 > _This project is a very small 2D game._
 
-	```1111111111111111111111111111111111
+	1111111111111111111111111111111111
 	1E0000000000B00C00000C0000N0000001
 	1010010100100000101001000000010101
 	1010010010101010001001000000010101
 	1P0000000C00C000F000000000000000C1
-	1111111111111111111111111111111111```
+	1111111111111111111111111111111111
 
 ---
 
