@@ -40,7 +40,7 @@ My approach was kinda different because I haven't used structs before so I haven
 but enough to learn the concept for future projects.
 Mainly used them for images, textures and the movement counter.
 I have 2 hooks, one for the player and one for the enemies because together my player was a bit laggy.
-`Spaghetti ala zstenger, hope you're hungry.`
+	`Spaghetti ala zstenger, hope you're hungry.`
 Feel free to ask me anything on slack.
 
 ---
@@ -48,7 +48,7 @@ Feel free to ask me anything on slack.
 ## 🛠️ How to play and make different maps:
 
 ### Keys for qwerty keyboard ⌥ :
-```
+
 `[FORWARD] = W`
 
 `[GO_LEFT] = A`
@@ -58,9 +58,9 @@ Feel free to ask me anything on slack.
 `[BACKWARD] = S`
 
 `[EXIT] = ESC`
-```
+
 ### How to build a map 🗺 :
-```
+
 `'0' = WALKING_PATH`
 
 `'1' = WALL`
@@ -76,7 +76,7 @@ Feel free to ask me anything on slack.
 `'F' = NORMINETTE2` (only with bonus)
 
 `'B' = NORMINETTE3` (only with bonus)
-```
+
 > _Mandatory map example._
 
 	1111111111111
