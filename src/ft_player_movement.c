@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 19:13:31 by zstenger          #+#    #+#             */
-/*   Updated: 2022/12/13 11:27:54 by zstenger         ###   ########.fr       */
+/*   Updated: 2022/12/13 13:48:52 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ char	ft_player_location(mlx_image_t *element, char mapelement)
 		else
 			x_m = 30;
 		if (ins[amount].y < img->player->instances->y)
-			y_m = 30;
+			y_m = 32;
 		else
 			y_m = 30;
 		if (fabs((float)(ins[amount].x - img->player->instances->x)) < x_m)
@@ -75,13 +75,13 @@ char	ft_is_wall(int x_m, int y_m, mlx_instance_t *element_ins, char maplmnt)
 	img = null_set_img(NULL);
 	player_ins = img->player->instances;
 	if (!(fabs((float)((element_ins->x + 14) - player_ins->x)) < x_m))
-		player_ins->x -= 2;
+		player_ins->x -= 3;
 	if (!(fabs((float)(element_ins->x - (player_ins->x + 14))) < x_m))
-		player_ins->x += 2;
+		player_ins->x += 3;
 	if (!(fabs((float)((element_ins->y + 12) - player_ins->y)) < y_m))
-		player_ins->y -= 2;
+		player_ins->y -= 3;
 	if (!(fabs((float)(element_ins->y - (player_ins->y + 12))) < y_m))
-		player_ins->y += 2;
+		player_ins->y += 3;
 	return (0);
 }
 
