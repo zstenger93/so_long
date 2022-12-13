@@ -6,7 +6,7 @@
 #    By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/18 16:05:40 by zstenger          #+#    #+#              #
-#    Updated: 2022/12/12 14:07:58 by zstenger         ###   ########.fr        #
+#    Updated: 2022/12/13 11:04:57 by zstenger         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,9 +18,9 @@ CFLAGS = -Wall -Wextra -Werror
 LIBFT = libft/libft.a
 MLX42 = MLX42/libmlx42.a
 GLFW3 = MLX42/glfw_lib/libglfw3.a
-SRCS = src/so_long.c src/ft_so_long_utils.c src/ft_dfs_utils.c \
+SRCS = src/so_long.c src/ft_dfs_utils.c src/ft_error_cases.c \
 		src/ft_load_character.c src/ft_load_elements.c src/ft_make_map.c \
-		src/ft_map_validator.c src/ft_player_movement.c src/ft_error_cases.c \
+		src/ft_map_validator.c src/ft_player_movement.c
 
 OBJS = $(SRCS:.c=.o)
 

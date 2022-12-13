@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 19:18:35 by zstenger          #+#    #+#             */
-/*   Updated: 2022/12/12 10:51:11 by zstenger         ###   ########.fr       */
+/*   Updated: 2022/12/13 11:42:10 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	ft_enemy_location(mlx_image_t *element)
 	int				y_m;
 	int				amount;
 
-	img = gset_img(NULL);
+	img = null_set_img(NULL);
 	ins = element->instances;
 	amount = 0;
 	while (amount < element->count)
@@ -46,7 +46,7 @@ void	ft_wall_enemy(int x_m, int y_m, mlx_instance_t *element_ins)
 	mlx_instance_t	*enemy_ins;
 	t_image			*img;
 
-	img = gset_img(NULL);
+	img = null_set_img(NULL);
 	enemy_ins = img->enemy->instances;
 	if (!(fabs((float)((element_ins->x + 6) - enemy_ins->x)) < x_m))
 		enemy_ins->x -= 5;
@@ -66,7 +66,7 @@ char	ft_enemy2_location(mlx_image_t *element)
 	int				y_m;
 	int				amount;
 
-	img = gset_img(NULL);
+	img = null_set_img(NULL);
 	ins = element->instances;
 	amount = 0;
 	while (amount < element->count)
@@ -92,7 +92,7 @@ void	ft_wall_enemy2(int x_m, int y_m, mlx_instance_t *element_ins)
 	mlx_instance_t	*enemy_ins;
 	t_image			*img;
 
-	img = gset_img(NULL);
+	img = null_set_img(NULL);
 	enemy_ins = img->enemy2->instances;
 	if (!(fabs((float)((element_ins->x + 6) - enemy_ins->x)) < x_m))
 		enemy_ins->x -= 5;

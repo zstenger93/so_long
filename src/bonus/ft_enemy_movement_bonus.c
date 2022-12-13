@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 19:21:51 by zstenger          #+#    #+#             */
-/*   Updated: 2022/12/12 15:16:49 by zstenger         ###   ########.fr       */
+/*   Updated: 2022/12/13 11:19:05 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void	ft_move_enemy_w(mlx_t *mlx, t_image *img)
 	img->enemy3->instances->y += 5;
 	ft_load_exit(mlx, 0, 0, 'W');
 	ft_load_pickitup(mlx, 0, 0, 'W');
+	ft_load_walking_path(mlx, 0, 0, 'W');
 }
 
 void	ft_move_enemy_s(mlx_t *mlx, t_image *img)
@@ -56,6 +57,7 @@ void	ft_move_enemy_s(mlx_t *mlx, t_image *img)
 	img->enemy3->instances->y -= 5;
 	ft_load_exit(mlx, 0, 0, 'S');
 	ft_load_pickitup(mlx, 0, 0, 'S');
+	ft_load_walking_path(mlx, 0, 0, 'S');
 }
 
 void	ft_move_enemy_a(mlx_t *mlx, t_image *img)
@@ -65,6 +67,7 @@ void	ft_move_enemy_a(mlx_t *mlx, t_image *img)
 	img->enemy3->instances->x += 5;
 	ft_load_exit(mlx, 0, 0, 'A');
 	ft_load_pickitup(mlx, 0, 0, 'A');
+	ft_load_walking_path(mlx, 0, 0, 'A');
 }
 
 void	ft_move_enemy_d(mlx_t *mlx, t_image *img)
@@ -74,4 +77,5 @@ void	ft_move_enemy_d(mlx_t *mlx, t_image *img)
 	img->enemy3->instances->x -= 5;
 	ft_load_exit(mlx, 0, 0, 'D');
 	ft_load_pickitup(mlx, 0, 0, 'D');
+	ft_load_walking_path(mlx, 0, 0, 'D');
 }

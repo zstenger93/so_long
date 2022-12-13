@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 12:19:44 by zstenger          #+#    #+#             */
-/*   Updated: 2022/12/12 11:26:44 by zstenger         ###   ########.fr       */
+/*   Updated: 2022/12/13 11:14:27 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void	ft_put_loaded_image(mlx_t *mlx, char c, int x, int y)
 {
 	if (c == 'F' || c == 'E' || c == '0' || c == 'P' || c == 'C' || c == 'N'
 		|| c == 'B')
-		ft_load_walking_path(mlx, x, y);
+		ft_load_walking_path(mlx, x, y, 'Q');
 	if (c == '1')
 		ft_load_wall(mlx, x, y);
 	if (c == 'C')

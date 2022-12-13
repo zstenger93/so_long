@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 13:30:55 by zstenger          #+#    #+#             */
-/*   Updated: 2022/12/12 15:19:13 by zstenger         ###   ########.fr       */
+/*   Updated: 2022/12/13 11:37:38 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ char	ft_l_e3(mlx_t *mlx, int x, int y, char keytype)
 	t_texture	*tex;
 	t_image		*img;
 
-	tex = gset_tex(NULL);
-	img = gset_img(NULL);
+	tex = null_set_tex(NULL);
+	img = null_set_img(NULL);
 	if (keytype == 'W')
 		tex->enemy3 = mlx_load_png("png/norminette_brown_d.png");
 	if (keytype == 'S')
@@ -49,7 +49,7 @@ char	ft_enemy3_location(mlx_image_t *element)
 	int				y_m;
 	int				amount;
 
-	img = gset_img(NULL);
+	img = null_set_img(NULL);
 	ins = element->instances;
 	amount = 0;
 	while (amount < element->count)
@@ -75,7 +75,7 @@ void	ft_wall_enemy3(int x_m, int y_m, mlx_instance_t *element_ins)
 	mlx_instance_t	*enemy_ins;
 	t_image			*img;
 
-	img = gset_img(NULL);
+	img = null_set_img(NULL);
 	enemy_ins = img->enemy3->instances;
 	if (!(fabs((float)((element_ins->x + 6) - enemy_ins->x)) < x_m))
 		enemy_ins->x -= 5;

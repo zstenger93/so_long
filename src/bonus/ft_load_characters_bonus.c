@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 19:10:04 by zstenger          #+#    #+#             */
-/*   Updated: 2022/12/12 15:19:35 by zstenger         ###   ########.fr       */
+/*   Updated: 2022/12/13 11:37:21 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ char	ft_load_enemy(mlx_t *mlx, int x, int y, char keytype)
 	t_texture	*tex;
 	t_image		*img;
 
-	tex = gset_tex(NULL);
-	img = gset_img(NULL);
+	tex = null_set_tex(NULL);
+	img = null_set_img(NULL);
 	if (keytype == 'W')
 		tex->enemy = mlx_load_png("png/norminette_d.png");
 	if (keytype == 'S')
@@ -46,8 +46,8 @@ char	ft_l_e2(mlx_t *mlx, int x, int y, char keytype)
 	t_texture	*tex;
 	t_image		*img;
 
-	tex = gset_tex(NULL);
-	img = gset_img(NULL);
+	tex = null_set_tex(NULL);
+	img = null_set_img(NULL);
 	if (keytype == 'W')
 		tex->enemy2 = mlx_load_png("png/norminette_blue_u.png");
 	if (keytype == 'S')
@@ -75,8 +75,8 @@ char	ft_load_player(mlx_t *mlx, int x, int y, char keytype)
 	t_texture	*tex;
 	t_image		*img;
 
-	tex = gset_tex(NULL);
-	img = gset_img(NULL);
+	tex = null_set_tex(NULL);
+	img = null_set_img(NULL);
 	if (keytype == 'W')
 		tex->player = mlx_load_png("png/player_u.png");
 	else if (keytype == 'S')
@@ -103,7 +103,7 @@ void	ft_player_hook(void *mlx)
 {
 	t_image		*img;
 
-	img = gset_img(NULL);
+	img = null_set_img(NULL);
 	if (img->player->enabled == true)
 	{
 		ft_player_movement(mlx, img);
@@ -118,7 +118,7 @@ void	ft_enemy_hook(void *mlx)
 {
 	t_image	*img;
 
-	img = gset_img(NULL);
+	img = null_set_img(NULL);
 	if (img->enemy->enabled == true && img->enemy2->enabled == true
 		&& img->enemy3->enabled == true)
 		ft_move_enemy(mlx, img);

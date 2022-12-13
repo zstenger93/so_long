@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 19:13:31 by zstenger          #+#    #+#             */
-/*   Updated: 2022/12/12 15:25:44 by zstenger         ###   ########.fr       */
+/*   Updated: 2022/12/13 11:27:54 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,22 +17,22 @@ void	ft_player_movement(mlx_t *mlx, t_image *img)
 	if (mlx_is_key_down(mlx, MLX_KEY_W))
 	{
 		if (ft_load_player(mlx, 0, 0, 'W') == 1)
-			ft_move_player_w(mlx, img);
+			img->player->instances[0].y -= 4;
 	}
 	else if (mlx_is_key_down(mlx, MLX_KEY_S))
 	{
 		if (ft_load_player(mlx, 0, 0, 'S') == 1)
-			ft_move_player_s(mlx, img);
+			img->player->instances[0].y += 4;
 	}
 	else if (mlx_is_key_down(mlx, MLX_KEY_A))
 	{
 		if (ft_load_player(mlx, 0, 0, 'A') == 1)
-			ft_move_player_a(mlx, img);
+			img->player->instances[0].x -= 4;
 	}
 	else if (mlx_is_key_down(mlx, MLX_KEY_D))
 	{
 		if (ft_load_player(mlx, 0, 0, 'D') == 1)
-			ft_move_player_d(mlx, img);
+			img->player->instances[0].x += 4;
 	}
 }
 
@@ -44,7 +44,7 @@ char	ft_player_location(mlx_image_t *element, char mapelement)
 	int				y_m;
 	int				amount;
 
-	img = gset_img(NULL);
+	img = null_set_img(NULL);
 	ins = element->instances;
 	amount = 0;
 	while (amount < element->count)
@@ -72,7 +72,7 @@ char	ft_is_wall(int x_m, int y_m, mlx_instance_t *element_ins, char maplmnt)
 
 	if (maplmnt != '1')
 		return (ft_isit_pickable(element_ins, maplmnt));
-	img = gset_img(NULL);
+	img = null_set_img(NULL);
 	player_ins = img->player->instances;
 	if (!(fabs((float)((element_ins->x + 14) - player_ins->x)) < x_m))
 		player_ins->x -= 2;

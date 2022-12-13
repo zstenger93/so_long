@@ -6,13 +6,13 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 19:20:21 by zstenger          #+#    #+#             */
-/*   Updated: 2022/12/12 12:08:20 by zstenger         ###   ########.fr       */
+/*   Updated: 2022/12/13 11:39:40 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/so_long_bonus.h"
 
-t_image	*gset_img(t_image *img_to_null)
+t_image	*null_set_img(t_image *img_to_null)
 {
 	static t_image	*img;
 
@@ -21,7 +21,7 @@ t_image	*gset_img(t_image *img_to_null)
 	return (img);
 }
 
-t_texture	*gset_tex(t_texture *tex_to_null)
+t_texture	*null_set_tex(t_texture *tex_to_null)
 {
 	static t_texture	*tex;
 
@@ -30,7 +30,7 @@ t_texture	*gset_tex(t_texture *tex_to_null)
 	return (tex);
 }
 
-mlx_t	*gset_mlx(mlx_t *mlx_to_null)
+mlx_t	*null_set_mlx(mlx_t *mlx_to_null)
 {
 	static mlx_t	*mlx;
 

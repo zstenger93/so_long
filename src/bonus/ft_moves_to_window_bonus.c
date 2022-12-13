@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 13:04:00 by zstenger          #+#    #+#             */
-/*   Updated: 2022/12/12 10:50:50 by zstenger         ###   ########.fr       */
+/*   Updated: 2022/12/13 11:39:01 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	ft_moves_to_window(mlx_t *mlx)
 	static mlx_image_t	*tmp;
 
 	mlx_delete_image(mlx, tmp);
-	img = gset_img(NULL);
+	img = null_set_img(NULL);
 	moves = ft_itoa(img->move->count);
 	text = ft_nm_strjoin("Moves: ", moves);
 	tmp = mlx_put_string(mlx, text, 0, 0);

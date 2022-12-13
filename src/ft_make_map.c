@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 12:19:44 by zstenger          #+#    #+#             */
-/*   Updated: 2022/12/12 13:03:38 by zstenger         ###   ########.fr       */
+/*   Updated: 2022/12/13 11:00:14 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,9 +83,9 @@ void	ft_put_loaded_image(mlx_t *mlx, char c, int x, int y)
 	if (c == '1')
 		ft_load_wall(mlx, x, y);
 	if (c == 'C')
-		ft_load_pickitup(mlx, x, y, 'H');
+		ft_load_pickitup(mlx, x, y);
 	if (c == 'E')
-		ft_load_exit(mlx, x, y, 'J');
+		ft_load_exit(mlx, x, y);
 	if (c == 'P')
 		ft_load_player(mlx, x, y, 'X');
 }

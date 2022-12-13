@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 15:06:49 by zstenger          #+#    #+#             */
-/*   Updated: 2022/12/12 14:38:53 by zstenger         ###   ########.fr       */
+/*   Updated: 2022/12/13 11:37:53 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void		ft_make_new_images(mlx_t *mlx, t_image *img);
 //MAKE THE ACTUAL MAP YOU WILL SEE
 void		ft_make_map(mlx_t *mlx, char *map);
 void		ft_put_loaded_image(mlx_t *mlx, char c, int x, int y);
-void		ft_load_walking_path(mlx_t *mlx, int x, int y);
+void		ft_load_walking_path(mlx_t *mlx, int x, int y, char keytype);
 void		ft_load_wall(mlx_t *mlx, int x, int y);
 void		ft_load_pickitup(mlx_t *mlx, int x, int y, char keytype);
 void		ft_load_exit(mlx_t *mlx, int x, int y, char keytype);
@@ -128,8 +128,8 @@ char		ft_move_and_count(mlx_t *mlx, t_image *img);
 //PUT THE MOVEMENT ON THE SCREEN
 void		ft_moves_to_window(mlx_t *mlx);
 //NULL SETTING MLX, IMAGES NAD TEXTURES
-mlx_t		*gset_mlx(mlx_t *mlx_to_null);
-t_texture	*gset_tex(t_texture *tex_to_null);
-t_image		*gset_img(t_image *img_to_null);
+mlx_t		*null_set_mlx(mlx_t *mlx_to_null);
+t_texture	*null_set_tex(t_texture *tex_to_null);
+t_image		*null_set_img(t_image *img_to_null);
 
 #endif

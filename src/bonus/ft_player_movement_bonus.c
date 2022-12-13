@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 19:13:31 by zstenger          #+#    #+#             */
-/*   Updated: 2022/12/12 10:50:46 by zstenger         ###   ########.fr       */
+/*   Updated: 2022/12/13 11:43:21 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ char	ft_player_location(mlx_image_t *element, char mapelement)
 	int				y_m;
 	int				amount;
 
-	img = gset_img(NULL);
+	img = null_set_img(NULL);
 	ins = element->instances;
 	amount = 0;
 	while (amount < element->count)
@@ -72,7 +72,7 @@ char	ft_is_wall(int x_m, int y_m, mlx_instance_t *element_ins, char maplmnt)
 
 	if (maplmnt != '1')
 		return (ft_isit_pickable(element_ins, maplmnt));
-	img = gset_img(NULL);
+	img = null_set_img(NULL);
 	player_ins = img->player->instances;
 	if (!(fabs((float)((element_ins->x + 14) - player_ins->x)) < x_m))
 		player_ins->x -= 2;
@@ -99,10 +99,10 @@ char	ft_isit_norminette(char mapelement)
 
 	if (mapelement != 'F' && mapelement != 'N' && mapelement != 'B')
 		return (ft_can_we_exit());
-	img = gset_img(NULL);
+	img = null_set_img(NULL);
 	if ((mapelement == 'F' || mapelement == 'N' || mapelement == 'B')
 		&& img->player->enabled == true)
-		ft_load_failure(gset_mlx(NULL), 0, 0);
+		ft_load_failure(null_set_mlx(NULL), 0, 0);
 	ft_images_disabled();
 	return (1);
 }

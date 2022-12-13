@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 15:06:49 by zstenger          #+#    #+#             */
-/*   Updated: 2022/12/12 14:46:01 by zstenger         ###   ########.fr       */
+/*   Updated: 2022/12/13 11:25:44 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,9 @@ typedef struct s_texture
 	mlx_texture_t	*player;
 	mlx_texture_t	*exit;
 	mlx_texture_t	*victory_screen;
-	mlx_texture_t	*failure_screen;
 	mlx_texture_t	*wall;
 	mlx_texture_t	*pickitup;
 	mlx_texture_t	*walking_path;
-	mlx_texture_t	*enemy;
-	mlx_texture_t	*enemy2;
-	mlx_texture_t	*enemy3;
 }	t_texture;
 
 //IMAGES WE WILL SHOW IN THE WINDOW AND MOVE FOR MOVEMENT COUNT
@@ -45,13 +41,9 @@ typedef struct s_image
 	mlx_image_t	*player;
 	mlx_image_t	*exit;
 	mlx_image_t	*victory_screen;
-	mlx_image_t	*failure_screen;
 	mlx_image_t	*wall;
 	mlx_image_t	*pickitup;
 	mlx_image_t	*walking_path;
-	mlx_image_t	*enemy;
-	mlx_image_t	*enemy2;
-	mlx_image_t	*enemy3;
 }	t_image;
 
 //THIS TWO FOR PRINTING OUT THE MAP COLORIZED INTO THE TERMINAL
@@ -86,17 +78,13 @@ void		ft_make_map(mlx_t *mlx, char *map);
 void		ft_put_loaded_image(mlx_t *mlx, char c, int x, int y);
 void		ft_load_walking_path(mlx_t *mlx, int x, int y);
 void		ft_load_wall(mlx_t *mlx, int x, int y);
-void		ft_load_pickitup(mlx_t *mlx, int x, int y, char keytype);
-void		ft_load_exit(mlx_t *mlx, int x, int y, char keytype);
+void		ft_load_pickitup(mlx_t *mlx, int x, int y);
+void		ft_load_exit(mlx_t *mlx, int x, int y);
 char		ft_load_player(mlx_t *mlx, int x, int y, char keytype);
 //HOOK
 void		ft_player_hook(void *mlx);
 //PLAYERMOVEMENTS
 void		ft_player_movement(mlx_t *mlx, t_image *img);
-void		ft_move_player_w(mlx_t *mlx, t_image *img);
-void		ft_move_player_s(mlx_t *mlx, t_image *img);
-void		ft_move_player_a(mlx_t *mlx, t_image *img);
-void		ft_move_player_d(mlx_t *mlx, t_image *img);
 //PLAYER LOCATION CHECKS
 char		ft_player_location(mlx_image_t *element, char mapelement);
 char		ft_is_wall(int x, int y, mlx_instance_t *element_ins, char maplmnt);
@@ -109,8 +97,8 @@ void		ft_images_disabled(void);
 //PRINT MOVEMENT TO THE TERMINAL
 char		ft_move_and_count(mlx_t *mlx, t_image *img);
 //NULL SETTING MLX, IMAGES NAD TEXTURES
-mlx_t		*gset_mlx(mlx_t *mlx_to_null);
-t_texture	*gset_tex(t_texture *tex_to_null);
-t_image		*gset_img(t_image *img_to_null);
+mlx_t		*null_set_mlx(mlx_t *mlx_to_null);
+t_texture	*null_set_tex(t_texture *tex_to_null);
+t_image		*null_set_img(t_image *img_to_null);
 
 #endif
