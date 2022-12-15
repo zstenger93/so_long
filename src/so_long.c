@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 12:10:50 by zstenger          #+#    #+#             */
-/*   Updated: 2022/12/15 11:00:19 by zstenger         ###   ########.fr       */
+/*   Updated: 2022/12/15 12:59:39 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ void	ft_load_victory(mlx_t *mlx, int x, int y)
 {
 	t_texture	*tex;
 	t_image		*img;
+
 	tex = null_set_tex(NULL);
 	img = null_set_img(NULL);
 	tex->victory_screen = mlx_load_png("png/victory.png");
