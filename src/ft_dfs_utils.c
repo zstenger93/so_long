@@ -6,12 +6,13 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 19:02:46 by zstenger          #+#    #+#             */
-/*   Updated: 2022/12/11 18:51:24 by zstenger         ###   ########.fr       */
+/*   Updated: 2022/12/15 10:24:23 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
 
+// looks for player position row by row
 void	ft_get_player(char **map, size_t *x, size_t *y, size_t columns)
 {
 	char	player_position;
@@ -32,6 +33,7 @@ void	ft_get_player(char **map, size_t *x, size_t *y, size_t columns)
 	}
 }
 
+// checks if there is still E or C on the map
 char	ft_dfs_check(char **map, size_t x, size_t y, size_t rows)
 {
 	size_t	i;
@@ -50,6 +52,7 @@ char	ft_dfs_check(char **map, size_t x, size_t y, size_t rows)
 	return (0);
 }
 
+//depth first search, replacing everything on the map with X which isn't a wall
 int	ft_dfs(char **map, size_t x, size_t y, size_t rows)
 {
 	if (x < 1 || y < 1 || x >= ft_strlen(*map) || y > rows

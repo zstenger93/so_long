@@ -6,12 +6,18 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 12:10:50 by zstenger          #+#    #+#             */
-/*   Updated: 2022/12/13 11:30:57 by zstenger         ###   ########.fr       */
+/*   Updated: 2022/12/15 11:00:19 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
 
+/*
+file check, error check, open window, make images, nullset them
+make the map, open the hooks and run the game until something else happens
+loop to deal with rendering and refreshing the window
+terminate to clear up everything when the window is closed
+*/
 int	main(int argc, char **argv)
 {
 	mlx_t		*mlx;
@@ -62,7 +68,6 @@ void	ft_load_victory(mlx_t *mlx, int x, int y)
 {
 	t_texture	*tex;
 	t_image		*img;
-
 	tex = null_set_tex(NULL);
 	img = null_set_img(NULL);
 	tex->victory_screen = mlx_load_png("png/victory.png");
@@ -72,6 +77,7 @@ void	ft_load_victory(mlx_t *mlx, int x, int y)
 	mlx_set_instance_depth(img->victory_screen->instances, 8);
 	mlx_delete_texture(tex->victory_screen);
 	mlx_set_window_size(mlx, 389, 170);
+	mlx_set_window_pos(mlx, 1100, 650);
 	return ;
 }
 

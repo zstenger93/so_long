@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 19:13:31 by zstenger          #+#    #+#             */
-/*   Updated: 2022/12/13 13:48:52 by zstenger         ###   ########.fr       */
+/*   Updated: 2022/12/15 10:20:53 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,14 @@ void	ft_player_movement(mlx_t *mlx, t_image *img)
 	}
 }
 
+/*
+if the player isn't close to the wall the margin is 32 pixel,
+if it is close then the margin is 30 pixel.
+if example wall[i]_x - player_x is smaller than the margin (x_m)
+if it will be true for y as well and then checks the wall else
+checks the enxt coordinate.
+if-else -> left-right, up-down
+*/
 char	ft_player_location(mlx_image_t *element, char mapelement)
 {
 	t_image			*img;
@@ -52,11 +60,11 @@ char	ft_player_location(mlx_image_t *element, char mapelement)
 		if (ins[amount].x < img->player->instances->x)
 			x_m = 30;
 		else
-			x_m = 30;
+			x_m = 32;
 		if (ins[amount].y < img->player->instances->y)
-			y_m = 32;
-		else
 			y_m = 30;
+		else
+			y_m = 32;
 		if (fabs((float)(ins[amount].x - img->player->instances->x)) < x_m)
 			if (fabs((float)(ins[amount].y - img->player->instances->y)) < y_m)
 				return (ft_is_wall(x_m, y_m, ins + amount, mapelement));
@@ -65,6 +73,13 @@ char	ft_player_location(mlx_image_t *element, char mapelement)
 	return (1);
 }
 
+/*
+if the statement is true we are "in the wall" because I set the margin to
+30/32px in the previous function, then we will bounce back 3px from the wall
+1 right 2 left 3 bottom 4 upper wall
+wall[i].x/y 
+all element is 32x32px and a floating number
+*/
 char	ft_is_wall(int x_m, int y_m, mlx_instance_t *element_ins, char maplmnt)
 {
 	mlx_instance_t	*player_ins;
@@ -74,13 +89,13 @@ char	ft_is_wall(int x_m, int y_m, mlx_instance_t *element_ins, char maplmnt)
 		return (ft_isit_pickable(element_ins, maplmnt));
 	img = null_set_img(NULL);
 	player_ins = img->player->instances;
-	if (!(fabs((float)((element_ins->x + 14) - player_ins->x)) < x_m))
+	if ((fabs((float)((element_ins->x + 14) - player_ins->x)) > x_m))
 		player_ins->x -= 3;
-	if (!(fabs((float)(element_ins->x - (player_ins->x + 14))) < x_m))
+	if ((fabs((float)(element_ins->x - (player_ins->x + 14))) > x_m))
 		player_ins->x += 3;
-	if (!(fabs((float)((element_ins->y + 12) - player_ins->y)) < y_m))
+	if ((fabs((float)((element_ins->y + 12) - player_ins->y)) > y_m))
 		player_ins->y -= 3;
-	if (!(fabs((float)(element_ins->y - (player_ins->y + 12))) < y_m))
+	if ((fabs((float)(element_ins->y - (player_ins->y + 12))) > y_m))
 		player_ins->y += 3;
 	return (0);
 }

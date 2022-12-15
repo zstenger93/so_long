@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 15:06:49 by zstenger          #+#    #+#             */
-/*   Updated: 2022/12/13 11:25:44 by zstenger         ###   ########.fr       */
+/*   Updated: 2022/12/15 10:57:49 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # include <math.h>
 # include <stdbool.h>
 
-//TEXTURES WE WILL PUT ON THE IMAGES
+//TEXTURES WE WILL PUT ON THE DIFFERENT PNG'S
 typedef struct s_texture
 {
 	mlx_texture_t	*player;
@@ -96,7 +96,7 @@ void		ft_load_victory(mlx_t *mlx, int x, int y);
 void		ft_images_disabled(void);
 //PRINT MOVEMENT TO THE TERMINAL
 char		ft_move_and_count(mlx_t *mlx, t_image *img);
-//NULL SETTING MLX, IMAGES NAD TEXTURES
+//NULL SETTING MLX, IMAGES AND TEXTURES OR RETURN IT
 mlx_t		*null_set_mlx(mlx_t *mlx_to_null);
 t_texture	*null_set_tex(t_texture *tex_to_null);
 t_image		*null_set_img(t_image *img_to_null);

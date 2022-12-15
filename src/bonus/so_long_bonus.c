@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 12:10:50 by zstenger          #+#    #+#             */
-/*   Updated: 2022/12/13 11:41:42 by zstenger         ###   ########.fr       */
+/*   Updated: 2022/12/15 10:58:16 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ void	ft_load_failure(mlx_t *mlx, int x, int y)
 	mlx_set_instance_depth(img->failure_screen->instances, 8);
 	mlx_delete_texture(tex->failure_screen);
 	mlx_set_window_size(mlx, 389, 170);
+	mlx_set_window_pos(mlx, 1100, 650);
 	return ;
 }
 
@@ -90,6 +91,7 @@ void	ft_load_victory(mlx_t *mlx, int x, int y)
 	mlx_set_instance_depth(img->victory_screen->instances, 8);
 	mlx_delete_texture(tex->victory_screen);
 	mlx_set_window_size(mlx, 389, 170);
+	mlx_set_window_pos(mlx, 1100, 650);
 	return ;
 }
 
