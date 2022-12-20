@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 12:10:50 by zstenger          #+#    #+#             */
-/*   Updated: 2022/12/20 18:58:48 by zstenger         ###   ########.fr       */
+/*   Updated: 2022/12/20 19:57:18 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,12 @@ int	main(int argc, char **argv)
 	null_set_img(&img);
 	null_set_tex(&tex);
 	ft_make_map(mlx, argv[1]);
+	system("afplay src/bonus/music.mp3 &");
 	mlx_loop_hook(mlx, ft_player_hook, mlx);
 	mlx_loop_hook(mlx, ft_enemy_hook, mlx);
 	mlx_loop(mlx);
 	mlx_terminate(mlx);
+	system("killall afplay music.mp3 &");
 	return (EXIT_SUCCESS);
 }
 
