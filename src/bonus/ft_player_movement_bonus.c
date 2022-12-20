@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 19:13:31 by zstenger          #+#    #+#             */
-/*   Updated: 2022/12/13 11:43:21 by zstenger         ###   ########.fr       */
+/*   Updated: 2022/12/20 18:24:43 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,14 +52,14 @@ char	ft_player_location(mlx_image_t *element, char mapelement)
 		if (ins[amount].x < img->player->instances->x)
 			x_m = 30;
 		else
-			x_m = 30;
+			x_m = 32;
 		if (ins[amount].y < img->player->instances->y)
 			y_m = 30;
 		else
-			y_m = 30;
-		if (fabs((float)(ins[amount].x - img->player->instances->x)) < x_m)
-			if (fabs((float)(ins[amount].y - img->player->instances->y)) < y_m)
-				return (ft_is_wall(x_m, y_m, ins + amount, mapelement));
+			y_m = 32;
+		if (fabs((float)(ins[amount].x - img->player->instances->x)) < x_m
+			&& fabs((float)(ins[amount].y - img->player->instances->y)) < y_m)
+			return (ft_is_wall(x_m, y_m, ins + amount, mapelement));
 		amount++;
 	}
 	return (1);
@@ -74,19 +74,22 @@ char	ft_is_wall(int x_m, int y_m, mlx_instance_t *element_ins, char maplmnt)
 		return (ft_isit_pickable(element_ins, maplmnt));
 	img = null_set_img(NULL);
 	player_ins = img->player->instances;
-	if (!(fabs((float)((element_ins->x + 14) - player_ins->x)) < x_m))
-		player_ins->x -= 2;
-	if (!(fabs((float)(element_ins->x - (player_ins->x + 14))) < x_m))
-		player_ins->x += 2;
-	if (!(fabs((float)((element_ins->y + 12) - player_ins->y)) < y_m))
-		player_ins->y -= 2;
-	if (!(fabs((float)(element_ins->y - (player_ins->y + 12))) < y_m))
-		player_ins->y += 2;
+	if ((fabs((float)((element_ins->x + 6) - player_ins->x)) > x_m))
+		player_ins->x -= 4;
+	if ((fabs((float)(element_ins->x - (player_ins->x + 6))) > x_m))
+		player_ins->x += 4;
+	if ((fabs((float)((element_ins->y + 6) - player_ins->y)) > y_m))
+		player_ins->y -= 4;
+	if ((fabs((float)(element_ins->y - (player_ins->y + 6))) > y_m))
+		player_ins->y += 4;
 	return (0);
 }
 
 char	ft_isit_pickable(mlx_instance_t *element_ins, char mapelement)
 {
+	int	i;
+
+	i = 0;
 	if (mapelement != 'C')
 		return (ft_isit_norminette(mapelement));
 	element_ins->enabled = false;
@@ -102,7 +105,10 @@ char	ft_isit_norminette(char mapelement)
 	img = null_set_img(NULL);
 	if ((mapelement == 'F' || mapelement == 'N' || mapelement == 'B')
 		&& img->player->enabled == true)
+	{
+		system("say mmm Why are you so bad? Try again &");
 		ft_load_failure(null_set_mlx(NULL), 0, 0);
-	ft_images_disabled();
+		ft_images_disabled();
+	}
 	return (1);
 }

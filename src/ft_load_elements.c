@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 12:21:52 by zstenger          #+#    #+#             */
-/*   Updated: 2022/12/13 11:27:12 by zstenger         ###   ########.fr       */
+/*   Updated: 2022/12/20 10:30:10 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	ft_load_walking_path(mlx_t *mlx, int x, int y)
 	tex = null_set_tex(NULL);
 	img = null_set_img(NULL);
 	itw = mlx_image_to_window(mlx, img->walking_path, x, y);
-	tex->walking_path = mlx_load_png("png/walking_path.png");
+	tex->walking_path = mlx_load_png("png/walking_path2.png");
 	mlx_draw_texture(img->walking_path, tex->walking_path, 0, 0);
 	mlx_set_instance_depth(img->walking_path->instances + itw, 2);
 	mlx_delete_texture(tex->walking_path);
@@ -61,12 +61,13 @@ void	ft_load_exit(mlx_t *mlx, int x, int y)
 {
 	t_texture	*tex;
 	t_image		*img;
+	int			itw;
 
 	tex = null_set_tex(NULL);
 	img = null_set_img(NULL);
+	itw = mlx_image_to_window(mlx, img->exit, x, y);
 	tex->exit = mlx_load_png("png/exit.png");
 	mlx_draw_texture(img->exit, tex->exit, 0, 0);
-	mlx_image_to_window(mlx, img->exit, x, y);
-	mlx_set_instance_depth(img->exit->instances, 3);
+	mlx_set_instance_depth(img->exit->instances + itw, 3);
 	mlx_delete_texture(tex->exit);
 }

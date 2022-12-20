@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 12:18:07 by zstenger          #+#    #+#             */
-/*   Updated: 2022/12/12 12:48:11 by zstenger         ###   ########.fr       */
+/*   Updated: 2022/12/20 11:11:07 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ bool	ft_wrong_input(int argc, char **argv)
 			ft_printf("\e[4;31mError!\e[0m\n"
 				"\e[1;4;34mMaybe something missing? oH, yEs! A MAP!\e[0m\n");
 		return (1);
-	}	
+	}
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 19:02:46 by zstenger          #+#    #+#             */
-/*   Updated: 2022/12/12 10:51:15 by zstenger         ###   ########.fr       */
+/*   Updated: 2022/12/20 17:56:48 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,28 +79,12 @@ void	ft_free_map(char **map, size_t rows)
 char	ft_move_and_count(mlx_t *mlx, t_image *img)
 {
 	if (mlx_is_key_down(mlx, MLX_KEY_W))
-	{
 		img->move->count++;
-		ft_printf("Moves:%i Pixels moved: %d\n",
-			img->move->count, img->move->count * 4);
-	}
 	else if (mlx_is_key_down(mlx, MLX_KEY_S))
-	{
 		img->move->count++;
-		ft_printf("Moves:%i Pixels moved: %d\n",
-			img->move->count, img->move->count * 4);
-	}
 	else if (mlx_is_key_down(mlx, MLX_KEY_A))
-	{
 		img->move->count++;
-		ft_printf("Moves:%i Pixels moved: %d\n",
-			img->move->count, img->move->count * 4);
-	}
 	else if (mlx_is_key_down(mlx, MLX_KEY_D))
-	{
 		img->move->count++;
-		ft_printf("Moves:%i Pixels moved: %d\n",
-			img->move->count, img->move->count * 4);
-	}
 	return (0);
 }
