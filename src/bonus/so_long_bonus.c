@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 12:10:50 by zstenger          #+#    #+#             */
-/*   Updated: 2022/12/21 11:17:51 by zstenger         ###   ########.fr       */
+/*   Updated: 2022/12/21 12:13:25 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,6 @@ char	ft_can_we_exit(void)
 		ft_load_victory(null_set_mlx(NULL), 0, 0);
 		ft_images_disabled();
 	}
-	if (img->pickitup->enabled == false)
-		img->victory_screen->enabled = true;
 	return (1);
 }
 

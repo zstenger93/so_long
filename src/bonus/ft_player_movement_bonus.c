@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 19:13:31 by zstenger          #+#    #+#             */
-/*   Updated: 2022/12/21 11:11:54 by zstenger         ###   ########.fr       */
+/*   Updated: 2022/12/21 12:14:33 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,11 @@ char	ft_isit_pickable(mlx_instance_t *element_ins, char mapelement)
 {
 	if (mapelement != 'C')
 		return (ft_isit_norminette(mapelement));
-	element_ins->enabled = false;
+	if (mapelement == 'C' && element_ins->enabled == true)
+	{
+		element_ins->enabled = false;
+		system("say I need more! &");
+	}
 	return (1);
 }
 
