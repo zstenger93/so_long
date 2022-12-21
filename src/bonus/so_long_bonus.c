@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 12:10:50 by zstenger          #+#    #+#             */
-/*   Updated: 2022/12/20 19:57:18 by zstenger         ###   ########.fr       */
+/*   Updated: 2022/12/21 11:17:51 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	main(int argc, char **argv)
 	mlx_loop_hook(mlx, ft_enemy_hook, mlx);
 	mlx_loop(mlx);
 	mlx_terminate(mlx);
-	system("killall afplay music.mp3 &");
+	system("killall afplay");
 	return (EXIT_SUCCESS);
 }
 
@@ -53,7 +53,7 @@ char	ft_can_we_exit(void)
 	img->player->enabled = false;
 	if (img->player->enabled == false)
 	{
-		system("say mmm norminette is not going to fail you this time! &");
+		system("say Congratulations! Norminette is not going to fail you, for now! &");
 		ft_load_victory(null_set_mlx(NULL), 0, 0);
 		ft_images_disabled();
 	}

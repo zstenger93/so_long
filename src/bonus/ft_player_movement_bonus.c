@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 19:13:31 by zstenger          #+#    #+#             */
-/*   Updated: 2022/12/20 18:24:43 by zstenger         ###   ########.fr       */
+/*   Updated: 2022/12/21 11:11:54 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,9 +87,6 @@ char	ft_is_wall(int x_m, int y_m, mlx_instance_t *element_ins, char maplmnt)
 
 char	ft_isit_pickable(mlx_instance_t *element_ins, char mapelement)
 {
-	int	i;
-
-	i = 0;
 	if (mapelement != 'C')
 		return (ft_isit_norminette(mapelement));
 	element_ins->enabled = false;
@@ -106,7 +103,7 @@ char	ft_isit_norminette(char mapelement)
 	if ((mapelement == 'F' || mapelement == 'N' || mapelement == 'B')
 		&& img->player->enabled == true)
 	{
-		system("say mmm Why are you so bad? Try again &");
+		system("say Damn! Why are you so bad? Try again &");
 		ft_load_failure(null_set_mlx(NULL), 0, 0);
 		ft_images_disabled();
 	}
