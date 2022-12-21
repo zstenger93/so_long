@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 15:06:49 by zstenger          #+#    #+#             */
-/*   Updated: 2022/12/21 12:12:08 by zstenger         ###   ########.fr       */
+/*   Updated: 2022/12/21 17:31:01 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,8 @@ char		ft_enemy2_location(mlx_image_t *element);
 void		ft_wall_enemy2(int x_m, int y_m, mlx_instance_t *element_ins);
 char		ft_enemy3_location(mlx_image_t *element);
 void		ft_wall_enemy3(int x_m, int y_m, mlx_instance_t *element_ins);
+//RETURN ENEMY LOCATION CHECKS FOR FT_LOAD_PLAYER 'POSITION PROBLEM FIX'
+char		ft_return_positions(t_image *img);
 //IMAGES TO LOAD CASE OF LOSING OR WINNING
 void		ft_load_failure(mlx_t *mlx, int x, int y);
 void		ft_load_victory(mlx_t *mlx, int x, int y);

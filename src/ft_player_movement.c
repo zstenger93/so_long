@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 19:13:31 by zstenger          #+#    #+#             */
-/*   Updated: 2022/12/19 08:05:13 by zstenger         ###   ########.fr       */
+/*   Updated: 2022/12/21 17:21:24 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,11 +60,11 @@ char	ft_player_location(mlx_image_t *element, char mapelement)
 		if (ins[amount].x < img->player->instances->x)
 			x_m = 30;
 		else
-			x_m = 32;
+			x_m = 30;
 		if (ins[amount].y < img->player->instances->y)
 			y_m = 30;
 		else
-			y_m = 32;
+			y_m = 30;
 		if (fabs((float)(ins[amount].x - img->player->instances->x)) < x_m
 			&& fabs((float)(ins[amount].y - img->player->instances->y)) < y_m)
 			return (ft_is_wall(x_m, y_m, ins + amount, mapelement));

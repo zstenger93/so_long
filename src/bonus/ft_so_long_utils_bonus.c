@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 19:20:21 by zstenger          #+#    #+#             */
-/*   Updated: 2022/12/13 11:39:40 by zstenger         ###   ########.fr       */
+/*   Updated: 2022/12/21 17:31:17 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ char	ft_map_enemies_check(char c, char *n, char *f, char *b)
 }
 
 /*
-ft_read_and_print_map(argv[1]);
+// ft_read_and_print_map(argv[1]);
 void	ft_read_and_print_map(char *map)
 {
 	int		count;

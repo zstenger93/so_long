@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 13:30:55 by zstenger          #+#    #+#             */
-/*   Updated: 2022/12/15 11:04:51 by zstenger         ###   ########.fr       */
+/*   Updated: 2022/12/21 17:29:47 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ char	ft_l_e3(mlx_t *mlx, int x, int y, char keytype)
 	mlx_draw_texture(img->enemy3, tex->enemy3, 0, 0);
 	mlx_delete_texture(tex->enemy3);
 	ft_enemy3_location(img->wall);
-	ft_player_location(img->enemy3, 'B');
 	return (1);
 }
 
@@ -85,4 +84,12 @@ void	ft_wall_enemy3(int x_m, int y_m, mlx_instance_t *element_ins)
 		enemy_ins->y -= 5;
 	if (!(fabs((float)(element_ins->y - (enemy_ins->y + 6))) < y_m))
 		enemy_ins->y += 5;
+}
+
+char	ft_return_positions(t_image *img)
+{
+	ft_player_location(img->enemy2, 'N');
+	ft_player_location(img->enemy, 'F');
+	ft_player_location(img->enemy3, 'B');
+	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 12:10:50 by zstenger          #+#    #+#             */
-/*   Updated: 2022/12/21 12:13:25 by zstenger         ###   ########.fr       */
+/*   Updated: 2022/12/21 17:36:04 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,8 @@ char	ft_can_we_exit(void)
 	img->player->enabled = false;
 	if (img->player->enabled == false)
 	{
-		system("say Congratulations! Norminette is not going to fail you, for now! &");
+		system("say Congratulations! Norminette is "
+			"not going to fail you, for now! &");
 		ft_load_victory(null_set_mlx(NULL), 0, 0);
 		ft_images_disabled();
 	}

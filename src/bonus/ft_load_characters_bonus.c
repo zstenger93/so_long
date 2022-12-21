@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 19:10:04 by zstenger          #+#    #+#             */
-/*   Updated: 2022/12/20 10:42:13 by zstenger         ###   ########.fr       */
+/*   Updated: 2022/12/21 17:29:34 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ char	ft_load_enemy(mlx_t *mlx, int x, int y, char keytype)
 	mlx_draw_texture(img->enemy, tex->enemy, 0, 0);
 	mlx_delete_texture(tex->enemy);
 	ft_enemy_location(img->wall);
-	ft_player_location(img->enemy, 'F');
 	return (1);
 }
 
@@ -66,7 +65,6 @@ char	ft_l_e2(mlx_t *mlx, int x, int y, char keytype)
 	mlx_draw_texture(img->enemy2, tex->enemy2, 0, 0);
 	mlx_delete_texture(tex->enemy2);
 	ft_enemy2_location(img->wall);
-	ft_player_location(img->enemy2, 'N');
 	return (1);
 }
 
@@ -96,7 +94,7 @@ char	ft_load_player(mlx_t *mlx, int x, int y, char keytype)
 	mlx_delete_texture(tex->player);
 	ft_player_location(img->pickitup, 'C');
 	ft_player_location(img->exit, 'E');
-	return (ft_player_location(img->wall, '1'));
+	return (ft_player_location(img->wall, '1') & ft_return_positions(img));
 }
 
 void	ft_player_hook(void *mlx)
