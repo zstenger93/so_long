@@ -6,7 +6,7 @@
 #    By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/18 16:05:40 by zstenger          #+#    #+#              #
-#    Updated: 2022/12/13 11:04:57 by zstenger         ###   ########.fr        #
+#    Updated: 2022/12/22 11:12:21 by zstenger         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -180,6 +180,11 @@ tb4: $(BONUS_NAME)
 tb5: $(BONUS_NAME)
 	@echo "$(RED)RUN BONUS TEST 5, LET THE GAME BEGIN!$(DEF_COLOR)"
 	./$(BONUS_NAME) maps/mapb5.ber
+	@echo "$(CYAN)\nHow was it? Did you survive our beloved cat, norminette?$(DEF_COLOR)"
+
+tb6: $(BONUS_NAME)
+	@echo "$(RED)RUN BONUS TEST 6, LET THE GAME BEGIN!$(DEF_COLOR)"
+	./$(BONUS_NAME) maps/mapb6.ber
 	@echo "$(CYAN)\nHow was it? Did you survive our beloved cat, norminette?$(DEF_COLOR)"
 
 re: fclean all

@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 15:06:49 by zstenger          #+#    #+#             */
-/*   Updated: 2022/12/20 13:02:39 by zstenger         ###   ########.fr       */
+/*   Updated: 2022/12/22 10:47:40 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 # include <stdlib.h>
 # include <stdio.h>
 # include <unistd.h>
-# include <memory.h>
 # include <fcntl.h>
 # include <math.h>
 # include <stdbool.h>
@@ -96,7 +95,7 @@ void		ft_load_victory(mlx_t *mlx, int x, int y);
 void		ft_images_disabled(void);
 //PRINT MOVEMENT TO THE TERMINAL
 char		ft_move_and_count(mlx_t *mlx, t_image *img);
-//NULL SETTING MLX, IMAGES AND TEXTURES OR RETURN IT
+//NULL SETTING MLX, IMAGES AND TEXTURES IF NULL IS GIVEN AS PARAMETER
 mlx_t		*null_set_mlx(mlx_t *mlx_to_null);
 t_texture	*null_set_tex(t_texture *tex_to_null);
 t_image		*null_set_img(t_image *img_to_null);

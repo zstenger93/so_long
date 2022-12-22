@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 15:06:49 by zstenger          #+#    #+#             */
-/*   Updated: 2022/12/21 17:31:01 by zstenger         ###   ########.fr       */
+/*   Updated: 2022/12/22 11:18:28 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 # include <stdlib.h>
 # include <stdio.h>
 # include <unistd.h>
-# include <memory.h>
 # include <fcntl.h>
 # include <math.h>
 # include <stdbool.h>
@@ -54,7 +53,7 @@ typedef struct s_image
 	mlx_image_t	*enemy3;
 }	t_image;
 
-//THIS TWO FOR PRINTING OUT THE MAP COLORIZED INTO THE TERMINAL
+//THIS TWO FOR PRINTING OUT THE MAP COLORIZED INTO THE TERMINAL. BETTER VISUAL
 /*
 void		ft_read_and_print_map(char *map);
 char		put_chars(char c);
@@ -111,7 +110,7 @@ char		ft_is_wall(int x, int y, mlx_instance_t *element_ins, char maplmnt);
 char		ft_isit_pickable(mlx_instance_t *element_ins, char mapelement);
 char		ft_isit_norminette(char mapelement);
 char		ft_can_we_exit(void);
-//ENEMY LOCATION CHECKS
+//3 DIFFERENT ENEMY LOCATION CHECKS
 char		ft_enemy_location(mlx_image_t *element);
 void		ft_wall_enemy(int x_m, int y_m, mlx_instance_t *element_ins);
 char		ft_enemy2_location(mlx_image_t *element);
