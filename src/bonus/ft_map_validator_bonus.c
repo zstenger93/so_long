@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 18:59:37 by zstenger          #+#    #+#             */
-/*   Updated: 2022/12/20 16:03:22 by zstenger         ###   ########.fr       */
+/*   Updated: 2022/12/22 11:42:33 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ char	ft_have_walls(int fd, size_t *length, size_t *row, size_t count)
 	char	*lineb;
 
 	line = get_next_line(fd);
-	if (line == NULL)
+	if (line == NULL || line[0] == '\n')
 		return ('0');
 	*length = ft_gnlinelen(line);
 	lineb = malloc((*length + 1));

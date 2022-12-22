@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 12:18:07 by zstenger          #+#    #+#             */
-/*   Updated: 2022/12/20 11:50:29 by zstenger         ###   ########.fr       */
+/*   Updated: 2022/12/22 11:41:38 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,8 @@ char	ft_error_types2(char *argv)
 			"\e[4;33mCan't collect everything! C'MON GIVE ME COFFEE\e[0m\n");
 	else if (error_type == '0')
 		ft_printf("\e[1;4;31mError!\e[0m\n"
-			"\e[4;33mWhy are you giving me this useless empty map?!\e[0m\n");
+			"\e[4;33mWhy is there a new line at the start or "
+			"givin' me this useless empty map?!\e[0m\n");
 	else
 		return (0);
 	return (1);
