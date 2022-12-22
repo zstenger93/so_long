@@ -6,7 +6,7 @@
 #    By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/18 16:05:40 by zstenger          #+#    #+#              #
-#    Updated: 2022/12/22 11:12:21 by zstenger         ###   ########.fr        #
+#    Updated: 2022/12/22 17:35:18 by zstenger         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,7 +46,7 @@ BWhite = \033[1;37m
 all: $(NAME)
 
 # compiling so_long
-$(NAME):$(OBJS) $(GLFW3) $(LIBFT) $(MLX42)
+$(NAME):$(MLX42) $(OBJS) $(GLFW3) $(LIBFT)
 	@echo "$(YELLOW)Compiling: $(DEF_COLOR)$(CYAN)$(NAME)$(DEF_COLOR)"
 	@$(CC) $(CFLAGS) -o $(NAME) $(SRCS) \
 	$(LIBFT) $(MLX42) $(GLFW3) -framework Cocoa -framework OpenGL -framework IOKit
@@ -75,6 +75,7 @@ $(LIBFT):
 # compiling MLX42
 $(MLX42):
 	@echo "$(YELLOW)Compiling: $(DEF_COLOR)$(CYAN) MLX42.$(DEF_COLOR)"
+	git submodule update --init --recursive
 	make -C ./MLX42
 	@echo "$(PURPLE)MLX42 $(DEF_COLOR)$(GREEN)has been compiled.$(DEF_COLOR)"
 
