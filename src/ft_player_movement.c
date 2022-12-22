@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 19:13:31 by zstenger          #+#    #+#             */
-/*   Updated: 2022/12/21 17:21:24 by zstenger         ###   ########.fr       */
+/*   Updated: 2022/12/22 18:00:57 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,8 @@ char	ft_player_location(mlx_image_t *element, char mapelement)
 
 /*
 FABS CONVERT ABSOLUTE VALUE->ALWAYS POSITIVE LIKE UNICUM
-if the statement is true we are "in the wall" because I set the margin to
-30/32px in the previous function, then we will bounce back 3px from the wall
+if the statement is true we are "close the wall" then we will bounce
+back 3px from the wall
 1 right 2 left 3 bottom 4 upper wall
 wall[i].x/y 
 all element is 32x32px and a floating number so it can be eg from

@@ -6,12 +6,18 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 12:21:52 by zstenger          #+#    #+#             */
-/*   Updated: 2022/12/20 10:30:10 by zstenger         ###   ########.fr       */
+/*   Updated: 2022/12/22 18:12:55 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
 
+/*
+load the png's on the texture then draw the texture on the
+image(what we created in the create_iamges funciton)
+set the dept of the image, put it to the window and
+delete the texture.
+*/
 void	ft_load_walking_path(mlx_t *mlx, int x, int y)
 {
 	t_image		*img;

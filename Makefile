@@ -6,7 +6,7 @@
 #    By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/18 16:05:40 by zstenger          #+#    #+#              #
-#    Updated: 2022/12/22 17:35:18 by zstenger         ###   ########.fr        #
+#    Updated: 2022/12/22 19:17:52 by zstenger         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,10 +41,10 @@ GREEN = \033[4;92m
 CYAN = \033[1;96m
 YELLOW = \033[1;33m
 PURPLE = \033[1;35m
-BWhite = \033[1;37m 
+BWhite = \033[1;37m
 
 all: $(NAME)
-
+	
 # compiling so_long
 $(NAME):$(MLX42) $(OBJS) $(GLFW3) $(LIBFT)
 	@echo "$(YELLOW)Compiling: $(DEF_COLOR)$(CYAN)$(NAME)$(DEF_COLOR)"
@@ -100,22 +100,22 @@ $(GLFW3):
 # compiling so_long_bonus
 bonus: $(BONUS_NAME)
 
-$(BONUS_NAME):$(BONUS_OBJS) $(GLFW3) $(LIBFT) $(MLX42)
+$(BONUS_NAME):$(MLX42) $(BONUS_OBJS) $(GLFW3) $(LIBFT)
 	@echo "$(YELLOW)Compiling: $(DEF_COLOR)$(CYAN)$(BONUS_NAME)$(DEF_COLOR)"
 	@$(CC) $(CFLAGS) -o $(BONUS_NAME) $(BONUS_OBJS) \
 	$(LIBFT) $(MLX42) $(GLFW3) -framework Cocoa -framework OpenGL -framework IOKit
 	@echo "$(PURPLE)$(BONUS_NAME) $(DEF_COLOR)$(GREEN)Compiling done.$(DEF_COLOR)"
-	@echo "\033[4;34m                                                            \n\
-	  ▄████████  ▄██████▄          ▄█          ▄██████▄  ███▄▄▄▄▄     ▄███████▄      \n\
-	 ███    ███ ███    ███        ███         ███    ███ ███▀▀▀▀██▄  ███     ███     \n\
-	 ███    █▀  ███    ███        ███         ███    ███ ███    ███ ███        █▀      \n\
-	 ███        ███    ███        ███         ███    ███ ███    ███ ███               \n\
-	███████████ ███    ███        ███         ███    ███ ███    ███ ███     ███▄      \n\
-	        ███ ███    ███        ███         ███    ███ ███    ███ ███       ███     \n\
-	  ▄█    ███ ███    ███        ███▌     ▄  ███    ███ ███    ███  ███     ███     \n\
-	▄████████▀   ▀██████▀  ██████ ███████▄▄██  ▀██████▀   ▀█    █▀    ▀███████▀      \n\
+	@echo "\033[4;34m                                                                                                                            \n\
+	  ▄████████  ▄██████▄   ▄██████▄          ▄█          ▄██████▄   ▄██████▄   ▄██████▄   ▄██████▄  ███▄▄▄▄▄     ▄███████▄      \n\
+	 ███    ███ ███    ███ ███    ███        ███         ███    ███ ███    ███ ███    ███ ███    ███ ███▀▀▀▀██▄  ███     ███     \n\
+	 ███    █▀  ███    ███ ███    ███        ███         ███    ███ ███    ███ ███    ███ ███    ███ ███    ███ ███        █▀      \n\
+	 ███        ███    ███ ███    ███        ███         ███    ███ ███    ███ ███    ███ ███    ███ ███    ███ ███               \n\
+	███████████ ███    ███ ███    ███        ███         ███    ███ ███    ███ ███    ███ ███    ███ ███    ███ ███     ███▄      \n\
+	        ███ ███    ███ ███    ███        ███         ███    ███ ███    ███ ███    ███ ███    ███ ███    ███ ███       ███     \n\
+	  ▄█    ███ ███    ███ ███    ███        ███▌     ▄  ███    ███ ███    ███ ███    ███ ███    ███ ███    ███  ███     ███     \n\
+	▄████████▀   ▀██████▀   ▀██████▀  ██████ ███████▄▄██  ▀██████▀   ▀██████▀   ▀██████▀   ▀██████▀   ▀█    █▀    ▀███████▀      \n\
 																				\033[0m$(DEF_COLOR)"
-	@echo "                                \033[1;37mBonus Part By: zstenger$(DEF_COLOR)" 
+	@echo "                                                 \033[1;37mBonus Part By: zstenger$(DEF_COLOR)" 
 
 clean:
 	@echo "$(RED)Removing .o files.$(DEF_COLOR)"
