@@ -13,6 +13,15 @@
 	<img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/zstenger93/so_long?color=green" />
 </p>
 
+> _FYI:_
+
+	The game has some improvements compared to the gifs.
+	I was too lazy to make new ones..:]
+	Main character and enemy moves fixed as well as the images.
+	Also the walking path has been animated.
+	Background music and voice reactions have been added.
+	More map checks and additional map.
+
 ---
 
 ![run](https://media2.giphy.com/media/8pkvLD2wAxDyyTA1po/giphy.gif?cid=790b7611610cc8aac29440459a2e89288b9c3f4e3ae0d6c5&rid=giphy.gif&ct=g)
