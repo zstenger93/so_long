@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+         #
+#    By: slaszlo- <slaszlo-@student.42heibronn.d    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/18 16:05:40 by zstenger          #+#    #+#              #
-#    Updated: 2022/12/22 19:17:52 by zstenger         ###   ########.fr        #
+#    Updated: 2023/01/06 13:54:16 by slaszlo-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,7 +46,7 @@ BWhite = \033[1;37m
 all: $(NAME)
 	
 # compiling so_long
-$(NAME):$(MLX42) $(OBJS) $(GLFW3) $(LIBFT)
+$(NAME):$(GLFW3) $(MLX42) $(OBJS) $(LIBFT)
 	@echo "$(YELLOW)Compiling: $(DEF_COLOR)$(CYAN)$(NAME)$(DEF_COLOR)"
 	@$(CC) $(CFLAGS) -o $(NAME) $(SRCS) \
 	$(LIBFT) $(MLX42) $(GLFW3) -framework Cocoa -framework OpenGL -framework IOKit
@@ -100,7 +100,7 @@ $(GLFW3):
 # compiling so_long_bonus
 bonus: $(BONUS_NAME)
 
-$(BONUS_NAME):$(MLX42) $(BONUS_OBJS) $(GLFW3) $(LIBFT)
+$(BONUS_NAME):$(GLFW3) $(MLX42) $(BONUS_OBJS) $(LIBFT)
 	@echo "$(YELLOW)Compiling: $(DEF_COLOR)$(CYAN)$(BONUS_NAME)$(DEF_COLOR)"
 	@$(CC) $(CFLAGS) -o $(BONUS_NAME) $(BONUS_OBJS) \
 	$(LIBFT) $(MLX42) $(GLFW3) -framework Cocoa -framework OpenGL -framework IOKit
