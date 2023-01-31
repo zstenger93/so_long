@@ -1,5 +1,8 @@
 <h1 align="center">
+	<p>
 	📖 SO_LONG
+	</p>
+	<img src="https://badge42.vercel.app/api/v2/cl9sfj1oy00110fjrw3eky83q/project/2918387">
 </h1>
 
 <p align="center">
